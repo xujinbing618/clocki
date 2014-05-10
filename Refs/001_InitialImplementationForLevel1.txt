@@ -1,0 +1,23 @@
+number : 1
+
+status : inprogress
+
+type : Story/feature
+
+subject : Initial implementation for level 1.
+
+description : Clocki is a game program, base on Klotski(wikipedia/Klotski).
+ Clocki uses Android platform and tools for development and production.
+ In this story/feature we plan to implement initial version for level 1.
+
+ This feature includes lot's of new files and modifications, and we
+ expect less changes as we progress further.
+ Note: Test Driven Development and continues refactoring is expected too.
+
+story point :
+
+comments : [
+  "Eclipse ADT-2.66.3 was used for creating this project structure.",
+  "Android-sdk-linux-2.66.2 was used as ANDROID_HOME.",
+  "Android-19 api was choosen as target api.",
+]
