@@ -1,7 +1,7 @@
-package mars.clocki.test;
+package mars.clocki.interfaces;
 
-import mars.clocki.FirstActivity;
 import mars.clocki.R;
+import mars.clocki.interfaces.FirstActivity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 

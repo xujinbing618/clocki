@@ -12,6 +12,7 @@ SPR_V=3.2.3.RELEASE
 SPS_V=3.1.4.RELEASE
 CPATH="
 $PWD/bin/classes:\
+$PWD/../main/bin/classes:\
 $MREPO/junit/junit/4.10/junit-4.10.jar:\
 $MREPO/log4j/log4j/1.2.17/log4j-1.2.17.jar:\
 $ANDROID_HOME/platforms/android-19/android.jar:\

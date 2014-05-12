@@ -1,7 +1,7 @@
-package organic.fact.tests;
+package mars.clocki.application.util;
 
 import junit.framework.TestCase;
-import mars.clocki.GridHelper;
+import mars.clocki.application.util.GridHelper;
 
 public class GridHelperTest extends TestCase {
 

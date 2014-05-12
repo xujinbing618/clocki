@@ -1,10 +1,13 @@
-package mars.clocki;
+package mars.clocki.interfaces.levels;
 
 import static android.view.DragEvent.ACTION_DRAG_ENDED;
 import static android.view.DragEvent.ACTION_DRAG_ENTERED;
 import static android.view.DragEvent.ACTION_DRAG_EXITED;
 import static android.view.DragEvent.ACTION_DRAG_STARTED;
 import static android.view.DragEvent.ACTION_DROP;
+
+import mars.clocki.R;
+import mars.clocki.application.util.GridHelper;
 import android.app.Activity;
 import android.content.ClipData;
 import android.graphics.Point;
@@ -102,11 +105,8 @@ public class Level1Activity extends Activity {
     makeAllCellsVisiable();
     Point screenSize = new Point();
     getWindowManager().getDefaultDisplay().getSize(screenSize);
-    int quarterScreenWidth = (int) (screenSize.x * 0.25);
     int oneEightScreenHeight = (int) (screenSize.y * 0.125);
-    if (oneEightScreenHeight * 4 < screenSize.x) { // High likely to make Square
-      quarterScreenWidth = oneEightScreenHeight;
-    }
+    int quarterScreenWidth = oneEightScreenHeight; // Square shape needed
     resizeView("r0c0", quarterScreenWidth, oneEightScreenHeight, true);
     resizeView("r0c1", quarterScreenWidth, oneEightScreenHeight, true);
     resizeView("r0c2", quarterScreenWidth, oneEightScreenHeight, true);
@@ -134,15 +134,15 @@ public class Level1Activity extends Activity {
     resizeView("r5c2", quarterScreenWidth, oneEightScreenHeight, false);
     resizeView("r5c3", quarterScreenWidth, oneEightScreenHeight, false);
 
-    resizeView("r6c0", quarterScreenWidth, oneEightScreenHeight, false);
-    resizeView("r6c1", quarterScreenWidth, oneEightScreenHeight, false);
-    resizeView("r6c2", quarterScreenWidth, oneEightScreenHeight, false);
-    resizeView("r6c3", quarterScreenWidth, oneEightScreenHeight, false);
+    resizeView("r6c0", quarterScreenWidth, oneEightScreenHeight, true);
+    resizeView("r6c1", quarterScreenWidth, oneEightScreenHeight, true);
+    resizeView("r6c2", quarterScreenWidth, oneEightScreenHeight, true);
+    resizeView("r6c3", quarterScreenWidth, oneEightScreenHeight, true);
 
-    resizeView("r7c0", quarterScreenWidth, oneEightScreenHeight, false);
-    resizeView("r7c1", quarterScreenWidth, oneEightScreenHeight, false);
-    resizeView("r7c2", quarterScreenWidth, oneEightScreenHeight, false);
-    resizeView("r7c3", quarterScreenWidth, oneEightScreenHeight, false);
+    resizeView("r7c0", quarterScreenWidth, oneEightScreenHeight, true);
+    resizeView("r7c1", quarterScreenWidth, oneEightScreenHeight, true);
+    resizeView("r7c2", quarterScreenWidth, oneEightScreenHeight, true);
+    resizeView("r7c3", quarterScreenWidth, oneEightScreenHeight, true);
   }
 
   private void resizeView(String id, int width, int height, boolean dropable) {

@@ -1,4 +1,4 @@
-package mars.clocki;
+package mars.clocki.application.util;
 
 
 public class GridHelper {
