@@ -1,7 +1,9 @@
 <resources>
+    <color name="white">#ffffff</color>
     <color name="blue_dark">#3465a4</color>
     <color name="blue_darker">#1b3f73</color>
     <color name="shadow_dark">#232322</color>
+    <color name="yellow_dark">#FF8A00</color>
     <color name="game_background">#eeeeec</color>
     <color name="grid_background">#ffffff</color>
     <color name="grid_wall_background">#729fcf</color>

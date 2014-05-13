@@ -4,19 +4,21 @@
 	android:versionCode="1"
 	android:versionName="1.0" >
 
-	<uses-sdk
-		android:minSdkVersion="11"
-		android:targetSdkVersion="19" />
+  <uses-sdk
+    android:minSdkVersion="11"
+    android:targetSdkVersion="19" />
 
-	<application
-		android:allowBackup="false"
-		android:icon="@drawable/ic_launcher"
-		android:label="@string/app_name"
-		android:theme="@style/AppTheme" >
+  <application
+    android:allowBackup="false"
+    android:icon="@drawable/ic_launcher"
+    android:label="@string/app_name"
+    android:theme="@style/AppTheme" >
 
     <activity
-      android:name="mars.clocki.interfaces.levels.Level1Activity"
-      android:label="@string/only_18_steps" >
+      android:name="mars.clocki.interfaces.HomeActivity"
+      android:label="@string/app_name"
+      android:launchMode="singleTask"
+      >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -24,14 +26,20 @@
     </activity>
 
     <activity
-			android:name="mars.clocki.interfaces.FirstActivity"
-			android:label="@string/app_name" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
+      android:name="mars.clocki.interfaces.levels.Level1Activity"
+      android:label="@string/i_only_18_steps"
+      >
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value="mars.clocki.interfaces.HomeActivity"
+       />
+    </activity>
 
-  </application>
+    <activity
+      android:name="mars.clocki.interfaces.levels.WinningDialogActivity"
+      android:theme="@android:style/Theme.Dialog"
+      />
+
+</application>
 
 </manifest>

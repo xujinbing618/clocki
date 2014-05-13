@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context="mars.clocki.interfaces.levels.Level1Activity"
+  >
+
+  <item
+    android:id="@+id/reset_level"
+    android:orderInCategory="101"
+    android:title="@string/reset"
+    app:showAsAction="ifRoom"/>
+
+</menu>

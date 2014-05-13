@@ -2,7 +2,7 @@ package mars.clocki.domain.model;
 
 import mars.clocki.domain.shared.ValueObject;
 
-final class Position implements ValueObject<Position> {
+public final class Position implements ValueObject<Position> {
 
   final int row;
   final int column;

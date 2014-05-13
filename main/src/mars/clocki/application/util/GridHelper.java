@@ -13,7 +13,7 @@ public class GridHelper {
    * where c is fixed string
    * where Y is dynamic number from 0 to 3
    */
-  public static int row(String cellId) {
+  public static int row(final String cellId) {
     try {
       return new Integer(cellId.substring(1, 2));
     } catch (Exception e) {
@@ -26,7 +26,7 @@ public class GridHelper {
    *
    * See {@link #rowNumber(String)}
    */
-  public static int column(String cellId) {
+  public static int column(final String cellId) {
     try {
       return new Integer(cellId.substring(cellId.length() -1));
     } catch (Exception e) {

@@ -6,7 +6,7 @@ public class PositionRightForSquare2x2Specification extends AbstractSpecificatio
 
   private final Position position;
 
-  public PositionRightForSquare2x2Specification(Position position) {
+  public PositionRightForSquare2x2Specification(final Position position) {
     this.position = position;
   }
 

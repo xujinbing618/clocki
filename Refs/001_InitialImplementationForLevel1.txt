@@ -1,6 +1,6 @@
 number : 1
 
-status : inprogress..
+status : inprogress...
 
 type : Story/feature
 
@@ -14,7 +14,7 @@ description : Clocki is a game program, base on Klotski(wikipedia/Klotski).
  expect less changes as we progress further.
  Note: Test Driven Development and continues refactoring is expected too.
 
-story point :
+story point : 4 + 2 = 6
 
 comments : [
   "Eclipse ADT-2.66.3 was used for creating this project structure.",
