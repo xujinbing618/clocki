@@ -2,57 +2,84 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:gravity="center"
   android:layout_width="fill_parent"
-  android:layout_height="wrap_content"
+  android:layout_height="fill_parent"
   xmlns:tools="http://schemas.android.com/tools"
   tools:context="mars.clocki.interfaces.HomeActivity"
-	tools:ignore="MergeRootFrame"
+  tools:ignore="MergeRootFrame"
   >
 <TableLayout
   android:gravity="center"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	>
+  style="@style/LayoutFillParent"
+  >
 
 <TableRow
   android:gravity="center"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	>
+  android:textAlignment="center"
+  style="@style/LayoutFillParent"
+  >
   <TextView
     android:id="@+id/welcome_label_id"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/welcome_to_clocki_game"
     android:textSize="@dimen/font_medium"
+    android:textAlignment="center"
     android:lineSpacingExtra="20dp"
     />
 </TableRow>
 
 <TableRow
   android:gravity="center"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
+  style="@style/LayoutFillParent"
   >
   <Button
     android:id="@+id/level1_btn"
-    android:layout_width="match_parent"
+    android:gravity="left|center_vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/i_only_18_steps"
+    android:background="@drawable/square_blue_border"
     android:onClick="startLevel1"
     />
 </TableRow>
 
 <TableRow
   android:gravity="center"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
+  style="@style/LayoutFillParent"
   >
   <Button
     android:id="@+id/level2_btn"
-    android:layout_width="match_parent"
+    android:gravity="left|center_vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/ii_daisy"
+    android:background="@drawable/square_blue_border"
     android:onClick="startLevel2"
+    />
+</TableRow>
+
+<TableRow
+  android:gravity="center"
+  style="@style/LayoutFillParent"
+  >
+  <TextView
+   android:text=" "
+   style="@style/LayoutFillParent"
+  />
+</TableRow>
+
+<TableRow
+  android:gravity="center"
+  style="@style/LayoutFillParent"
+  >
+  <Button
+    android:id="@+id/exit_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/exit"
+    android:textColor="@color/pink_dark"
+    android:background="@drawable/square_pink_border"
+    android:onClick="exit"
     />
 </TableRow>
 

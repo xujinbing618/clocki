@@ -12,7 +12,9 @@ import mars.clocki.domain.model.GridContainer;
 import mars.clocki.domain.model.Position;
 import mars.clocki.domain.model.Square.SquareType;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -35,6 +37,9 @@ public class Level1Activity extends ActionBarActivity {
 
   private GridContainer grid;
   private int moveCount;
+  private int mostRecentSquareId;
+  private String mostRecentDraggedId = "";
+  private boolean moveDecreasedOnce;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -114,14 +119,27 @@ public class Level1Activity extends ActionBarActivity {
           findViewById(R.id.sq2x2_b).setBackground(getResources().getDrawable(R.drawable.square_green_big_full));
           moveCount++;
           ((TextView)findViewById(R.id.moves)).setText(moveCount + "");
-          startActivity(new Intent(Level1Activity.this, WinningDialogActivity.class));
+          writeScore();
+          startActivity(new Intent(Level1Activity.this, WinningDialogActivity.class).
+              putExtra(LevelActivity.LEVEL, LevelActivity.LEVEL1));
+          Level1Activity.this.finish();
         }
         else if (isAllowedToMoveTo(homeId, dropId)) {
           updateViewWithMove(view, container);
           grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
                     GridHelper.row(dropId), GridHelper.column(dropId));
-          moveCount++;
+          if (mostRecentSquareId == view.getId() &&
+              mostRecentDraggedId.equalsIgnoreCase(dropId) &&
+              !moveDecreasedOnce) {
+            moveCount--;
+            moveDecreasedOnce = true;
+          } else {
+            moveCount++;
+            moveDecreasedOnce = false;
+          }
           ((TextView)findViewById(R.id.moves)).setText(moveCount + "");
+          mostRecentSquareId = view.getId();
+          mostRecentDraggedId = homeId;
         }
         break;
       case ACTION_DRAG_ENDED:
@@ -131,6 +149,19 @@ public class Level1Activity extends ActionBarActivity {
         break;
       }
       return true;
+    }
+
+    private void writeScore() {
+      SharedPreferences sharedPref = getApplicationContext().
+          getSharedPreferences(LevelActivity.SCORE_FILE_KEY, Context.MODE_PRIVATE);
+      SharedPreferences.Editor editor = sharedPref.edit();
+      editor.putBoolean(LevelActivity.LEVEL1, true);
+      editor.putInt(LevelActivity.LEVEL1_LAST, moveCount);
+      int score = sharedPref.getInt(LevelActivity.LEVEL1_SCORE, 0);
+      if (score == 0 || score > moveCount) {
+        editor.putInt(LevelActivity.LEVEL1_SCORE, moveCount);
+      }
+      editor.commit();
     }
 
     private boolean isAllowedToMoveTo(String homeId, String dropId) {

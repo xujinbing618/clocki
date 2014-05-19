@@ -3,12 +3,13 @@
 
 	<string name="app_name">Clocki</string>
 
-	<string name="welcome_to_clocki_game">Welcome to Clocki game</string>
-	<string name="i_only_18_steps">I. Only 18 Steps</string>
-	<string name="ii_daisy">II. Daisy</string>
+	<string name="welcome_to_clocki_game">Welcomen to Clocki!</string>
+	<string name="i_only_18_steps">&#160;I. Only 18 Steps</string>
+	<string name="ii_daisy">&#160;II. Daisy</string>
 	<string name="moves">Moves: </string>
 	<string name="reset">Reset</string>
 	<string name="the_puzzle_has_been_solved">The Puzzle Has Been Solved!</string>
 	<string name="ok">Okay</string>
+	<string name="exit">Exit</string>
 
 </resources>

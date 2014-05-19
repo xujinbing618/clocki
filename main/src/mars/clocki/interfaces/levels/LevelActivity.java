@@ -32,12 +32,15 @@ import android.widget.GridLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class LevelActivity extends ActionBarActivity {
+public abstract class LevelActivity extends ActionBarActivity {
 
-  protected int moveCount;
   protected GridContainer grid;
   protected GridLayout gridLayout;
+  protected int moveCount;
   protected TextView moveView;
+  private int mostRecentSquareId;
+  private String mostRecentDraggedId = "";
+  private boolean moveDecreasedOnce;
 
   protected LinearLayout r0c0Cell;
   protected LinearLayout r0c1Cell;
@@ -74,6 +77,10 @@ public class LevelActivity extends ActionBarActivity {
   protected LinearLayout r7c3Cell;
 
   private final String r_c_ = "r%sc%s";
+
+  protected abstract void writeScore();
+
+  protected abstract String level();
 
   protected void initGridLayout(boolean firstTime) {
     refreshLinearLayouts();
@@ -231,15 +238,28 @@ public class LevelActivity extends ActionBarActivity {
               getDrawable(R.drawable.square_green_big_full));
           moveCount++;
           moveView.setText(moveCount + "");
+          writeScore();
           startActivity(new Intent(LevelActivity.this,
-                                   WinningDialogActivity.class));
+                                   WinningDialogActivity.class).
+                            putExtra(LEVEL, level()));
+          LevelActivity.this.finish();
         }
         else if (isAllowedToMoveTo(homeId, dropId)) {
           grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
                     GridHelper.row(dropId), GridHelper.column(dropId));
           updateViewViewNewMove(view, container);
-          moveCount++;
-          moveView.setText(moveCount + "");
+          if (mostRecentSquareId == view.getId() &&
+              mostRecentDraggedId.equalsIgnoreCase(dropId) &&
+              !moveDecreasedOnce) {
+            moveCount--;
+            moveDecreasedOnce = true;
+          } else {
+            moveCount++;
+            moveDecreasedOnce = false;
+          }
+          ((TextView)findViewById(R.id.moves)).setText(moveCount + "");
+          mostRecentSquareId = view.getId();
+          mostRecentDraggedId = homeId;
         }
         break;
       case ACTION_DRAG_ENDED:
@@ -409,5 +429,14 @@ public class LevelActivity extends ActionBarActivity {
     r4c2Cell.setVisibility(View.VISIBLE);
     r4c3Cell.setVisibility(View.VISIBLE);
   }
+
+  public final static String SCORE_FILE_KEY = "SCORE_FILE";
+  public final static String LEVEL = "LEVEL";
+  public final static String LEVEL1 = "LEVEL1";
+  public final static String LEVEL1_LAST = "LEVEL1_LAST";
+  public final static String LEVEL1_SCORE = "LEVEL1_SCORE";
+  public final static String LEVEL2 = "LEVEL2";
+  public final static String LEVEL2_LAST = "LEVEL2_LAST";
+  public final static String LEVEL2_SCORE = "LEVEL2_SCORE";
 
 }
