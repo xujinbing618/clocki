@@ -257,7 +257,7 @@ public class Level1Activity extends ActionBarActivity {
             child.getId() == R.id.sq2x2_b) {
           cell.getLayoutParams().width = width * 2;
           cell.getLayoutParams().height = height * 2;
-          // Let's remove other three cell
+          // Let's invisible other three covered cells
           String other3cell = GridHelper.findOtherThreeCell(id+"");
           if (other3cell != null) {
             String[] cells = other3cell.split(",");

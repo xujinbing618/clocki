@@ -5,9 +5,10 @@
 
 	<string name="welcome_to_clocki_game">Welcome to Clocki game</string>
 	<string name="i_only_18_steps">I. Only 18 Steps</string>
+	<string name="ii_daisy">II. Daisy</string>
 	<string name="moves">Moves: </string>
 	<string name="reset">Reset</string>
 	<string name="the_puzzle_has_been_solved">The Puzzle Has Been Solved!</string>
-	<string name="close">Close</string>
+	<string name="ok">Okay</string>
 
 </resources>

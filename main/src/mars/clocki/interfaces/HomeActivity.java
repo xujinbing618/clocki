@@ -2,6 +2,7 @@ package mars.clocki.interfaces;
 
 import mars.clocki.R;
 import mars.clocki.interfaces.levels.Level1Activity;
+import mars.clocki.interfaces.levels.Level2Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -34,8 +35,11 @@ public class HomeActivity extends ActionBarActivity {
   }
 
   public void startLevel1(View view) {
-    Intent intent = new Intent(HomeActivity.this, Level1Activity.class);
-    startActivity(intent);
+    startActivity(new Intent(HomeActivity.this, Level1Activity.class));
+  }
+
+  public void startLevel2(View view) {
+    startActivity(new Intent(HomeActivity.this, Level2Activity.class));
   }
 
 }

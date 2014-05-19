@@ -42,5 +42,19 @@
     />
 </TableRow>
 
+<TableRow
+  android:gravity="center"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  >
+  <Button
+    android:id="@+id/level2_btn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/ii_daisy"
+    android:onClick="startLevel2"
+    />
+</TableRow>
+
 </TableLayout>
 </ScrollView>

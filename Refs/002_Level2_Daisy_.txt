@@ -1,0 +1,18 @@
+number : 2
+
+status : inprogress
+
+type : Story/feature
+
+subject : Level 2 _Daisy_
+
+description : Level 2 (Daisy), is quite similar to level 1, but new square
+ type 1x2 will be introduced into the game. Therefore some logic changes are
+ expected.
+
+story point : 2 = 2
+
+comments : [
+  : "2014-05-17 story was told.",
+  : "",
+]

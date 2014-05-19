@@ -1,24 +1,22 @@
 package mars.clocki.domain.model;
 
 import mars.clocki.domain.model.Square.SquareType;
-import junit.framework.TestCase;
 
-public class GridContainerTest extends TestCase {
-  GridContainer grid;
+/**
+ * This test class goes through different possible moves in level 1.
+ * Generally we want to make sure squares are only allowed to move
+ * in Horizontal or Vertical directions when there are empty cells
+ * next to them. In addition no square is allowed to jump.
+ */
+public class GridContainerTest extends GridContainerTestCase {
 
   @Override
   protected void setUp() throws Exception {
     grid = GridContainer.initLevel1();
   }
 
-  /**
-   * This test goes through different possible moves in level 1.
-   * Generally we want to make sure squares are only allowed to move
-   * in Horizontal or Vertical directions when there are empty cells
-   * next to them. In addition no square is allowed to jump.
-   */
   public void testIsValidMoveForLevel1() {
-    // Asserts after grid level 1 is initialized.
+    // Asserts after grid level 1 is initialized, see end of this file.
     assertMoveIsValid(0, 0, false, 0, 1, "");
     assertMoveIsValid(0, 1, false, 0, 2, "");
     assertMoveIsValid(0, 2, false, 0, 3, "");
@@ -147,23 +145,17 @@ public class GridContainerTest extends TestCase {
     moveSquare(2, 1, 4, 1);
   }
 
-  void assertMoveIsValid(int row, int column, boolean isValid, int toRow, int toColumn, String msg) {
-    if (isValid) {
-      assertTrue(msg, grid.isValidMove(
-                   grid.cell(row, column).square(),
-                   grid.cell(toRow, toColumn)));
-    }
-    else {
-      assertFalse(msg, grid.isValidMove(
-                    grid.cell(row, column).square(),
-                    grid.cell(toRow, toColumn)));
-    }
-  }
-
-  void moveSquare(int row, int column, int toRow, int toColumn) {
-    grid.move(
-        grid.cell(row, column).square(),
-        grid.cell(toRow, toColumn));
-  }
-
 }
+/*
+ * Visual initialization for Level 1
+ *   _   _ _ _   _
+ *  | | |     | | |
+ *   _  |     |  _
+ *  | | |     | | |
+ *   _   _   _   _
+ *  | | | | | | | |
+ *   _   _   _   _
+ *  | | | | | | | |
+ *   _           _
+ *  | |         | |
+ */

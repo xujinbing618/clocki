@@ -26,8 +26,12 @@ public class GridContainer {
         break;
       case s2x2:
         moveSquareType2x2(square, targetContainer);
-      default:
         break;
+      case s1x2:
+        moveSquareType1x2(square, targetContainer);
+        break;
+      default:
+        throw new RuntimeException("Square type not found! (nothing moved)");
       }
     }
   }
@@ -44,6 +48,73 @@ public class GridContainer {
     currentContainer.setSquare(null);
     square.setPosition(targetContainer.position());
     targetContainer.setSquare(square);
+  }
+
+  private void moveSquareType1x2(Square square, CellContainer target) {
+    CellContainer currentCell = cells.get(square.position());
+    currentCell.setSquare(null);
+    switch(moveDirectionForSquareType1x2(square.position(), target.position())) {
+    case RIGHT:
+      square.setPosition(Position.point(
+          square.position().row,
+          square.position().column + 1
+      ));
+      cell(square.position().row, square.position().column).setSquare(square);
+      cell(square.position().row, square.position().column - 1).setSquare(null);
+      cell(square.position().row + 1, square.position().column - 1).setSquare(null);
+      makeCellCovered(square.position().row + 1, square.position().column);
+      break;
+    case LEFT:
+      square.setPosition(Position.point(
+          square.position().row,
+          square.position().column - 1
+      ));
+      cell(square.position().row, square.position().column).setSquare(square);
+      cell(square.position().row, square.position().column + 1).setSquare(null);
+      cell(square.position().row + 1, square.position().column + 1).setSquare(null);
+      makeCellCovered(square.position().row + 1, square.position().column);
+      break;
+    case UP:
+      if (square.position().row - target.position().row > 1) {
+        square.setPosition(Position.point(
+            square.position().row - 2,
+            square.position().column
+        ));
+        cell(square.position().row + 2, square.position().column).setSquare(null);
+        cell(square.position().row + 3, square.position().column).setSquare(null);
+      }
+      else {
+        square.setPosition(Position.point(
+            square.position().row - 1,
+            square.position().column
+        ));
+        cell(square.position().row + 2, square.position().column).setSquare(null);
+      }
+      cell(square.position().row, square.position().column).setSquare(square);
+      makeCellCovered(square.position().row + 1, square.position().column);
+      break;
+    case DOWN:
+      if (target.position().row - square.position().row > 2) {
+        square.setPosition(Position.point(
+            square.position().row + 2,
+            square.position().column
+        ));
+        cell(square.position().row - 1, square.position().column).setSquare(null);
+        cell(square.position().row - 2, square.position().column).setSquare(null);
+      }
+      else {
+        square.setPosition(Position.point(
+            square.position().row + 1,
+            square.position().column
+        ));
+        cell(square.position().row - 1, square.position().column).setSquare(null);
+      }
+      cell(square.position().row, square.position().column).setSquare(square);
+      makeCellCovered(square.position().row + 1, square.position().column);
+      break;
+    default:
+      throw new RuntimeException("Square 1x2 didn't moved!");
+    }
   }
 
   private void moveSquareType2x2(Square square, CellContainer target) {
@@ -107,7 +178,7 @@ public class GridContainer {
   }
 
   public Direction moveDirectionForSquareType2x2(Position current,
-                                                  Position target) {
+                                                 Position target) {
     if (new PositionRightForSquare2x2Specification(current).
         isSatisfiedBy(target)) {
       return Direction.RIGHT;
@@ -127,6 +198,23 @@ public class GridContainer {
     return Direction.NONE;
   }
 
+  public Direction moveDirectionForSquareType1x2(Position current,
+                                                 Position target) {
+    if (new PositionRightForSquare1x2Specification(current).isSatisfiedBy(target)) {
+      return Direction.RIGHT;
+    }
+    if (new PositionLeftForSquare1x2Specification(current).isSatisfiedBy(target)) {
+      return Direction.LEFT;
+    }
+    if (new PositionUpForSquare1x2Specification(current).isSatisfiedBy(target)) {
+      return Direction.UP;
+    }
+    if (new PositionDownForSquare1x2Specification(current).isSatisfiedBy(target)) {
+      return Direction.DOWN;
+    }
+    return Direction.NONE;
+  }
+
   public boolean isValidMove(Square square, CellContainer cellContainer) {
     if (square == null || cellContainer.hasSquare()) {
       return false;
@@ -140,9 +228,45 @@ public class GridContainer {
       return possibleMovesForSquareType1x1(square.position(), Direction.NONE).contains(to);
     case s2x2:
       return possibleMovesForSquareType2x2(square.position()).contains(to);
+    case s1x2:
+      return possibleMovesForSquareType1x2(square.position()).contains(to);
     default:
       return false;
     }
+  }
+
+  private Set<Position> possibleMovesForSquareType1x2(final Position p) {
+    Set<Position> result = new HashSet<Position>();
+    Position right  = Position.point(p.row,     p.column + 1);
+    Position right2 = Position.point(p.row + 1, p.column + 1);
+    Position left   = Position.point(p.row,     p.column - 1);
+    Position left2  = Position.point(p.row + 1, p.column - 1);
+    Position top    = Position.point(p.row - 1, p.column);
+    Position top2   = Position.point(p.row - 2, p.column);
+    Position down   = Position.point(p.row + 2, p.column);
+    Position down2  = Position.point(p.row + 3, p.column);
+
+    if (isEmpty(right) && isEmpty(right2)) {
+      result.add(right);
+      result.add(right2);
+    }
+    if (isEmpty(left) && isEmpty(left2)) {
+      result.add(left);
+      result.add(left2);
+    }
+    if (isEmpty(top)) {
+      result.add(top);
+      if (isEmpty(top2)) {
+        result.add(top2);
+      }
+    }
+    if (isEmpty(down)) {
+      result.add(down);
+      if (isEmpty(down2)) {
+        result.add(down2);
+      }
+    }
+    return result;
   }
 
   private Set<Position> possibleMovesForSquareType2x2(final Position p) {
@@ -164,11 +288,11 @@ public class GridContainer {
       result.add(left);
       result.add(left2);
     }
-    if (isEmpty(top)  && isEmpty(top2) ) {
+    if (isEmpty(top)  && isEmpty(top2)) {
       result.add(top);
       result.add(top2);
     }
-    if (isEmpty(down)  && isEmpty(down2) ) {
+    if (isEmpty(down)  && isEmpty(down2)) {
       result.add(down);
       result.add(down2);
     }
@@ -210,6 +334,35 @@ public class GridContainer {
     return cell != null && !cell.hasSquare();
   }
 
+  public CellContainer cell(int row, int column) {
+    return cells.get(Position.point(row, column));
+  }
+
+  public boolean isAllowedToMoveFrom(int row, int column) {
+    if (cell(row, column) != null &&
+        cell(row, column).square() != null) {
+      switch(cell(row, column).square().type()) {
+      case s1x1:
+        return possibleMovesForSquareType1x1(Position.point(row, column), Direction.NONE).size() > 0;
+      case s2x2:
+        return possibleMovesForSquareType2x2(Position.point(row, column)).size() > 0;
+      case s1x2:
+        return possibleMovesForSquareType1x2(Position.point(row, column)).size() > 0;
+      default:
+        return false;
+      }
+    }
+    return false;
+  }
+
+  public boolean isAllowedToMoveTo(int row, int column, int rowTo, int columnTo) {
+    CellContainer cell = cell(row, column);
+    if (cell != null && cell.square() != null) {
+      return isThereAnyValidPath(cell.square(), Position.point(rowTo, columnTo));
+    }
+    return false;
+  }
+
   public static GridContainer initLevel1() {
     Map<Position, CellContainer> cells = new HashMap<Position, CellContainer>();
     cells.put(Position.point(0, 0), CellContainer.newCell(0, 0, SquareType.s1x1));
@@ -239,31 +392,33 @@ public class GridContainer {
     return new GridContainer(cells);
   }
 
-  public CellContainer cell(int row, int column) {
-    return cells.get(Position.point(row, column));
-  }
+  public static GridContainer initLevel2() {
+    Map<Position, CellContainer> cells = new HashMap<Position, CellContainer>();
+    cells.put(Position.point(0, 0), CellContainer.newCell(0, 0, SquareType.s1x2));
+    cells.put(Position.point(0, 1), CellContainer.newCell(0, 1, SquareType.s2x2));
+    cells.put(Position.point(0, 2), CellContainer.newCell(0, 2, SquareType.COVERED));
+    cells.put(Position.point(0, 3), CellContainer.newCell(0, 3, SquareType.s1x2));
 
-  public boolean isAllowedToMoveFrom(int row, int column) {
-    if (cell(row, column) != null &&
-        cell(row, column).square() != null) {
-      switch(cell(row, column).square().type()) {
-      case s1x1:
-        return possibleMovesForSquareType1x1(Position.point(row, column), Direction.NONE).size() > 0;
-      case s2x2:
-        return possibleMovesForSquareType2x2(Position.point(row, column)).size() > 0;
-      default:
-        return false;
-      }
-    }
-    return false;
-  }
+    cells.put(Position.point(1, 0), CellContainer.newCell(1, 0, SquareType.COVERED));
+    cells.put(Position.point(1, 1), CellContainer.newCell(1, 1, SquareType.COVERED));
+    cells.put(Position.point(1, 2), CellContainer.newCell(1, 2, SquareType.COVERED));
+    cells.put(Position.point(1, 3), CellContainer.newCell(1, 3, SquareType.COVERED));
 
-  public boolean isAllowedToMoveTo(int row, int column, int rowTo, int columnTo) {
-    CellContainer cell = cell(row, column);
-    if (cell != null && cell.square() != null) {
-      return isThereAnyValidPath(cell.square(), Position.point(rowTo, columnTo));
-    }
-    return false;
+    cells.put(Position.point(2, 0), CellContainer.newCell(2, 0, SquareType.s1x1));
+    cells.put(Position.point(2, 1), CellContainer.newCell(2, 1, SquareType.s1x1));
+    cells.put(Position.point(2, 2), CellContainer.newCell(2, 2, SquareType.s1x1));
+    cells.put(Position.point(2, 3), CellContainer.newCell(2, 3, SquareType.s1x1));
+
+    cells.put(Position.point(3, 0), CellContainer.newCell(3, 0, SquareType.s1x1));
+    cells.put(Position.point(3, 1), CellContainer.newCell(3, 1, SquareType.s1x1));
+    cells.put(Position.point(3, 2), CellContainer.newCell(3, 2, SquareType.s1x1));
+    cells.put(Position.point(3, 3), CellContainer.newCell(3, 3, SquareType.s1x1));
+
+    cells.put(Position.point(4, 0), CellContainer.newCell(4, 0, SquareType.s1x1));
+    cells.put(Position.point(4, 1), CellContainer.newCell(4, 1));
+    cells.put(Position.point(4, 2), CellContainer.newCell(4, 2));
+    cells.put(Position.point(4, 3), CellContainer.newCell(4, 3, SquareType.s1x1));
+    return new GridContainer(cells);
   }
 
 }

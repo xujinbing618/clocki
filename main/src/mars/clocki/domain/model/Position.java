@@ -12,6 +12,14 @@ public final class Position implements ValueObject<Position> {
     this.column = column;
   }
 
+  public int row() {
+    return row;
+  }
+
+  public int column() {
+    return column;
+  }
+
   public static Position point(int row, int column) {
     return new Position(row, column);
   }
