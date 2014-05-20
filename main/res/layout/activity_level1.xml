@@ -15,7 +15,8 @@
   android:layout_height="wrap_content"
   android:layout_gravity="center"
   android:layout_marginTop="60dp"
-  android:background="@color/grid_background"
+  android:background="@color/white"
+  android:useDefaultMargins="false"
   >
 
   <LinearLayout
@@ -307,6 +308,7 @@
       android:text="@string/moves"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:textSize="@dimen/font_small"
       />
     <TextView
       android:id="@+id/moves"

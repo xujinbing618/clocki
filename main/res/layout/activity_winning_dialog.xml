@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/winning_dialog_layout_id"
   android:orientation="vertical"
-  android:layout_width="250dp"
-  android:layout_height="250dp"
   android:background="@drawable/square_green_border"
   android:padding="12dip"
+  style="@style/LayoutFillParent"
   >
 
   <TextView
@@ -12,21 +12,20 @@
     android:layout_height="wrap_content"
     android:text="@string/the_puzzle_has_been_solved"
     android:gravity="center_horizontal"
-    android:textSize="@dimen/font_medium"
     android:textColor="@color/black"
     android:paddingBottom="12dip"
   />
 
   <Button
-    android:id="@+id/btn_winning_dialog_close"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:id="@+id/winning_dialog_btn_id"
     android:layout_gravity="center_horizontal"
     android:text="@string/ok"
     android:textSize="@dimen/font_small"
     android:textColor="@color/white"
     android:background="@drawable/square_blue"
     android:onClick="closeDialog"
+    style="@style/LayoutFillParent"
     />
+
 
 </LinearLayout>

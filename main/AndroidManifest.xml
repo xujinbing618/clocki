@@ -17,7 +17,7 @@
     <activity
       android:name="mars.clocki.interfaces.HomeActivity"
       android:label="@string/app_name"
-      android:launchMode="singleTask"
+      android:launchMode="singleInstance"
       >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

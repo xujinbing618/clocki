@@ -40,6 +40,7 @@ public class Level1Activity extends ActionBarActivity {
   private int mostRecentSquareId;
   private String mostRecentDraggedId = "";
   private boolean moveDecreasedOnce;
+  public static Level1Activity instance;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class Level1Activity extends ActionBarActivity {
     ((TextView)findViewById(R.id.moves)).setText(moveCount + "");
     grid = GridContainer.initLevel1();
     reSizeSquareViews(true);
-
+    instance = this;
   }
 
 
@@ -122,7 +123,6 @@ public class Level1Activity extends ActionBarActivity {
           writeScore();
           startActivity(new Intent(Level1Activity.this, WinningDialogActivity.class).
               putExtra(LevelActivity.LEVEL, LevelActivity.LEVEL1));
-          Level1Activity.this.finish();
         }
         else if (isAllowedToMoveTo(homeId, dropId)) {
           updateViewWithMove(view, container);

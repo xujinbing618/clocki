@@ -14,7 +14,6 @@ import mars.clocki.domain.model.Square.SquareType;
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.view.DragEvent;
@@ -81,6 +80,8 @@ public abstract class LevelActivity extends ActionBarActivity {
   protected abstract void writeScore();
 
   protected abstract String level();
+
+  protected static LevelActivity instance;
 
   protected void initGridLayout(boolean firstTime) {
     refreshLinearLayouts();
@@ -152,6 +153,7 @@ public abstract class LevelActivity extends ActionBarActivity {
         }
         else if (child.getId() == R.id.sq1x2_a ||
                  child.getId() == R.id.sq1x2_b) {
+          cellView.getLayoutParams().width = ripBox;
           cellView.getLayoutParams().height = ripBox * 2;
           GridLayout.LayoutParams params = (LayoutParams)
               cellView.getLayoutParams();
@@ -210,20 +212,18 @@ public abstract class LevelActivity extends ActionBarActivity {
    * Dragging ends here.
    */
   protected final class DropListener implements OnDragListener {
-    Drawable normalShape = getResources().getDrawable(
-        R.drawable.abc_list_selector_disabled_holo_light);
-    Drawable enterShape = getResources().getDrawable(
-        R.drawable.abc_list_selector_background_transition_holo_dark);
+    int normalShape = getResources().getColor(R.color.game_background);
+    int enterShape = getResources().getColor(R.color.blue_light);
 
     public boolean onDrag(View v, DragEvent event) {
       switch(event.getAction()) {
       case ACTION_DRAG_STARTED:
-        break; // do nothing
+        break;
       case ACTION_DRAG_ENTERED:
-        v.setBackground(enterShape);
+        v.setBackgroundColor(enterShape);
         break;
       case ACTION_DRAG_EXITED:
-        v.setBackground(normalShape);
+        v.setBackgroundColor(normalShape);
         break;
       case ACTION_DROP:
         // Dropped, reassign View to ViewGroup
@@ -242,7 +242,6 @@ public abstract class LevelActivity extends ActionBarActivity {
           startActivity(new Intent(LevelActivity.this,
                                    WinningDialogActivity.class).
                             putExtra(LEVEL, level()));
-          LevelActivity.this.finish();
         }
         else if (isAllowedToMoveTo(homeId, dropId)) {
           grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
@@ -261,9 +260,9 @@ public abstract class LevelActivity extends ActionBarActivity {
           mostRecentSquareId = view.getId();
           mostRecentDraggedId = homeId;
         }
+        v.setBackgroundColor(normalShape);
         break;
       case ACTION_DRAG_ENDED:
-        v.setBackground(normalShape);
         break;
       default:
         break;

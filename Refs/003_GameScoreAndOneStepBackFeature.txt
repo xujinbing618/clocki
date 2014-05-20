@@ -1,6 +1,6 @@
 number : 3
 
-status : inprogress
+status : inprogress.
 
 type : Story/feature
 
@@ -13,9 +13,9 @@ description : After end of each level, if number of moves is less than last
  of showing to users that this level of puzzle is done.
 
  Another nice feature to have is, decreasing move count if any square backs to
- position that they came from last time. Let's call this one-step-back feature.
+ position that they came from last time. Let's call this, one-step-back feature.
 
-story point :
+story point : 0.4 + 0.2 = 0.6
 
 comments : [
   : "2014-May-19 story was told",

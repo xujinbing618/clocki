@@ -1,15 +1,14 @@
 <resources>
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-    <color name="blue_dark">#3465a4</color>
-    <color name="blue_darker">#1b3f73</color>
-    <color name="shadow_dark">#232322</color>
-    <color name="yellow_dark">#FF8A00</color>
-    <color name="pink_dark">#c200c2</color>
-    <color name="game_background">#eeeeec</color>
-    <color name="grid_background">#ffffff</color>
-    <color name="grid_wall_background">#729fcf</color>
-    <color name="square_green">#9cff3b</color>
-    <color name="square_blue">#6993bf</color>
-    <color name="square_green_border">#67cc08</color>
+  <color name="white">#ffffff</color>
+  <color name="pink_dark">#c200c2</color>
+  <color name="black">#000000</color>
+  <color name="blue_light">#44b4e4</color>
+  <color name="blue_dark">#3465a4</color>
+  <color name="blue_darker">#1b3f73</color>
+  <color name="shadow_dark">#232322</color>
+  <color name="game_background">#eeeeec</color>
+  <color name="grid_wall_background">#729fcf</color>
+  <color name="square_blue">#6993bf</color>
+  <color name="square_green">#9cff3b</color>
+  <color name="square_green_border">#67cc08</color>
 </resources>

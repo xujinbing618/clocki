@@ -79,6 +79,7 @@ public class Level2Activity extends LevelActivity {
     moveView = (TextView) findViewById(R.id.moves);
     grid = GridContainer.initLevel2();
     initGridLayout(true);
+    instance = this;
   }
 
   @Override

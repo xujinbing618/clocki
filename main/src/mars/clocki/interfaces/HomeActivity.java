@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,7 @@ public class HomeActivity extends ActionBarActivity {
 
   public void exit(View view) {
     HomeActivity.this.finish();
+    Process.killProcess(Process.myPid());
   }
 
   public void checkScores() {
@@ -47,14 +49,14 @@ public class HomeActivity extends ActionBarActivity {
       level1Btn.setBackground(getResources().
                               getDrawable(R.drawable.square_green_border));
       level1Btn.setText(getResources().getString(R.string.i_only_18_steps)
-          + " ... " + score(LevelActivity.LEVEL1_SCORE));
+          + ": " + score(LevelActivity.LEVEL1_SCORE));
     }
     if (sharedPref.getBoolean(LevelActivity.LEVEL2, false)) {
       Button level1Btn = (Button) findViewById(R.id.level2_btn);
       level1Btn.setBackground(getResources().
           getDrawable(R.drawable.square_green_border));
       level1Btn.setText(getResources().getString(R.string.ii_daisy)
-          + " .......... " + score(LevelActivity.LEVEL2_SCORE));
+          + ": " + score(LevelActivity.LEVEL2_SCORE));
     }
   }
 
