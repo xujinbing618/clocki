@@ -1003,6 +1003,7 @@ containing a value of this type.
         public static final int font_large=0x7f080019;
         public static final int font_medium=0x7f080018;
         public static final int font_small=0x7f080017;
+        public static final int font_xlarge=0x7f08001a;
     }
     public static final class drawable {
         public static final int abc_ab_bottom_solid_dark_holo=0x7f020000;

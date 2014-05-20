@@ -38,6 +38,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/i_only_18_steps"
+    android:textSize="@dimen/font_medium"
     android:background="@drawable/square_blue_border"
     android:onClick="startLevel1"
     />
@@ -53,6 +54,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/ii_daisy"
+    android:textSize="@dimen/font_medium"
     android:background="@drawable/square_blue_border"
     android:onClick="startLevel2"
     />

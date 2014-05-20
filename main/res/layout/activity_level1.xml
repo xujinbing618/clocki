@@ -16,7 +16,6 @@
   android:layout_gravity="center"
   android:layout_marginTop="60dp"
   android:background="@color/white"
-  android:useDefaultMargins="false"
   >
 
   <LinearLayout
@@ -24,7 +23,7 @@
     android:layout_row="0"
     android:layout_column="0"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_a"
       android:background="@drawable/square_blue"
@@ -37,7 +36,7 @@
     android:layout_row="0"
     android:layout_column="1"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq2x2_a"
       android:background="@drawable/square_blue_big"
@@ -50,7 +49,7 @@
     android:layout_row="0"
     android:layout_column="2"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
   </LinearLayout>
 
   <LinearLayout
@@ -58,7 +57,7 @@
     android:layout_row="0"
     android:layout_column="3"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_b"
       android:background="@drawable/square_blue"
@@ -71,7 +70,7 @@
     android:layout_row="1"
     android:layout_column="0"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_c"
       android:background="@drawable/square_blue"
@@ -84,7 +83,7 @@
     android:layout_row="1"
     android:layout_column="1"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
   </LinearLayout>
 
   <LinearLayout
@@ -92,7 +91,7 @@
     android:layout_row="1"
     android:layout_column="2"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
   </LinearLayout>
 
   <LinearLayout
@@ -100,7 +99,7 @@
     android:layout_row="1"
     android:layout_column="3"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_d"
       android:background="@drawable/square_blue"
@@ -113,7 +112,7 @@
     android:layout_row="2"
     android:layout_column="0"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_e"
       android:background="@drawable/square_blue"
@@ -126,7 +125,7 @@
     android:layout_row="2"
     android:layout_column="1"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_f"
       android:background="@drawable/square_blue"
@@ -139,7 +138,7 @@
     android:layout_row="2"
     android:layout_column="2"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_g"
       android:background="@drawable/square_blue"
@@ -152,7 +151,7 @@
     android:layout_row="2"
     android:layout_column="3"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_h"
       android:background="@drawable/square_blue"
@@ -165,7 +164,7 @@
     android:layout_row="3"
     android:layout_column="0"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_i"
       android:background="@drawable/square_blue"
@@ -178,7 +177,7 @@
     android:layout_row="3"
     android:layout_column="1"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_j"
       android:background="@drawable/square_blue"
@@ -191,7 +190,7 @@
     android:layout_row="3"
     android:layout_column="2"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_k"
       android:background="@drawable/square_blue"
@@ -204,7 +203,7 @@
     android:layout_row="3"
     android:layout_column="3"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_l"
       android:background="@drawable/square_blue"
@@ -217,7 +216,7 @@
     android:layout_row="4"
     android:layout_column="0"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_m"
       android:background="@drawable/square_blue"
@@ -230,7 +229,7 @@
     android:layout_row="4"
     android:layout_column="1"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
   </LinearLayout>
 
   <LinearLayout
@@ -238,7 +237,7 @@
     android:layout_row="4"
     android:layout_column="2"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
   </LinearLayout>
 
   <LinearLayout
@@ -246,7 +245,7 @@
     android:layout_row="4"
     android:layout_column="3"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_n"
       android:background="@drawable/square_blue"
@@ -267,7 +266,7 @@
     android:layout_row="5"
     android:layout_column="1"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_green1"
       android:background="@drawable/square_green"
@@ -280,7 +279,7 @@
     android:layout_row="5"
     android:layout_column="2"
     android:gravity="center"
-    android:background="@drawable/abc_list_selector_disabled_holo_light">
+    android:background="@color/game_background">
     <Button
       android:id="@+id/sq1x1_green2"
       android:background="@drawable/square_green"

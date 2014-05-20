@@ -12,7 +12,9 @@ import mars.clocki.domain.model.GridContainer;
 import mars.clocki.domain.model.Position;
 import mars.clocki.domain.model.Square.SquareType;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
@@ -84,7 +86,7 @@ public abstract class LevelActivity extends ActionBarActivity {
   protected static LevelActivity instance;
 
   protected void initGridLayout(boolean firstTime) {
-    refreshLinearLayouts();
+    visiableAllLinearLayouts();
     Point screenSize = new Point();
     getWindowManager().getDefaultDisplay().getSize(screenSize);
     int ripBox = (int) (screenSize.y * 0.125);
@@ -406,7 +408,16 @@ public abstract class LevelActivity extends ActionBarActivity {
     return getResources().getResourceEntryName(id);
   }
 
-  private void refreshLinearLayouts() {
+  protected SharedPreferences getSharedPref() {
+    return getApplicationContext().
+        getSharedPreferences(SCORE_FILE_KEY, Context.MODE_PRIVATE);
+  }
+
+  protected SharedPreferences.Editor getSharedEditor() {
+    return getSharedPref().edit();
+  }
+
+  private void visiableAllLinearLayouts() {
     r0c0Cell.setVisibility(View.VISIBLE);
     r0c1Cell.setVisibility(View.VISIBLE);
     r0c2Cell.setVisibility(View.VISIBLE);
@@ -427,6 +438,67 @@ public abstract class LevelActivity extends ActionBarActivity {
     r4c1Cell.setVisibility(View.VISIBLE);
     r4c2Cell.setVisibility(View.VISIBLE);
     r4c3Cell.setVisibility(View.VISIBLE);
+  }
+
+  protected void initViewFields() {
+    r0c0Cell = (LinearLayout) findViewById(R.id.r0c0);
+    r0c1Cell = (LinearLayout) findViewById(R.id.r0c1);
+    r0c2Cell = (LinearLayout) findViewById(R.id.r0c2);
+    r0c3Cell = (LinearLayout) findViewById(R.id.r0c3);
+    r1c0Cell = (LinearLayout) findViewById(R.id.r1c0);
+    r1c1Cell = (LinearLayout) findViewById(R.id.r1c1);
+    r1c2Cell = (LinearLayout) findViewById(R.id.r1c2);
+    r1c3Cell = (LinearLayout) findViewById(R.id.r1c3);
+    r2c0Cell = (LinearLayout) findViewById(R.id.r2c0);
+    r2c1Cell = (LinearLayout) findViewById(R.id.r2c1);
+    r2c2Cell = (LinearLayout) findViewById(R.id.r2c2);
+    r2c3Cell = (LinearLayout) findViewById(R.id.r2c3);
+    r3c0Cell = (LinearLayout) findViewById(R.id.r3c0);
+    r3c1Cell = (LinearLayout) findViewById(R.id.r3c1);
+    r3c2Cell = (LinearLayout) findViewById(R.id.r3c2);
+    r3c3Cell = (LinearLayout) findViewById(R.id.r3c3);
+    r4c0Cell = (LinearLayout) findViewById(R.id.r4c0);
+    r4c1Cell = (LinearLayout) findViewById(R.id.r4c1);
+    r4c2Cell = (LinearLayout) findViewById(R.id.r4c2);
+    r4c3Cell = (LinearLayout) findViewById(R.id.r4c3);
+
+    r5c0Cell = (LinearLayout) findViewById(R.id.r5c0);
+    r5c1Cell = (LinearLayout) findViewById(R.id.r5c1);
+    r5c2Cell = (LinearLayout) findViewById(R.id.r5c2);
+    r5c3Cell = (LinearLayout) findViewById(R.id.r5c3);
+    r6c0Cell = (LinearLayout) findViewById(R.id.r6c0);
+    r6c1Cell = (LinearLayout) findViewById(R.id.r6c1);
+    r6c2Cell = (LinearLayout) findViewById(R.id.r6c2);
+    r6c3Cell = (LinearLayout) findViewById(R.id.r6c3);
+    r7c0Cell = (LinearLayout) findViewById(R.id.r7c0);
+    r7c1Cell = (LinearLayout) findViewById(R.id.r7c1);
+    r7c2Cell = (LinearLayout) findViewById(R.id.r7c2);
+    r7c3Cell = (LinearLayout) findViewById(R.id.r7c3);
+
+    r0c0Cell.setOnDragListener(new DropListener());
+    r0c1Cell.setOnDragListener(new DropListener());
+    r0c2Cell.setOnDragListener(new DropListener());
+    r0c3Cell.setOnDragListener(new DropListener());
+    r1c0Cell.setOnDragListener(new DropListener());
+    r1c1Cell.setOnDragListener(new DropListener());
+    r1c2Cell.setOnDragListener(new DropListener());
+    r1c3Cell.setOnDragListener(new DropListener());
+    r2c0Cell.setOnDragListener(new DropListener());
+    r2c1Cell.setOnDragListener(new DropListener());
+    r2c2Cell.setOnDragListener(new DropListener());
+    r2c3Cell.setOnDragListener(new DropListener());
+    r3c0Cell.setOnDragListener(new DropListener());
+    r3c1Cell.setOnDragListener(new DropListener());
+    r3c2Cell.setOnDragListener(new DropListener());
+    r3c3Cell.setOnDragListener(new DropListener());
+    r4c0Cell.setOnDragListener(new DropListener());
+    r4c1Cell.setOnDragListener(new DropListener());
+    r4c2Cell.setOnDragListener(new DropListener());
+    r4c3Cell.setOnDragListener(new DropListener());
+
+    r6c1Cell.setOnDragListener(new DropListener());
+
+    moveView = (TextView) findViewById(R.id.moves);
   }
 
   public final static String SCORE_FILE_KEY = "SCORE_FILE";
