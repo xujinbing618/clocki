@@ -36,7 +36,6 @@ import android.widget.TextView;
 public abstract class LevelActivity extends ActionBarActivity {
 
   protected GridContainer grid;
-  protected GridLayout gridLayout;
   protected int moveCount;
   protected TextView moveView;
   private int mostRecentSquareId;
