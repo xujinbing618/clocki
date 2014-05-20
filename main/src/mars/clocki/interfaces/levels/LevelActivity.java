@@ -78,9 +78,9 @@ public abstract class LevelActivity extends ActionBarActivity {
 
   private final String r_c_ = "r%sc%s";
 
-  protected abstract void writeScore();
-
   protected abstract String level();
+
+  protected abstract void writeScore();
 
   protected static LevelActivity instance;
 
@@ -153,7 +153,8 @@ public abstract class LevelActivity extends ActionBarActivity {
           cellView.setLayoutParams(params);
         }
         else if (child.getId() == R.id.sq1x2_a ||
-                 child.getId() == R.id.sq1x2_b) {
+                 child.getId() == R.id.sq1x2_b ||
+                 child.getId() == R.id.sq1x2_c) {
           cellView.getLayoutParams().width = ripBox;
           cellView.getLayoutParams().height = ripBox * 2;
           GridLayout.LayoutParams params = (LayoutParams)
@@ -503,10 +504,13 @@ public abstract class LevelActivity extends ActionBarActivity {
   public final static String SCORE_FILE_KEY = "SCORE_FILE";
   public final static String LEVEL = "LEVEL";
   public final static String LEVEL1 = "LEVEL1";
-  public final static String LEVEL1_LAST = "LEVEL1_LAST";
-  public final static String LEVEL1_SCORE = "LEVEL1_SCORE";
   public final static String LEVEL2 = "LEVEL2";
+  public final static String LEVEL3 = "LEVEL3";
+  public final static String LEVEL1_LAST = "LEVEL1_LAST";
   public final static String LEVEL2_LAST = "LEVEL2_LAST";
+  public final static String LEVEL3_LAST = "LEVEL3_LAST";
+  public final static String LEVEL1_SCORE = "LEVEL1_SCORE";
   public final static String LEVEL2_SCORE = "LEVEL2_SCORE";
+  public final static String LEVEL3_SCORE = "LEVEL3_SCORE";
 
 }

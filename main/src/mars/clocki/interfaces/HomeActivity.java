@@ -3,6 +3,7 @@ package mars.clocki.interfaces;
 import mars.clocki.R;
 import mars.clocki.interfaces.levels.Level1Activity;
 import mars.clocki.interfaces.levels.Level2Activity;
+import mars.clocki.interfaces.levels.Level3Activity;
 import mars.clocki.interfaces.levels.LevelActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -36,34 +37,59 @@ public class HomeActivity extends ActionBarActivity {
     startActivity(new Intent(HomeActivity.this, Level2Activity.class));
   }
 
+  public void startLevel3(View view) {
+    startActivity(new Intent(HomeActivity.this, Level3Activity.class));
+  }
+
   public void exit(View view) {
     HomeActivity.this.finish();
     Process.killProcess(Process.myPid());
   }
 
   public void checkScores() {
-    SharedPreferences sharedPref = getApplicationContext().
-        getSharedPreferences(LevelActivity.SCORE_FILE_KEY, Context.MODE_PRIVATE);
+    SharedPreferences sharedPref = getSharedPref();
     if (sharedPref.getBoolean(LevelActivity.LEVEL1, false)) {
-      Button level1Btn = (Button) findViewById(R.id.level1_btn);
-      level1Btn.setBackground(getResources().
-                              getDrawable(R.drawable.square_green_border));
-      level1Btn.setText(getResources().getString(R.string.i_only_18_steps)
-          + ": " + score(LevelActivity.LEVEL1_SCORE));
+      Button btn = (Button) findViewById(R.id.level1_btn);
+      setBackgroundGreen(btn);
+      addScoreNumber(btn, LevelActivity.LEVEL1_SCORE, R.string.i_only_18_steps);
     }
     if (sharedPref.getBoolean(LevelActivity.LEVEL2, false)) {
-      Button level1Btn = (Button) findViewById(R.id.level2_btn);
-      level1Btn.setBackground(getResources().
-          getDrawable(R.drawable.square_green_border));
-      level1Btn.setText(getResources().getString(R.string.ii_daisy)
-          + ": " + score(LevelActivity.LEVEL2_SCORE));
+      Button btn = (Button) findViewById(R.id.level2_btn);
+      setBackgroundGreen(btn);
+      addScoreNumber(btn, LevelActivity.LEVEL2_SCORE, R.string.ii_daisy);
+    }
+    if (sharedPref.getBoolean(LevelActivity.LEVEL3, false)) {
+      Button btn = (Button) findViewById(R.id.level3_btn);
+      setBackgroundGreen(btn);
+      addScoreNumber(btn, LevelActivity.LEVEL3_SCORE, R.string.iii_violet);
     }
   }
 
-  public int score(String level_key) {
-    SharedPreferences sharedPref = getApplicationContext().
-        getSharedPreferences(LevelActivity.SCORE_FILE_KEY, Context.MODE_PRIVATE);
-    return sharedPref.getInt(level_key, 0);
+  public void setBackgroundGreen(Button button) {
+    button.setBackground(
+        getResources().
+        getDrawable(R.drawable.square_green_border)
+    );
+  }
+
+  public void addScoreNumber(Button button,
+                             String levelScoreKey,
+                             int levelLabelId) {
+    button.setText(
+        getResources().getString(levelLabelId) + ": " +
+        score(levelScoreKey)
+    );
+  }
+
+  public int score(String levelKey) {
+    return getSharedPref().getInt(levelKey, 0);
+  }
+
+  private SharedPreferences getSharedPref() {
+    return getApplicationContext().
+             getSharedPreferences(
+                 LevelActivity.SCORE_FILE_KEY,
+                 Context.MODE_PRIVATE);
   }
 
 }

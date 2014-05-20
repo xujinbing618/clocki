@@ -5,16 +5,16 @@ import mars.clocki.domain.model.GridContainer;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-public class Level2Activity extends LevelActivity {
+public class Level3Activity extends LevelActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_level2);
+    setContentView(R.layout.activity_level3);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     initViewFields();
-    grid = GridContainer.initLevel2();
+    grid = GridContainer.initLevel3();
     initGridLayout(true);
 
     moveCount = 0;
@@ -25,17 +25,17 @@ public class Level2Activity extends LevelActivity {
 
   @Override
   protected String level() {
-    return LEVEL2;
+    return LEVEL3;
   }
 
   @Override
   protected void writeScore() {
     SharedPreferences.Editor editor = getSharedPref().edit();
-    editor.putBoolean(LEVEL2, true);
-    editor.putInt(LEVEL2_LAST, moveCount);
-    int score = getSharedPref().getInt(LEVEL2_SCORE, 0);
+    editor.putBoolean(LEVEL3, true);
+    editor.putInt(LEVEL3_LAST, moveCount);
+    int score = getSharedPref().getInt(LEVEL3_SCORE, 0);
     if (score == 0 || score > moveCount) {
-      editor.putInt(LEVEL2_SCORE, moveCount);
+      editor.putInt(LEVEL3_SCORE, moveCount);
     }
     editor.commit();
   }

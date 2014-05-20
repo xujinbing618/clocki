@@ -9,6 +9,7 @@
   >
 <TableLayout
   android:gravity="center"
+  android:typeface="monospace"
   style="@style/LayoutFillParent"
   >
 
@@ -57,6 +58,22 @@
     android:textSize="@dimen/font_medium"
     android:background="@drawable/square_blue_border"
     android:onClick="startLevel2"
+    />
+</TableRow>
+
+<TableRow
+  android:gravity="center"
+  style="@style/LayoutFillParent"
+  >
+  <Button
+    android:id="@+id/level3_btn"
+    android:gravity="left|center_vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/iii_violet"
+    android:textSize="@dimen/font_medium"
+    android:background="@drawable/square_blue_border"
+    android:onClick="startLevel3"
     />
 </TableRow>
 

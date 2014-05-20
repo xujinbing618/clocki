@@ -17,37 +17,51 @@ public class WinningDialogActivity extends Activity {
     super.onCreate(savedInstanceState);
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.activity_winning_dialog);
-    ((TextView) findViewById(R.id.winning_text_id)).setText(
-        getResources().getString(R.string.the_puzzle_has_been_solved) + ": " + lastRecord());
+    ((TextView) findViewById(R.id.winning_text_id)).
+                setText(
+                  getResources().
+                  getString(R.string.the_puzzle_has_been_solved) + ": " +
+                  lastRecord()
+                );
     reSizeLayoutAndOkayButton();
   }
 
   public void closeDialog(View v) {
-    if (getIntent().getStringExtra(LevelActivity.LEVEL).
-        equalsIgnoreCase(LevelActivity.LEVEL1)) {
+    if (cameFrom(LevelActivity.LEVEL1)) {
       Level1Activity.instance.finish();
     }
-    else if (getIntent().getStringExtra(LevelActivity.LEVEL).
-        equalsIgnoreCase(LevelActivity.LEVEL2)) {
+    else if (cameFrom(LevelActivity.LEVEL2)) {
       Level2Activity.instance.finish();
+    }
+    else if (cameFrom(LevelActivity.LEVEL3)) {
+      Level3Activity.instance.finish();
     }
     WinningDialogActivity.this.finish();
   }
 
   private int lastRecord() {
-    if (getIntent().getStringExtra(LevelActivity.LEVEL).
-        equalsIgnoreCase(LevelActivity.LEVEL1)) {
-      SharedPreferences sharedPref = getApplicationContext().
-          getSharedPreferences(LevelActivity.SCORE_FILE_KEY, Context.MODE_PRIVATE);
-      return sharedPref.getInt(LevelActivity.LEVEL1_LAST, 0);
+    if (cameFrom(LevelActivity.LEVEL1)) {
+      return getSharedPref().getInt(LevelActivity.LEVEL1_LAST, 0);
     }
-    else if (getIntent().getStringExtra(LevelActivity.LEVEL).
-        equalsIgnoreCase(LevelActivity.LEVEL2)) {
-      SharedPreferences sharedPref = getApplicationContext().
-          getSharedPreferences(LevelActivity.SCORE_FILE_KEY, Context.MODE_PRIVATE);
-      return sharedPref.getInt(LevelActivity.LEVEL2_LAST, 0);
+    else if (cameFrom(LevelActivity.LEVEL2)) {
+      return getSharedPref().getInt(LevelActivity.LEVEL2_LAST, 0);
+    }
+    else if (cameFrom(LevelActivity.LEVEL3)) {
+      return getSharedPref().getInt(LevelActivity.LEVEL3_LAST, 0);
     }
     return -1;
+  }
+
+  private boolean cameFrom(String level) {
+    return getIntent().
+           getStringExtra(LevelActivity.LEVEL).
+           equalsIgnoreCase(level);
+  }
+
+  private SharedPreferences getSharedPref() {
+    return getApplicationContext().
+           getSharedPreferences(LevelActivity.SCORE_FILE_KEY,
+                                Context.MODE_PRIVATE);
   }
 
   private void reSizeLayoutAndOkayButton() {

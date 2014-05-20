@@ -46,6 +46,16 @@
     </activity>
 
     <activity
+      android:name="mars.clocki.interfaces.levels.Level3Activity"
+      android:label="@string/iii_violet"
+      >
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value="mars.clocki.interfaces.HomeActivity"
+       />
+    </activity>
+
+    <activity
       android:name="mars.clocki.interfaces.levels.WinningDialogActivity"
       android:theme="@android:style/Theme.Dialog"
       />

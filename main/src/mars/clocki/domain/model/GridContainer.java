@@ -363,61 +363,94 @@ public class GridContainer {
     return false;
   }
 
+  private static void putNewCell(Map<Position, CellContainer> cells,
+                   int row,
+                   int column,
+                   SquareType squareType) {
+    if (squareType != null) {
+      cells.put(Position.point(row, column),
+                CellContainer.newCell(row, column, squareType)
+      );
+    }
+    else {
+      cells.put(Position.point(row, column),
+                CellContainer.newCell(row, column)
+      );
+    }
+  }
+
   public static GridContainer initLevel1() {
     Map<Position, CellContainer> cells = new HashMap<Position, CellContainer>();
-    cells.put(Position.point(0, 0), CellContainer.newCell(0, 0, SquareType.s1x1));
-    cells.put(Position.point(0, 1), CellContainer.newCell(0, 1, SquareType.s2x2));
-    cells.put(Position.point(0, 2), CellContainer.newCell(0, 2, SquareType.COVERED));
-    cells.put(Position.point(0, 3), CellContainer.newCell(0, 3, SquareType.s1x1));
-
-    cells.put(Position.point(1, 0), CellContainer.newCell(1, 0, SquareType.s1x1));
-    cells.put(Position.point(1, 1), CellContainer.newCell(1, 1, SquareType.COVERED));
-    cells.put(Position.point(1, 2), CellContainer.newCell(1, 2, SquareType.COVERED));
-    cells.put(Position.point(1, 3), CellContainer.newCell(1, 3, SquareType.s1x1));
-
-    cells.put(Position.point(2, 0), CellContainer.newCell(2, 0, SquareType.s1x1));
-    cells.put(Position.point(2, 1), CellContainer.newCell(2, 1, SquareType.s1x1));
-    cells.put(Position.point(2, 2), CellContainer.newCell(2, 2, SquareType.s1x1));
-    cells.put(Position.point(2, 3), CellContainer.newCell(2, 3, SquareType.s1x1));
-
-    cells.put(Position.point(3, 0), CellContainer.newCell(3, 0, SquareType.s1x1));
-    cells.put(Position.point(3, 1), CellContainer.newCell(3, 1, SquareType.s1x1));
-    cells.put(Position.point(3, 2), CellContainer.newCell(3, 2, SquareType.s1x1));
-    cells.put(Position.point(3, 3), CellContainer.newCell(3, 3, SquareType.s1x1));
-
-    cells.put(Position.point(4, 0), CellContainer.newCell(4, 0, SquareType.s1x1));
-    cells.put(Position.point(4, 1), CellContainer.newCell(4, 1));
-    cells.put(Position.point(4, 2), CellContainer.newCell(4, 2));
-    cells.put(Position.point(4, 3), CellContainer.newCell(4, 3, SquareType.s1x1));
+    putNewCell(cells, 0, 0, SquareType.s1x1);
+    putNewCell(cells, 0, 1, SquareType.s2x2);
+    putNewCell(cells, 0, 2, SquareType.COVERED);
+    putNewCell(cells, 0, 3, SquareType.s1x1);
+    putNewCell(cells, 1, 0, SquareType.s1x1);
+    putNewCell(cells, 1, 1, SquareType.COVERED);
+    putNewCell(cells, 1, 2, SquareType.COVERED);
+    putNewCell(cells, 1, 3, SquareType.s1x1);
+    putNewCell(cells, 2, 0, SquareType.s1x1);
+    putNewCell(cells, 2, 1, SquareType.s1x1);
+    putNewCell(cells, 2, 2, SquareType.s1x1);
+    putNewCell(cells, 2, 3, SquareType.s1x1);
+    putNewCell(cells, 3, 0, SquareType.s1x1);
+    putNewCell(cells, 3, 1, SquareType.s1x1);
+    putNewCell(cells, 3, 2, SquareType.s1x1);
+    putNewCell(cells, 3, 3, SquareType.s1x1);
+    putNewCell(cells, 4, 0, SquareType.s1x1);
+    putNewCell(cells, 4, 1, null);
+    putNewCell(cells, 4, 2, null);
+    putNewCell(cells, 4, 3, SquareType.s1x1);
     return new GridContainer(cells);
   }
 
   public static GridContainer initLevel2() {
     Map<Position, CellContainer> cells = new HashMap<Position, CellContainer>();
-    cells.put(Position.point(0, 0), CellContainer.newCell(0, 0, SquareType.s1x2));
-    cells.put(Position.point(0, 1), CellContainer.newCell(0, 1, SquareType.s2x2));
-    cells.put(Position.point(0, 2), CellContainer.newCell(0, 2, SquareType.COVERED));
-    cells.put(Position.point(0, 3), CellContainer.newCell(0, 3, SquareType.s1x2));
+    putNewCell(cells, 0, 0, SquareType.s1x2);
+    putNewCell(cells, 0, 1, SquareType.s2x2);
+    putNewCell(cells, 0, 2, SquareType.COVERED);
+    putNewCell(cells, 0, 3, SquareType.s1x2);
+    putNewCell(cells, 1, 0, SquareType.COVERED);
+    putNewCell(cells, 1, 1, SquareType.COVERED);
+    putNewCell(cells, 1, 2, SquareType.COVERED);
+    putNewCell(cells, 1, 3, SquareType.COVERED);
+    putNewCell(cells, 2, 0, SquareType.s1x1);
+    putNewCell(cells, 2, 1, SquareType.s1x1);
+    putNewCell(cells, 2, 2, SquareType.s1x1);
+    putNewCell(cells, 2, 3, SquareType.s1x1);
+    putNewCell(cells, 3, 0, SquareType.s1x1);
+    putNewCell(cells, 3, 1, SquareType.s1x1);
+    putNewCell(cells, 3, 2, SquareType.s1x1);
+    putNewCell(cells, 3, 3, SquareType.s1x1);
+    putNewCell(cells, 4, 0, SquareType.s1x1);
+    putNewCell(cells, 4, 1, null);
+    putNewCell(cells, 4, 2, null);
+    putNewCell(cells, 4, 3, SquareType.s1x1);
+    return new GridContainer(cells);
+  }
 
-    cells.put(Position.point(1, 0), CellContainer.newCell(1, 0, SquareType.COVERED));
-    cells.put(Position.point(1, 1), CellContainer.newCell(1, 1, SquareType.COVERED));
-    cells.put(Position.point(1, 2), CellContainer.newCell(1, 2, SquareType.COVERED));
-    cells.put(Position.point(1, 3), CellContainer.newCell(1, 3, SquareType.COVERED));
-
-    cells.put(Position.point(2, 0), CellContainer.newCell(2, 0, SquareType.s1x1));
-    cells.put(Position.point(2, 1), CellContainer.newCell(2, 1, SquareType.s1x1));
-    cells.put(Position.point(2, 2), CellContainer.newCell(2, 2, SquareType.s1x1));
-    cells.put(Position.point(2, 3), CellContainer.newCell(2, 3, SquareType.s1x1));
-
-    cells.put(Position.point(3, 0), CellContainer.newCell(3, 0, SquareType.s1x1));
-    cells.put(Position.point(3, 1), CellContainer.newCell(3, 1, SquareType.s1x1));
-    cells.put(Position.point(3, 2), CellContainer.newCell(3, 2, SquareType.s1x1));
-    cells.put(Position.point(3, 3), CellContainer.newCell(3, 3, SquareType.s1x1));
-
-    cells.put(Position.point(4, 0), CellContainer.newCell(4, 0, SquareType.s1x1));
-    cells.put(Position.point(4, 1), CellContainer.newCell(4, 1));
-    cells.put(Position.point(4, 2), CellContainer.newCell(4, 2));
-    cells.put(Position.point(4, 3), CellContainer.newCell(4, 3, SquareType.s1x1));
+  public static GridContainer initLevel3() {
+    Map<Position, CellContainer> cells = new HashMap<Position, CellContainer>();
+    putNewCell(cells, 0, 0, SquareType.s1x2);
+    putNewCell(cells, 0, 1, SquareType.s2x2);
+    putNewCell(cells, 0, 2, SquareType.COVERED);
+    putNewCell(cells, 0, 3, SquareType.s1x2);
+    putNewCell(cells, 1, 0, SquareType.COVERED);
+    putNewCell(cells, 1, 1, SquareType.COVERED);
+    putNewCell(cells, 1, 2, SquareType.COVERED);
+    putNewCell(cells, 1, 3, SquareType.COVERED);
+    putNewCell(cells, 2, 0, SquareType.s1x2);
+    putNewCell(cells, 2, 1, SquareType.s1x1);
+    putNewCell(cells, 2, 2, SquareType.s1x1);
+    putNewCell(cells, 2, 3, SquareType.s1x1);
+    putNewCell(cells, 3, 0, SquareType.COVERED);
+    putNewCell(cells, 3, 1, SquareType.s1x1);
+    putNewCell(cells, 3, 2, SquareType.s1x1);
+    putNewCell(cells, 3, 3, SquareType.s1x1);
+    putNewCell(cells, 4, 0, SquareType.s1x1);
+    putNewCell(cells, 4, 1, null);
+    putNewCell(cells, 4, 2, null);
+    putNewCell(cells, 4, 3, SquareType.s1x1);
     return new GridContainer(cells);
   }
 
