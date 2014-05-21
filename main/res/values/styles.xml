@@ -23,13 +23,26 @@
     <item name="android:layout_margin">2dp</item>
     <item name="android:shadowDx">4</item>
     <item name="android:shadowDy">4</item>
-    <item name="android:shadowColor">@color/shadow_dark</item>
+    <item name="android:shadowColor">@color/shadow_border</item>
     <item name="android:shadowRadius">4</item>
   </style>
 
   <style name="LayoutFillParent">
    <item name="android:layout_width">fill_parent</item>
    <item name="android:layout_height">fill_parent</item>
+  </style>
+
+  <style name="LayoutFillParentCenter" parent="LayoutFillParent">
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="LayoutWrapContent">
+   <item name="android:layout_width">wrap_content</item>
+   <item name="android:layout_height">wrap_content</item>
+  </style>
+
+  <style name="LayoutWrapContentAndMargin2dip" parent="LayoutWrapContent">
+   <item name="android:layout_margin">2dip</item>
   </style>
 
 </resources>

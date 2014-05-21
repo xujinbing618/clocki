@@ -9,7 +9,7 @@ subject : Level three
 description : Level three of this game. This level should be quite simple,
  since current logics works for this level too.
 
-story point :
+story point : 0.2 = 0.2
 
 comments : [
   : "2014-May-20 Story was told",

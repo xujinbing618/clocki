@@ -234,33 +234,37 @@ public abstract class LevelActivity extends ActionBarActivity {
         LinearLayout container = (LinearLayout) v;
         String homeId = idString(owner.getId());
         String dropId = idString(container.getId());
-        if (isLastMove(homeId)) {
-          owner.removeView(view);
-          findViewById(R.id.sq2x2_b).setBackground(getResources().
-              getDrawable(R.drawable.square_green_big_full));
-          moveCount++;
-          moveView.setText(moveCount + "");
-          writeScore();
-          startActivity(new Intent(LevelActivity.this,
-                                   WinningDialogActivity.class).
-                            putExtra(LEVEL, level()));
-        }
-        else if (isAllowedToMoveTo(homeId, dropId)) {
-          grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
-                    GridHelper.row(dropId), GridHelper.column(dropId));
-          updateViewViewNewMove(view, container);
-          if (mostRecentSquareId == view.getId() &&
-              mostRecentDraggedId.equalsIgnoreCase(dropId) &&
-              !moveDecreasedOnce) {
-            moveCount--;
-            moveDecreasedOnce = true;
-          } else {
+
+        if (isAllowedToMoveTo(homeId, dropId)) {
+          if (isLastMove(homeId)) {
+            owner.removeView(view);
+            findViewById(R.id.sq2x2_b).
+              setBackground(getResources().
+                            getDrawable(R.drawable.square_green_big_full));
             moveCount++;
-            moveDecreasedOnce = false;
+            moveView.setText(moveCount + "");
+            writeScore();
+            startActivity(new Intent(LevelActivity.this,
+                                     WinningDialogActivity.class).
+                              putExtra(LEVEL, level()));
           }
-          ((TextView)findViewById(R.id.moves)).setText(moveCount + "");
-          mostRecentSquareId = view.getId();
-          mostRecentDraggedId = homeId;
+          else {
+            grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
+                      GridHelper.row(dropId), GridHelper.column(dropId));
+            updateViewViewNewMove(view, container);
+            if (mostRecentSquareId == view.getId() &&
+                mostRecentDraggedId.equalsIgnoreCase(dropId) &&
+                !moveDecreasedOnce) {
+              moveCount--;
+              moveDecreasedOnce = true;
+            } else {
+              moveCount++;
+              moveDecreasedOnce = false;
+            }
+            moveView.setText(moveCount + "");
+            mostRecentSquareId = view.getId();
+            mostRecentDraggedId = homeId;
+          }
         }
         v.setBackgroundColor(normalShape);
         break;
@@ -291,6 +295,14 @@ public abstract class LevelActivity extends ActionBarActivity {
     }
 
     private boolean isAllowedToMoveTo(String homeId, String dropId) {
+      if (dropId.equalsIgnoreCase("r6c1")) {    // Special case for last move jump
+        if (homeId.equalsIgnoreCase("r2c1")) {
+          if (grid.isEmpty(Position.point(4, 1)) &&
+              grid.isEmpty(Position.point(4, 2))) {
+            return true;
+          }
+        }
+      }
       return grid.isAllowedToMoveTo(
           GridHelper.row(homeId), GridHelper.column(homeId),
           GridHelper.row(dropId), GridHelper.column(dropId));

@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.os.Process;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 public class HomeActivity extends ActionBarActivity {
 
@@ -49,36 +49,29 @@ public class HomeActivity extends ActionBarActivity {
   public void checkScores() {
     SharedPreferences sharedPref = getSharedPref();
     if (sharedPref.getBoolean(LevelActivity.LEVEL1, false)) {
-      Button btn = (Button) findViewById(R.id.level1_btn);
-      setBackgroundGreen(btn);
-      addScoreNumber(btn, LevelActivity.LEVEL1_SCORE, R.string.i_only_18_steps);
+      setBackgroundGreen(R.id.level1_btn);
+      setScoreNumber(LevelActivity.LEVEL1_SCORE, R.id.level1_score);
     }
     if (sharedPref.getBoolean(LevelActivity.LEVEL2, false)) {
-      Button btn = (Button) findViewById(R.id.level2_btn);
-      setBackgroundGreen(btn);
-      addScoreNumber(btn, LevelActivity.LEVEL2_SCORE, R.string.ii_daisy);
+      setBackgroundGreen(R.id.level2_btn);
+      setScoreNumber(LevelActivity.LEVEL2_SCORE, R.id.level2_score);
     }
     if (sharedPref.getBoolean(LevelActivity.LEVEL3, false)) {
-      Button btn = (Button) findViewById(R.id.level3_btn);
-      setBackgroundGreen(btn);
-      addScoreNumber(btn, LevelActivity.LEVEL3_SCORE, R.string.iii_violet);
+      setBackgroundGreen(R.id.level3_btn);
+      setScoreNumber(LevelActivity.LEVEL3_SCORE, R.id.level3_score);
     }
   }
 
-  public void setBackgroundGreen(Button button) {
-    button.setBackground(
+  public void setBackgroundGreen(int buttonId) {
+    findViewById(buttonId).setBackground(
         getResources().
         getDrawable(R.drawable.square_green_border)
     );
   }
 
-  public void addScoreNumber(Button button,
-                             String levelScoreKey,
+  public void setScoreNumber(String levelScoreKey,
                              int levelLabelId) {
-    button.setText(
-        getResources().getString(levelLabelId) + ": " +
-        score(levelScoreKey)
-    );
+    ((TextView) findViewById(levelLabelId)).setText(score(levelScoreKey) + "");
   }
 
   public int score(String levelKey) {
