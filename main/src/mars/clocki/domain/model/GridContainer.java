@@ -30,6 +30,9 @@ public class GridContainer {
       case s1x2:
         moveSquareType1x2(square, targetContainer);
         break;
+      case s2x1:
+        moveSquareType2x1(square, targetContainer);
+        break;
       default:
         throw new RuntimeException("Square type not found! (nothing moved)");
       }
@@ -48,6 +51,66 @@ public class GridContainer {
     currentContainer.setSquare(null);
     square.setPosition(targetContainer.position());
     targetContainer.setSquare(square);
+  }
+
+  private void moveSquareType2x1(Square square, CellContainer target) {
+    CellContainer currentCell = cells.get(square.position());
+    currentCell.setSquare(null);
+
+    switch(moveDirectionForSquareType2x1(square.position(), target.position())) {
+    case RIGHT:
+      if (target.position().column - square.position().column > 2) {
+        square.setPosition(Position.point(
+            square.position().row, square.position().column + 2)
+        );
+        cell(square.position().row, square.position().column - 2).setSquare(null);
+      }
+      else {
+        square.setPosition(Position.point(
+            square.position().row, square.position().column + 1)
+        );
+      }
+      cell(square.position().row, square.position().column).setSquare(square);
+      cell(square.position().row, square.position().column - 1).setSquare(null);
+      makeCellCovered(square.position().row, square.position().column + 1);
+      break;
+    case LEFT:
+      if (square.position().column - target.position().column > 1) {
+        square.setPosition(Position.point(
+            square.position().row, square.position().column - 2)
+        );
+        cell(square.position().row, square.position().column + 3).setSquare(null);
+      }
+      else {
+        square.setPosition(Position.point(
+            square.position().row, square.position().column - 1)
+        );
+      }
+      cell(square.position().row, square.position().column).setSquare(square);
+      cell(square.position().row, square.position().column + 2).setSquare(null);
+      makeCellCovered(square.position().row, square.position().column  + 1);
+      break;
+    case UP:
+      square.setPosition(Position.point(
+          square.position().row - 1, square.position().column
+      ));
+      cell(square.position().row, square.position().column).setSquare(square);
+      cell(square.position().row + 1, square.position().column).setSquare(null);
+      cell(square.position().row + 1, square.position().column + 1).setSquare(null);
+      makeCellCovered(square.position().row, square.position().column + 1);
+      break;
+    case DOWN:
+      square.setPosition(Position.point(
+          square.position().row + 1, square.position().column)
+      );
+      cell(square.position().row, square.position().column).setSquare(square);
+      cell(square.position().row - 1, square.position().column).setSquare(null);
+      cell(square.position().row - 1, square.position().column + 1).setSquare(null);
+      makeCellCovered(square.position().row, square.position().column + 1);
+      break;
+    default:
+      throw new RuntimeException("Square 2x1 didn't moved!");
+    }
   }
 
   private void moveSquareType1x2(Square square, CellContainer target) {
@@ -80,7 +143,6 @@ public class GridContainer {
             square.position().row - 2,
             square.position().column
         ));
-        cell(square.position().row + 2, square.position().column).setSquare(null);
         cell(square.position().row + 3, square.position().column).setSquare(null);
       }
       else {
@@ -88,9 +150,9 @@ public class GridContainer {
             square.position().row - 1,
             square.position().column
         ));
-        cell(square.position().row + 2, square.position().column).setSquare(null);
       }
       cell(square.position().row, square.position().column).setSquare(square);
+      cell(square.position().row + 2, square.position().column).setSquare(null);
       makeCellCovered(square.position().row + 1, square.position().column);
       break;
     case DOWN:
@@ -99,7 +161,6 @@ public class GridContainer {
             square.position().row + 2,
             square.position().column
         ));
-        cell(square.position().row - 1, square.position().column).setSquare(null);
         cell(square.position().row - 2, square.position().column).setSquare(null);
       }
       else {
@@ -107,9 +168,9 @@ public class GridContainer {
             square.position().row + 1,
             square.position().column
         ));
-        cell(square.position().row - 1, square.position().column).setSquare(null);
       }
       cell(square.position().row, square.position().column).setSquare(square);
+      cell(square.position().row - 1, square.position().column).setSquare(null);
       makeCellCovered(square.position().row + 1, square.position().column);
       break;
     default:
@@ -198,6 +259,23 @@ public class GridContainer {
     return Direction.NONE;
   }
 
+  public Direction moveDirectionForSquareType2x1(Position current,
+                                                 Position target) {
+    if (new PositionRightForSquare2x1Specification(current).isSatisfiedBy(target)) {
+      return Direction.RIGHT;
+    }
+    if (new PositionLeftForSquare2x1Specification(current).isSatisfiedBy(target)) {
+      return Direction.LEFT;
+    }
+    if (new PositionUpForSquare2x1Specification(current).isSatisfiedBy(target)) {
+      return Direction.UP;
+    }
+    if (new PositionDownForSquare2x1Specification(current).isSatisfiedBy(target)) {
+      return Direction.DOWN;
+    }
+    return Direction.NONE;
+  }
+
   public Direction moveDirectionForSquareType1x2(Position current,
                                                  Position target) {
     if (new PositionRightForSquare1x2Specification(current).isSatisfiedBy(target)) {
@@ -230,9 +308,45 @@ public class GridContainer {
       return possibleMovesForSquareType2x2(square.position()).contains(to);
     case s1x2:
       return possibleMovesForSquareType1x2(square.position()).contains(to);
+    case s2x1:
+      return possibleMovesForSquareType2x1(square.position()).contains(to);
     default:
       return false;
     }
+  }
+
+  private Set<Position> possibleMovesForSquareType2x1(final Position p) {
+    Set<Position> result = new HashSet<Position>();
+    Position right  = Position.point(p.row, p.column + 2);
+    Position right2 = Position.point(p.row, p.column + 3);
+    Position left   = Position.point(p.row, p.column - 1);
+    Position left2  = Position.point(p.row, p.column - 2);
+    Position up    = Position.point(p.row - 1, p.column);
+    Position up2   = Position.point(p.row - 1, p.column + 1);
+    Position down   = Position.point(p.row + 1, p.column);
+    Position down2  = Position.point(p.row + 1, p.column + 1);
+
+    if (isEmpty(right)) {
+      result.add(right);
+      if (isEmpty(right2)) {
+        result.add(right2);
+      }
+    }
+    if (isEmpty(left)) {
+      result.add(left);
+      if (isEmpty(left2)) {
+        result.add(left2);
+      }
+    }
+    if (isEmpty(up) && isEmpty(up2)) {
+      result.add(up);
+      result.add(up2);
+    }
+    if (isEmpty(down) && isEmpty(down2)) {
+      result.add(down);
+      result.add(down2);
+    }
+    return result;
   }
 
   private Set<Position> possibleMovesForSquareType1x2(final Position p) {
@@ -444,6 +558,31 @@ public class GridContainer {
     putNewCell(cells, 2, 2, SquareType.s1x1);
     putNewCell(cells, 2, 3, SquareType.s1x1);
     putNewCell(cells, 3, 0, SquareType.COVERED);
+    putNewCell(cells, 3, 1, SquareType.s1x1);
+    putNewCell(cells, 3, 2, SquareType.s1x1);
+    putNewCell(cells, 3, 3, SquareType.s1x1);
+    putNewCell(cells, 4, 0, SquareType.s1x1);
+    putNewCell(cells, 4, 1, null);
+    putNewCell(cells, 4, 2, null);
+    putNewCell(cells, 4, 3, SquareType.s1x1);
+    return new GridContainer(cells);
+  }
+
+  public static GridContainer initLevel4() {
+    Map<Position, CellContainer> cells = new HashMap<Position, CellContainer>();
+    putNewCell(cells, 0, 0, SquareType.s1x2);
+    putNewCell(cells, 0, 1, SquareType.s2x2);
+    putNewCell(cells, 0, 2, SquareType.COVERED);
+    putNewCell(cells, 0, 3, SquareType.s1x2);
+    putNewCell(cells, 1, 0, SquareType.COVERED);
+    putNewCell(cells, 1, 1, SquareType.COVERED);
+    putNewCell(cells, 1, 2, SquareType.COVERED);
+    putNewCell(cells, 1, 3, SquareType.COVERED);
+    putNewCell(cells, 2, 0, SquareType.s1x1);
+    putNewCell(cells, 2, 1, SquareType.s2x1);
+    putNewCell(cells, 2, 2, SquareType.COVERED);
+    putNewCell(cells, 2, 3, SquareType.s1x1);
+    putNewCell(cells, 3, 0, SquareType.s1x1);
     putNewCell(cells, 3, 1, SquareType.s1x1);
     putNewCell(cells, 3, 2, SquareType.s1x1);
     putNewCell(cells, 3, 3, SquareType.s1x1);

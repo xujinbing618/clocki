@@ -4,8 +4,8 @@ import static mars.clocki.domain.model.Square.SquareType.*;
 
 /**
  * This test class goes through different possible moves in level 2.
- * We will test only new added logic in level 2 here, see
- * {@link GridContainerTest#testIsValidMoveForLevel1()} for later tests.
+ * We will test only new added logic(square type 1x2) here.
+ * see {@link GridContainerTest#testIsValidMoveForLevel1()} for later tests.
  */
 public class GridContainerLevel2Test extends GridContainerTestCase {
 

@@ -1,0 +1,19 @@
+number : 5
+
+status : inprogress
+
+type : Story/feature
+
+subject : Level four to eight.
+
+description : In this story we are suppose to implement level four, five, six,
+ seven and eight of this game. In level four we need one new logic handling
+ (square type 2x1) and in continue there is no new logic.Therefore implementing
+ next levels are expected to be stright forward.
+
+story point : 0.3 = 0.3
+
+comments : [
+  : "2014-May-21 story was told",
+  : "",
+]
