@@ -4,6 +4,7 @@ import mars.clocki.R;
 import mars.clocki.interfaces.levels.Level1Activity;
 import mars.clocki.interfaces.levels.Level2Activity;
 import mars.clocki.interfaces.levels.Level3Activity;
+import mars.clocki.interfaces.levels.Level4Activity;
 import mars.clocki.interfaces.levels.LevelActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,10 @@ public class HomeActivity extends ActionBarActivity {
     startActivity(new Intent(HomeActivity.this, Level3Activity.class));
   }
 
+  public void startLevel4(View view) {
+    startActivity(new Intent(HomeActivity.this, Level4Activity.class));
+  }
+
   public void exit(View view) {
     HomeActivity.this.finish();
     Process.killProcess(Process.myPid());
@@ -49,17 +54,22 @@ public class HomeActivity extends ActionBarActivity {
   public void checkScores() {
     SharedPreferences sharedPref = getSharedPref();
     if (sharedPref.getBoolean(LevelActivity.LEVEL1, false)) {
-      setBackgroundGreen(R.id.level1_btn);
-      setScoreNumber(LevelActivity.LEVEL1_SCORE, R.id.level1_score);
+      setScore(R.id.level1_btn, LevelActivity.LEVEL1_SCORE, R.id.level1_score);
     }
     if (sharedPref.getBoolean(LevelActivity.LEVEL2, false)) {
-      setBackgroundGreen(R.id.level2_btn);
-      setScoreNumber(LevelActivity.LEVEL2_SCORE, R.id.level2_score);
+      setScore(R.id.level2_btn, LevelActivity.LEVEL2_SCORE, R.id.level2_score);
     }
     if (sharedPref.getBoolean(LevelActivity.LEVEL3, false)) {
-      setBackgroundGreen(R.id.level3_btn);
-      setScoreNumber(LevelActivity.LEVEL3_SCORE, R.id.level3_score);
+      setScore(R.id.level3_btn, LevelActivity.LEVEL3_SCORE, R.id.level3_score);
     }
+    if (sharedPref.getBoolean(LevelActivity.LEVEL4, false)) {
+      setScore(R.id.level4_btn, LevelActivity.LEVEL4_SCORE, R.id.level4_score);
+    }
+  }
+
+  public void setScore(int buttonId, String scoreKey, int textViewId) {
+    setBackgroundGreen(buttonId);
+    setScoreNumber(scoreKey, textViewId);
   }
 
   public void setBackgroundGreen(int buttonId) {

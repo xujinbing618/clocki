@@ -95,6 +95,28 @@
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <Button
+    android:id="@+id/level4_btn"
+    android:text="@string/iv_poppy"
+    android:textSize="@dimen/font_medium"
+    android:onClick="startLevel4"
+    android:padding="8dip"
+    android:gravity="left|center_vertical"
+    android:background="@drawable/square_blue_border"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
+  <TextView
+    android:id="@+id/level4_score"
+    android:textColor="@color/square_green_border"
+    android:gravity="left|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
+</TableRow>
+
+<TableRow
+  android:layout_margin="2dip"
+  style="@style/LayoutFillParentCenter"
+  >
   <TextView
    android:text=" "
    style="@style/LayoutFillParent"

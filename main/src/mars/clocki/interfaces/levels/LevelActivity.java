@@ -128,7 +128,7 @@ public abstract class LevelActivity extends ActionBarActivity {
 
   private void resizeView(final int i, final int j, LinearLayout cellView,
       int ripBox, boolean firstTime) {
-    String id = String.format(r_c_, i, j);
+    String id = formattedId(i, j);
     if (cellView != null) {
       if (((ViewGroup) cellView).getChildCount() > 0) {
         View child = ((ViewGroup) cellView).getChildAt(0);
@@ -162,7 +162,15 @@ public abstract class LevelActivity extends ActionBarActivity {
           params.rowSpec = GridLayout.spec(i, 2);
           cellView.setLayoutParams(params);
           // Hide one covered view. Note: i + 1 will change i value to i + 1 (keyword 'final' has no effect)
-          viewById(String.format(r_c_, i + 1, j)).setVisibility(View.GONE);
+          viewById(i + 1, j).setVisibility(View.GONE);
+        }
+        else if (child.getId() == R.id.sq2x1_a) {
+          cellView.getLayoutParams().width = ripBox * 2;
+          cellView.getLayoutParams().height = ripBox;
+          ((GridLayout.LayoutParams)cellView.getLayoutParams()).
+            columnSpec = GridLayout.spec(j, 2);
+          // Hide covered view.
+          viewById(i, j + 1).setVisibility(View.GONE);
         }
         else {
           cellView.getLayoutParams().width = ripBox;
@@ -190,6 +198,7 @@ public abstract class LevelActivity extends ActionBarActivity {
    * Dragging starts here.
    */
   private final class DragListener implements OnTouchListener {
+    @Override
     public boolean onTouch(View view, MotionEvent event) {
       if (event.getAction() == MotionEvent.ACTION_DOWN) {
         String id = idString(((ViewGroup)view.getParent()).getId());
@@ -286,8 +295,18 @@ public abstract class LevelActivity extends ActionBarActivity {
           return true;
         }
         if (lastRow == 2 && lastColumn == 1 &&
-            grid.isEmpty(Position.point(4, 1)) &&
-            grid.isEmpty(Position.point(4, 2))) {
+            grid.isEmpty(4, 1) &&
+            grid.isEmpty(4, 2)) {
+          return true;
+        }
+        if (lastRow == 3 && lastColumn == 0 &&
+            grid.isEmpty(3, 2) &&
+            grid.isEmpty(4, 2)) {
+          return true;
+        }
+        if (lastRow == 3 && lastColumn == 2 &&
+            grid.isEmpty(3, 1) &&
+            grid.isEmpty(4, 1)) {
           return true;
         }
       }
@@ -295,12 +314,9 @@ public abstract class LevelActivity extends ActionBarActivity {
     }
 
     private boolean isAllowedToMoveTo(String homeId, String dropId) {
-      if (dropId.equalsIgnoreCase("r6c1")) {    // Special case for last move jump
-        if (homeId.equalsIgnoreCase("r2c1")) {
-          if (grid.isEmpty(Position.point(4, 1)) &&
-              grid.isEmpty(Position.point(4, 2))) {
-            return true;
-          }
+      if (dropId.equalsIgnoreCase("r6c1")) {  // Special case for last move jump
+        if (isLastMove(homeId)) {
+          return true;
         }
       }
       return grid.isAllowedToMoveTo(
@@ -316,69 +332,81 @@ public abstract class LevelActivity extends ActionBarActivity {
       final Position drop = Position.point(GridHelper.row(dropId),
                                            GridHelper.column(dropId));
 
-      ((ViewGroup) view.getParent()).removeView(view);  // Remove view first.
+      ((ViewGroup) view.getParent()).removeView(view);  // Detach view first.
 
-      if (idString(view.getId()).equalsIgnoreCase("sq2x2_a")) { // Big square type 2x2
-        String newHomeId = "";
+      if (idString(view.getId()).equalsIgnoreCase("sq2x2_a")) { // Square type 2x2
         switch (grid.moveDirectionForSquareType2x2(home, drop)) {
         case RIGHT:
-          newHomeId = String.format(r_c_, home.row(), home.column() + 1);
-          viewById(newHomeId).addView(view);
-          initGridLayout(false);
+          viewById(home.row(), home.column() + 1).addView(view);
           break;
         case LEFT:
-          newHomeId = String.format(r_c_, home.row(), home.column() - 1);
-          viewById(newHomeId).addView(view);
-          initGridLayout(false);
+          viewById(home.row(), home.column() - 1).addView(view);
           break;
         case UP:
-          newHomeId = String.format(r_c_, home.row() - 1, home.column());
-          viewById(newHomeId).addView(view);
-          initGridLayout(false);
+          viewById(home.row() - 1, home.column()).addView(view);
           break;
         case DOWN:
-          newHomeId = String.format(r_c_, home.row() + 1, home.column());
-          viewById(newHomeId).addView(view);
-          initGridLayout(false);
+          viewById(home.row() + 1, home.column()).addView(view);
           break;
         default:
           break;
         }
+        initGridLayout(false);
       }
-      else if (idString(view.getId()).startsWith("sq1x2")) {    // Big square type 1x2
-        String newHomeId = "";
+      else if (idString(view.getId()).startsWith("sq1x2")) {    // Square type 1x2
         switch (grid.moveDirectionForSquareType1x2(home, drop)) {
         case RIGHT:
-          newHomeId = String.format(r_c_, home.row(), home.column() + 1);
-          viewById(newHomeId).addView(view);
-          initGridLayout(false);
+          viewById(home.row(), home.column() + 1).addView(view);
           break;
         case LEFT:
-          newHomeId = String.format(r_c_, home.row(), home.column() - 1);
-          viewById(newHomeId).addView(view);
-          initGridLayout(false);
+          viewById(home.row(), home.column() - 1).addView(view);
           break;
         case UP:
           if (home.row() - drop.row() > 1) {
-            newHomeId = String.format(r_c_, home.row() - 2, home.column());
+            viewById(home.row() - 2, home.column()).addView(view);
           } else {
-            newHomeId = String.format(r_c_, home.row() - 1, home.column());
+            viewById(home.row() - 1, home.column()).addView(view);
           }
-          viewById(newHomeId).addView(view);
-          initGridLayout(false);
           break;
         case DOWN:
           if (drop.row() - home.row() > 2) {
-            newHomeId = String.format(r_c_, home.row() + 2, home.column());
+            viewById(home.row() + 2, home.column()).addView(view);
           } else {
-            newHomeId = String.format(r_c_, home.row() + 1, home.column());
+            viewById(home.row() + 1, home.column()).addView(view);
           }
-          viewById(newHomeId).addView(view);
-          initGridLayout(false);
           break;
         default:
           break;
         }
+        initGridLayout(false);
+      } else if (idString(view.getId()).startsWith("sq2x1")) {  // Square type 2x1
+        switch(grid.moveDirectionForSquareType2x1(home, drop)) {
+        case RIGHT:
+          if (drop.column() - home.column() > 2) {
+            viewById(home.row(), home.column() + 2).addView(view);
+          }
+          else {
+            viewById(home.row(), home.column() + 1).addView(view);
+          }
+          break;
+        case LEFT:
+          if (home.column() - drop.column() > 1) {
+            viewById(home.row(), home.column() - 2).addView(view);
+          }
+          else {
+            viewById(home.row(), home.column() - 1).addView(view);
+          }
+          break;
+        case UP:
+          viewById(home.row() - 1, home.column()).addView(view);
+          break;
+        case DOWN:
+          viewById(home.row() + 1, home.column()).addView(view);
+          break;
+        default:
+          break;
+        }
+        initGridLayout(false);
       }
       else {
         droppedIn.addView(view);
@@ -411,13 +439,21 @@ public abstract class LevelActivity extends ActionBarActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  protected String idString(int id) {
+    return getResources().getResourceEntryName(id);
+  }
+
   protected ViewGroup viewById(String id) {
     return (ViewGroup) findViewById(getResources().
         getIdentifier(id, "id", getPackageName()));
   }
 
-  protected String idString(int id) {
-    return getResources().getResourceEntryName(id);
+  protected ViewGroup viewById(int row, int column) {
+    return viewById(formattedId(row, column));
+  }
+
+  protected String formattedId(int row, int column) {
+    return String.format(r_c_, row, column);
   }
 
   protected SharedPreferences getSharedPref() {
@@ -518,11 +554,14 @@ public abstract class LevelActivity extends ActionBarActivity {
   public final static String LEVEL1 = "LEVEL1";
   public final static String LEVEL2 = "LEVEL2";
   public final static String LEVEL3 = "LEVEL3";
+  public final static String LEVEL4 = "LEVEL4";
   public final static String LEVEL1_LAST = "LEVEL1_LAST";
   public final static String LEVEL2_LAST = "LEVEL2_LAST";
   public final static String LEVEL3_LAST = "LEVEL3_LAST";
+  public final static String LEVEL4_LAST = "LEVEL4_LAST";
   public final static String LEVEL1_SCORE = "LEVEL1_SCORE";
   public final static String LEVEL2_SCORE = "LEVEL2_SCORE";
   public final static String LEVEL3_SCORE = "LEVEL3_SCORE";
+  public final static String LEVEL4_SCORE = "LEVEL4_SCORE";
 
 }

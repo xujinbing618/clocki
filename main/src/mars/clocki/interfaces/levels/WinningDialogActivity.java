@@ -36,6 +36,9 @@ public class WinningDialogActivity extends Activity {
     else if (cameFrom(LevelActivity.LEVEL3)) {
       Level3Activity.instance.finish();
     }
+    else if (cameFrom(LevelActivity.LEVEL4)) {
+      Level4Activity.instance.finish();
+    }
     WinningDialogActivity.this.finish();
   }
 
@@ -48,6 +51,9 @@ public class WinningDialogActivity extends Activity {
     }
     else if (cameFrom(LevelActivity.LEVEL3)) {
       return getSharedPref().getInt(LevelActivity.LEVEL3_LAST, 0);
+    }
+    else if (cameFrom(LevelActivity.LEVEL4)) {
+      return getSharedPref().getInt(LevelActivity.LEVEL4_LAST, 0);
     }
     return -1;
   }

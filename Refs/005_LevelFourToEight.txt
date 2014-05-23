@@ -1,6 +1,6 @@
 number : 5
 
-status : inprogress
+status : inprogress.
 
 type : Story/feature
 

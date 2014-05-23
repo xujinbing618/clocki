@@ -448,6 +448,10 @@ public class GridContainer {
     return cell != null && !cell.hasSquare();
   }
 
+  public boolean isEmpty(int row, int column) {
+    return isEmpty(Position.point(row, column));
+  }
+
   public CellContainer cell(int row, int column) {
     return cells.get(Position.point(row, column));
   }
@@ -462,6 +466,8 @@ public class GridContainer {
         return possibleMovesForSquareType2x2(Position.point(row, column)).size() > 0;
       case s1x2:
         return possibleMovesForSquareType1x2(Position.point(row, column)).size() > 0;
+      case s2x1:
+        return possibleMovesForSquareType2x1(Position.point(row, column)).size() > 0;
       default:
         return false;
       }
