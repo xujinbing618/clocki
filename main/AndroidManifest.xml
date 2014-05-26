@@ -12,7 +12,8 @@
     android:allowBackup="false"
     android:icon="@drawable/square_green_big_full"
     android:label="@string/app_name"
-    android:theme="@style/AppTheme" >
+    android:theme="@style/AppTheme"
+    android:debuggable="true">
 
     <activity
       android:name="mars.clocki.interfaces.HomeActivity"
@@ -57,6 +58,16 @@
 
     <activity
       android:name="mars.clocki.interfaces.levels.Level4Activity"
+      android:label="@string/iv_poppy"
+      >
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value="mars.clocki.interfaces.HomeActivity"
+       />
+    </activity>
+
+    <activity
+      android:name="mars.clocki.interfaces.dargdrop.DragActivity"
       android:label="@string/iv_poppy"
       >
       <meta-data

@@ -1,6 +1,7 @@
 package mars.clocki.interfaces;
 
 import mars.clocki.R;
+import mars.clocki.interfaces.dargdrop.DragActivity;
 import mars.clocki.interfaces.levels.Level1Activity;
 import mars.clocki.interfaces.levels.Level2Activity;
 import mars.clocki.interfaces.levels.Level3Activity;
@@ -44,6 +45,10 @@ public class HomeActivity extends ActionBarActivity {
 
   public void startLevel4(View view) {
     startActivity(new Intent(HomeActivity.this, Level4Activity.class));
+  }
+
+  public void startLevel5(View view) {
+    startActivity(new Intent(HomeActivity.this, DragActivity.class));
   }
 
   public void exit(View view) {

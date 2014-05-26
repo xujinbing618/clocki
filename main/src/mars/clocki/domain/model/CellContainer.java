@@ -43,7 +43,7 @@ public class CellContainer implements ValueObject<CellContainer> {
   /**
    * Returns <code>true</code> if cell contains square.
    */
-  boolean hasSquare() {
+  public boolean hasSquare() {
     return square != null;
   }
 
