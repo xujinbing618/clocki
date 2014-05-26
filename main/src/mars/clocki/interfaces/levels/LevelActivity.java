@@ -575,17 +575,20 @@ public abstract class LevelActivity extends ActionBarActivity {
   public final static String LEVEL4 = "LEVEL4";
   public final static String LEVEL5 = "LEVEL5";
   public final static String LEVEL6 = "LEVEL6";
+  public final static String LEVEL7 = "LEVEL7";
   public final static String LEVEL1_LAST = "LEVEL1_LAST";
   public final static String LEVEL2_LAST = "LEVEL2_LAST";
   public final static String LEVEL3_LAST = "LEVEL3_LAST";
   public final static String LEVEL4_LAST = "LEVEL4_LAST";
   public final static String LEVEL5_LAST = "LEVEL5_LAST";
   public final static String LEVEL6_LAST = "LEVEL6_LAST";
+  public final static String LEVEL7_LAST = "LEVEL7_LAST";
   public final static String LEVEL1_SCORE = "LEVEL1_SCORE";
   public final static String LEVEL2_SCORE = "LEVEL2_SCORE";
   public final static String LEVEL3_SCORE = "LEVEL3_SCORE";
   public final static String LEVEL4_SCORE = "LEVEL4_SCORE";
   public final static String LEVEL5_SCORE = "LEVEL5_SCORE";
   public final static String LEVEL6_SCORE = "LEVEL6_SCORE";
+  public final static String LEVEL7_SCORE = "LEVEL7_SCORE";
 
 }
