@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.DragEvent;
 import android.view.Menu;
@@ -83,6 +84,307 @@ public abstract class LevelActivity extends ActionBarActivity {
   protected abstract void writeScore();
 
   protected static LevelActivity instance;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(activityViewId());
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    moveCount = 0;
+    initViewFields();
+    initGridLayout(true);
+    instance = this;
+  }
+
+  private int activityViewId() {
+    if (level().equalsIgnoreCase(LEVEL1)) {
+      return R.layout.activity_level1;
+    }
+    if (level().equalsIgnoreCase(LEVEL2)) {
+      return R.layout.activity_level2;
+    }
+    if (level().equalsIgnoreCase(LEVEL3)) {
+      return R.layout.activity_level3;
+    }
+    if (level().equalsIgnoreCase(LEVEL4)) {
+      return R.layout.activity_level4;
+    }
+    throw new RuntimeException("View id not found for current level: " + level());
+  }
+
+  /**
+   * Dragging starts here.
+   */
+  private final class DragListener implements OnTouchListener {
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+      if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        String id = idString((ViewGroup)view.getParent());
+        if (grid.isAllowedToMoveFrom(GridHelper.row(id),
+                                     GridHelper.column(id))) {
+          ClipData data = ClipData.newPlainText("", "");
+          DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+          view.startDrag(data, shadowBuilder, view, 0);
+          view.setVisibility(View.INVISIBLE);
+          return true;
+        }
+        return false;
+      }
+      else {
+        view.setVisibility(View.VISIBLE);
+        return false;
+      }
+    }
+  }
+
+  /**
+   * Dragging ends here.
+   */
+  protected final class DropListener implements OnDragListener {
+    int normalShape = getResources().getColor(R.color.game_background);
+    int enterShape = getResources().getColor(R.color.blue_light);
+
+    public boolean onDrag(View v, DragEvent event) {
+      switch(event.getAction()) {
+      case ACTION_DRAG_STARTED:
+        break;
+      case ACTION_DRAG_ENTERED:
+        v.setBackgroundColor(enterShape);
+        break;
+      case ACTION_DRAG_EXITED:
+        v.setBackgroundColor(normalShape);
+        break;
+      case ACTION_DROP:
+        // Dropped, reassign View to ViewGroup
+        View view = (View) event.getLocalState();
+        ViewGroup owner = (ViewGroup) view.getParent();
+        LinearLayout container = (LinearLayout) v;
+        String homeId = idString(owner);
+        String dropId = idString(container);
+
+        if (isAllowedToMoveTo(homeId, dropId)) {
+          if (isLastMove(homeId)) {
+            owner.removeView(view);
+            findViewById(R.id.sq2x2_b).
+              setBackground(getResources().
+                            getDrawable(R.drawable.square_green_big_full));
+            moveCount++;
+            moveView.setText(moveCount + "");
+            writeScore();
+            startActivity(new Intent(LevelActivity.this,
+                                     WinningDialogActivity.class).
+                              putExtra(LEVEL, level()));
+          }
+          else {
+            grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
+                      GridHelper.row(dropId), GridHelper.column(dropId));
+            updateViewViewNewMove(view, container);
+            if (mostRecentSquareId == view.getId() &&
+                mostRecentDraggedId.equalsIgnoreCase(dropId) &&
+                !moveDecreasedOnce) {
+              moveCount--;
+              moveDecreasedOnce = true;
+            } else {
+              moveCount++;
+              moveDecreasedOnce = false;
+            }
+            moveView.setText(moveCount + "");
+            mostRecentSquareId = view.getId();
+            mostRecentDraggedId = homeId;
+          }
+        }
+        v.setBackgroundColor(normalShape);
+        break;
+      case ACTION_DRAG_ENDED:
+        break;
+      default:
+        break;
+      }
+      return true;
+    }
+
+  }
+
+  private boolean isLastMove(String homeId) {
+    final int lastRow = GridHelper.row(homeId);
+    final int lastColumn = GridHelper.column(homeId);
+    CellContainer lastCell = grid.cell(lastRow, lastColumn);
+    if (lastCell.square() != null &&
+        lastCell.square().type().equals(SquareType.s2x2)) {
+      if (lastRow == 3 && lastColumn == 1) {
+        return true;
+      }
+      if (lastRow == 2 && lastColumn == 1 &&
+          grid.isEmpty(4, 1) &&
+          grid.isEmpty(4, 2)) {
+        return true;
+      }
+      if (lastRow == 3 && lastColumn == 0 &&
+          grid.isEmpty(3, 2) &&
+          grid.isEmpty(4, 2)) {
+        return true;
+      }
+      if (lastRow == 3 && lastColumn == 2 &&
+          grid.isEmpty(3, 1) &&
+          grid.isEmpty(4, 1)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean isAllowedToMoveTo(String homeId, String dropId) {
+    if (dropId.equalsIgnoreCase("r6c1")) {  // Special case for last move jump
+      if (isLastMove(homeId)) {
+        return true;
+      }
+    }
+    return grid.isAllowedToMoveTo(
+        GridHelper.row(homeId), GridHelper.column(homeId),
+        GridHelper.row(dropId), GridHelper.column(dropId));
+  }
+
+  private void updateViewViewNewMove(View view, LinearLayout droppedIn) {
+    String homeId = idString((ViewGroup)view.getParent());
+    String dropId = idString(droppedIn);
+    final Position home = Position.point(GridHelper.row(homeId),
+                                         GridHelper.column(homeId));
+    final Position drop = Position.point(GridHelper.row(dropId),
+                                         GridHelper.column(dropId));
+
+    ((ViewGroup) view.getParent()).removeView(view);  // Detach view first.
+
+    if (idString(view).equalsIgnoreCase("sq2x2_a")) { // Square type 2x2
+      switch (grid.moveDirectionForSquareType2x2(home, drop)) {
+      case RIGHT:
+        viewById(home.row(), home.column() + 1).addView(view);
+        break;
+      case LEFT:
+        viewById(home.row(), home.column() - 1).addView(view);
+        break;
+      case UP:
+        viewById(home.row() - 1, home.column()).addView(view);
+        break;
+      case DOWN:
+        viewById(home.row() + 1, home.column()).addView(view);
+        break;
+      default:
+        break;
+      }
+      initGridLayout(false);
+    }
+    else if (idString(view).startsWith("sq1x2")) {    // Square type 1x2
+      switch (grid.moveDirectionForSquareType1x2(home, drop)) {
+      case RIGHT:
+        viewById(home.row(), home.column() + 1).addView(view);
+        break;
+      case LEFT:
+        viewById(home.row(), home.column() - 1).addView(view);
+        break;
+      case UP:
+        if (home.row() - drop.row() > 1) {
+          viewById(home.row() - 2, home.column()).addView(view);
+        } else {
+          viewById(home.row() - 1, home.column()).addView(view);
+        }
+        break;
+      case DOWN:
+        if (drop.row() - home.row() > 2) {
+          viewById(home.row() + 2, home.column()).addView(view);
+        } else {
+          viewById(home.row() + 1, home.column()).addView(view);
+        }
+        break;
+      default:
+        break;
+      }
+      initGridLayout(false);
+    } else if (idString(view).startsWith("sq2x1")) {  // Square type 2x1
+      switch(grid.moveDirectionForSquareType2x1(home, drop)) {
+      case RIGHT:
+        if (drop.column() - home.column() > 2) {
+          viewById(home.row(), home.column() + 2).addView(view);
+        }
+        else {
+          viewById(home.row(), home.column() + 1).addView(view);
+        }
+        break;
+      case LEFT:
+        if (home.column() - drop.column() > 1) {
+          viewById(home.row(), home.column() - 2).addView(view);
+        }
+        else {
+          viewById(home.row(), home.column() - 1).addView(view);
+        }
+        break;
+      case UP:
+        viewById(home.row() - 1, home.column()).addView(view);
+        break;
+      case DOWN:
+        viewById(home.row() + 1, home.column()).addView(view);
+        break;
+      default:
+        break;
+      }
+      initGridLayout(false);
+    }
+    else {
+      droppedIn.addView(view);
+    }
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.reset, menu);
+    return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+    case R.id.reset_level:
+      if (Build.VERSION.SDK_INT >= 11) {
+        recreate();
+      }
+      else {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+      }
+      break;
+    default:
+      break;
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
+  protected String idString(View view) {
+    return getResources().getResourceEntryName(view.getId());
+  }
+
+  protected ViewGroup viewById(String id) {
+    return (ViewGroup) findViewById(getResources().
+        getIdentifier(id, "id", getPackageName()));
+  }
+
+  protected ViewGroup viewById(int row, int column) {
+    return viewById(formattedId(row, column));
+  }
+
+  protected String formattedId(int row, int column) {
+    return String.format(r_c_, row, column);
+  }
+
+  protected SharedPreferences getSharedPref() {
+    return getApplicationContext().
+        getSharedPreferences(SCORE_FILE_KEY, Context.MODE_PRIVATE);
+  }
+
+  protected SharedPreferences.Editor getSharedEditor() {
+    return getSharedPref().edit();
+  }
+
 
   protected void initGridLayout(boolean firstTime) {
     visiableAllLinearLayouts();
@@ -194,277 +496,6 @@ public abstract class LevelActivity extends ActionBarActivity {
     }
   }
 
-  /**
-   * Dragging starts here.
-   */
-  private final class DragListener implements OnTouchListener {
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-      if (event.getAction() == MotionEvent.ACTION_DOWN) {
-        String id = idString(((ViewGroup)view.getParent()).getId());
-        if (grid.isAllowedToMoveFrom(GridHelper.row(id),
-                                     GridHelper.column(id))) {
-          ClipData data = ClipData.newPlainText("", "");
-          DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-          view.startDrag(data, shadowBuilder, view, 0);
-          view.setVisibility(View.INVISIBLE);
-          return true;
-        }
-        return false;
-      }
-      else {
-        view.setVisibility(View.VISIBLE);
-        return false;
-      }
-    }
-  }
-
-  /**
-   * Dragging ends here.
-   */
-  protected final class DropListener implements OnDragListener {
-    int normalShape = getResources().getColor(R.color.game_background);
-    int enterShape = getResources().getColor(R.color.blue_light);
-
-    public boolean onDrag(View v, DragEvent event) {
-      switch(event.getAction()) {
-      case ACTION_DRAG_STARTED:
-        break;
-      case ACTION_DRAG_ENTERED:
-        v.setBackgroundColor(enterShape);
-        break;
-      case ACTION_DRAG_EXITED:
-        v.setBackgroundColor(normalShape);
-        break;
-      case ACTION_DROP:
-        // Dropped, reassign View to ViewGroup
-        View view = (View) event.getLocalState();
-        ViewGroup owner = (ViewGroup) view.getParent();
-        LinearLayout container = (LinearLayout) v;
-        String homeId = idString(owner.getId());
-        String dropId = idString(container.getId());
-
-        if (isAllowedToMoveTo(homeId, dropId)) {
-          if (isLastMove(homeId)) {
-            owner.removeView(view);
-            findViewById(R.id.sq2x2_b).
-              setBackground(getResources().
-                            getDrawable(R.drawable.square_green_big_full));
-            moveCount++;
-            moveView.setText(moveCount + "");
-            writeScore();
-            startActivity(new Intent(LevelActivity.this,
-                                     WinningDialogActivity.class).
-                              putExtra(LEVEL, level()));
-          }
-          else {
-            grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
-                      GridHelper.row(dropId), GridHelper.column(dropId));
-            updateViewViewNewMove(view, container);
-            if (mostRecentSquareId == view.getId() &&
-                mostRecentDraggedId.equalsIgnoreCase(dropId) &&
-                !moveDecreasedOnce) {
-              moveCount--;
-              moveDecreasedOnce = true;
-            } else {
-              moveCount++;
-              moveDecreasedOnce = false;
-            }
-            moveView.setText(moveCount + "");
-            mostRecentSquareId = view.getId();
-            mostRecentDraggedId = homeId;
-          }
-        }
-        v.setBackgroundColor(normalShape);
-        break;
-      case ACTION_DRAG_ENDED:
-        break;
-      default:
-        break;
-      }
-      return true;
-    }
-
-    private boolean isLastMove(String homeId) {
-      final int lastRow = GridHelper.row(homeId);
-      final int lastColumn = GridHelper.column(homeId);
-      CellContainer lastCell = grid.cell(lastRow, lastColumn);
-      if (lastCell.square() != null &&
-          lastCell.square().type().equals(SquareType.s2x2)) {
-        if (lastRow == 3 && lastColumn == 1) {
-          return true;
-        }
-        if (lastRow == 2 && lastColumn == 1 &&
-            grid.isEmpty(4, 1) &&
-            grid.isEmpty(4, 2)) {
-          return true;
-        }
-        if (lastRow == 3 && lastColumn == 0 &&
-            grid.isEmpty(3, 2) &&
-            grid.isEmpty(4, 2)) {
-          return true;
-        }
-        if (lastRow == 3 && lastColumn == 2 &&
-            grid.isEmpty(3, 1) &&
-            grid.isEmpty(4, 1)) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    private boolean isAllowedToMoveTo(String homeId, String dropId) {
-      if (dropId.equalsIgnoreCase("r6c1")) {  // Special case for last move jump
-        if (isLastMove(homeId)) {
-          return true;
-        }
-      }
-      return grid.isAllowedToMoveTo(
-          GridHelper.row(homeId), GridHelper.column(homeId),
-          GridHelper.row(dropId), GridHelper.column(dropId));
-    }
-
-    private void updateViewViewNewMove(View view, LinearLayout droppedIn) {
-      String homeId = idString(((ViewGroup)view.getParent()).getId());
-      String dropId = idString(droppedIn.getId());
-      final Position home = Position.point(GridHelper.row(homeId),
-                                           GridHelper.column(homeId));
-      final Position drop = Position.point(GridHelper.row(dropId),
-                                           GridHelper.column(dropId));
-
-      ((ViewGroup) view.getParent()).removeView(view);  // Detach view first.
-
-      if (idString(view.getId()).equalsIgnoreCase("sq2x2_a")) { // Square type 2x2
-        switch (grid.moveDirectionForSquareType2x2(home, drop)) {
-        case RIGHT:
-          viewById(home.row(), home.column() + 1).addView(view);
-          break;
-        case LEFT:
-          viewById(home.row(), home.column() - 1).addView(view);
-          break;
-        case UP:
-          viewById(home.row() - 1, home.column()).addView(view);
-          break;
-        case DOWN:
-          viewById(home.row() + 1, home.column()).addView(view);
-          break;
-        default:
-          break;
-        }
-        initGridLayout(false);
-      }
-      else if (idString(view.getId()).startsWith("sq1x2")) {    // Square type 1x2
-        switch (grid.moveDirectionForSquareType1x2(home, drop)) {
-        case RIGHT:
-          viewById(home.row(), home.column() + 1).addView(view);
-          break;
-        case LEFT:
-          viewById(home.row(), home.column() - 1).addView(view);
-          break;
-        case UP:
-          if (home.row() - drop.row() > 1) {
-            viewById(home.row() - 2, home.column()).addView(view);
-          } else {
-            viewById(home.row() - 1, home.column()).addView(view);
-          }
-          break;
-        case DOWN:
-          if (drop.row() - home.row() > 2) {
-            viewById(home.row() + 2, home.column()).addView(view);
-          } else {
-            viewById(home.row() + 1, home.column()).addView(view);
-          }
-          break;
-        default:
-          break;
-        }
-        initGridLayout(false);
-      } else if (idString(view.getId()).startsWith("sq2x1")) {  // Square type 2x1
-        switch(grid.moveDirectionForSquareType2x1(home, drop)) {
-        case RIGHT:
-          if (drop.column() - home.column() > 2) {
-            viewById(home.row(), home.column() + 2).addView(view);
-          }
-          else {
-            viewById(home.row(), home.column() + 1).addView(view);
-          }
-          break;
-        case LEFT:
-          if (home.column() - drop.column() > 1) {
-            viewById(home.row(), home.column() - 2).addView(view);
-          }
-          else {
-            viewById(home.row(), home.column() - 1).addView(view);
-          }
-          break;
-        case UP:
-          viewById(home.row() - 1, home.column()).addView(view);
-          break;
-        case DOWN:
-          viewById(home.row() + 1, home.column()).addView(view);
-          break;
-        default:
-          break;
-        }
-        initGridLayout(false);
-      }
-      else {
-        droppedIn.addView(view);
-      }
-    }
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.reset, menu);
-    return super.onCreateOptionsMenu(menu);
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-    case R.id.reset_level:
-      if (Build.VERSION.SDK_INT >= 11) {
-        recreate();
-      }
-      else {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-      }
-      break;
-    default:
-      break;
-    }
-    return super.onOptionsItemSelected(item);
-  }
-
-  protected String idString(int id) {
-    return getResources().getResourceEntryName(id);
-  }
-
-  protected ViewGroup viewById(String id) {
-    return (ViewGroup) findViewById(getResources().
-        getIdentifier(id, "id", getPackageName()));
-  }
-
-  protected ViewGroup viewById(int row, int column) {
-    return viewById(formattedId(row, column));
-  }
-
-  protected String formattedId(int row, int column) {
-    return String.format(r_c_, row, column);
-  }
-
-  protected SharedPreferences getSharedPref() {
-    return getApplicationContext().
-        getSharedPreferences(SCORE_FILE_KEY, Context.MODE_PRIVATE);
-  }
-
-  protected SharedPreferences.Editor getSharedEditor() {
-    return getSharedPref().edit();
-  }
-
   private void visiableAllLinearLayouts() {
     r0c0Cell.setVisibility(View.VISIBLE);
     r0c1Cell.setVisibility(View.VISIBLE);
@@ -547,6 +578,7 @@ public abstract class LevelActivity extends ActionBarActivity {
     r6c1Cell.setOnDragListener(new DropListener());
 
     moveView = (TextView) findViewById(R.id.moves);
+    moveView.setText(moveCount + "");
   }
 
   public final static String SCORE_FILE_KEY = "SCORE_FILE";
