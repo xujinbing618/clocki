@@ -1,6 +1,7 @@
 package mars.clocki.interfaces.levels;
 
 import mars.clocki.R;
+import mars.clocki.application.util.LevelViewHelper;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,41 +28,17 @@ public class WinningDialogActivity extends Activity {
   }
 
   public void closeDialog(View v) {
-    if (cameFrom(LevelActivity.LEVEL1)) {
-      Level1Activity.instance.finish();
-    }
-    else if (cameFrom(LevelActivity.LEVEL2)) {
-      Level2Activity.instance.finish();
-    }
-    else if (cameFrom(LevelActivity.LEVEL3)) {
-      Level3Activity.instance.finish();
-    }
-    else if (cameFrom(LevelActivity.LEVEL4)) {
-      Level4Activity.instance.finish();
-    }
+    LevelViewHelper.finishActivity(level());
     WinningDialogActivity.this.finish();
   }
 
   private int lastRecord() {
-    if (cameFrom(LevelActivity.LEVEL1)) {
-      return getSharedPref().getInt(LevelActivity.LEVEL1_LAST, 0);
-    }
-    else if (cameFrom(LevelActivity.LEVEL2)) {
-      return getSharedPref().getInt(LevelActivity.LEVEL2_LAST, 0);
-    }
-    else if (cameFrom(LevelActivity.LEVEL3)) {
-      return getSharedPref().getInt(LevelActivity.LEVEL3_LAST, 0);
-    }
-    else if (cameFrom(LevelActivity.LEVEL4)) {
-      return getSharedPref().getInt(LevelActivity.LEVEL4_LAST, 0);
-    }
-    return -1;
+    return getSharedPref().getInt(LevelViewHelper.levelKeyForLastScore(level()), 0);
   }
 
-  private boolean cameFrom(String level) {
+  private String level() {
     return getIntent().
-           getStringExtra(LevelActivity.LEVEL).
-           equalsIgnoreCase(level);
+           getStringExtra(LevelActivity.LEVEL);
   }
 
   private SharedPreferences getSharedPref() {

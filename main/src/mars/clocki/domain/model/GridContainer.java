@@ -599,4 +599,29 @@ public class GridContainer {
     return new GridContainer(cells);
   }
 
+  public static GridContainer initLevel5() {
+    Map<Position, CellContainer> cells = new HashMap<Position, CellContainer>();
+    putNewCell(cells, 0, 0, SquareType.s1x2);
+    putNewCell(cells, 0, 1, SquareType.s2x2);
+    putNewCell(cells, 0, 2, SquareType.COVERED);
+    putNewCell(cells, 0, 3, SquareType.s1x2);
+    putNewCell(cells, 1, 0, SquareType.COVERED);
+    putNewCell(cells, 1, 1, SquareType.COVERED);
+    putNewCell(cells, 1, 2, SquareType.COVERED);
+    putNewCell(cells, 1, 3, SquareType.COVERED);
+    putNewCell(cells, 2, 0, SquareType.s1x2);
+    putNewCell(cells, 2, 1, SquareType.s1x1);
+    putNewCell(cells, 2, 2, SquareType.s1x1);
+    putNewCell(cells, 2, 3, SquareType.s1x2);
+    putNewCell(cells, 3, 0, SquareType.COVERED);
+    putNewCell(cells, 3, 1, SquareType.s1x1);
+    putNewCell(cells, 3, 2, SquareType.s1x1);
+    putNewCell(cells, 3, 3, SquareType.COVERED);
+    putNewCell(cells, 4, 0, SquareType.s1x1);
+    putNewCell(cells, 4, 1, null);
+    putNewCell(cells, 4, 2, null);
+    putNewCell(cells, 4, 3, SquareType.s1x1);
+    return new GridContainer(cells);
+  }
+
 }

@@ -67,8 +67,8 @@
     </activity>
 
     <activity
-      android:name="mars.clocki.interfaces.dargdrop.DragActivity"
-      android:label="@string/iv_poppy"
+      android:name="mars.clocki.interfaces.levels.Level5Activity"
+      android:label="@string/v_pansy"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"

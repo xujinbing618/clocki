@@ -1,11 +1,11 @@
 package mars.clocki.interfaces;
 
 import mars.clocki.R;
-import mars.clocki.interfaces.dargdrop.DragActivity;
 import mars.clocki.interfaces.levels.Level1Activity;
 import mars.clocki.interfaces.levels.Level2Activity;
 import mars.clocki.interfaces.levels.Level3Activity;
 import mars.clocki.interfaces.levels.Level4Activity;
+import mars.clocki.interfaces.levels.Level5Activity;
 import mars.clocki.interfaces.levels.LevelActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +48,7 @@ public class HomeActivity extends ActionBarActivity {
   }
 
   public void startLevel5(View view) {
-    startActivity(new Intent(HomeActivity.this, DragActivity.class));
+    startActivity(new Intent(HomeActivity.this, Level5Activity.class));
   }
 
   public void exit(View view) {
@@ -69,6 +69,9 @@ public class HomeActivity extends ActionBarActivity {
     }
     if (sharedPref.getBoolean(LevelActivity.LEVEL4, false)) {
       setScore(R.id.level4_btn, LevelActivity.LEVEL4_SCORE, R.id.level4_score);
+    }
+    if (sharedPref.getBoolean(LevelActivity.LEVEL5, false)) {
+      setScore(R.id.level5_btn, LevelActivity.LEVEL5_SCORE, R.id.level5_score);
     }
   }
 

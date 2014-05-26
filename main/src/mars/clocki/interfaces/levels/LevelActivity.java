@@ -7,6 +7,7 @@ import static android.view.DragEvent.ACTION_DRAG_STARTED;
 import static android.view.DragEvent.ACTION_DROP;
 import mars.clocki.R;
 import mars.clocki.application.util.GridHelper;
+import mars.clocki.application.util.LevelViewHelper;
 import mars.clocki.domain.model.CellContainer;
 import mars.clocki.domain.model.GridContainer;
 import mars.clocki.domain.model.Position;
@@ -83,34 +84,18 @@ public abstract class LevelActivity extends ActionBarActivity {
 
   protected abstract void writeScore();
 
-  protected static LevelActivity instance;
+  public static LevelActivity instance;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(activityViewId());
+    setContentView(LevelViewHelper.activityViewId(level()));
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     moveCount = 0;
     initViewFields();
     initGridLayout(true);
     instance = this;
-  }
-
-  private int activityViewId() {
-    if (level().equalsIgnoreCase(LEVEL1)) {
-      return R.layout.activity_level1;
-    }
-    if (level().equalsIgnoreCase(LEVEL2)) {
-      return R.layout.activity_level2;
-    }
-    if (level().equalsIgnoreCase(LEVEL3)) {
-      return R.layout.activity_level3;
-    }
-    if (level().equalsIgnoreCase(LEVEL4)) {
-      return R.layout.activity_level4;
-    }
-    throw new RuntimeException("View id not found for current level: " + level());
   }
 
   /**
@@ -456,7 +441,8 @@ public abstract class LevelActivity extends ActionBarActivity {
         }
         else if (child.getId() == R.id.sq1x2_a ||
                  child.getId() == R.id.sq1x2_b ||
-                 child.getId() == R.id.sq1x2_c) {
+                 child.getId() == R.id.sq1x2_c ||
+                 child.getId() == R.id.sq1x2_d) {
           cellView.getLayoutParams().width = ripBox;
           cellView.getLayoutParams().height = ripBox * 2;
           GridLayout.LayoutParams params = (LayoutParams)
@@ -587,13 +573,16 @@ public abstract class LevelActivity extends ActionBarActivity {
   public final static String LEVEL2 = "LEVEL2";
   public final static String LEVEL3 = "LEVEL3";
   public final static String LEVEL4 = "LEVEL4";
+  public final static String LEVEL5 = "LEVEL5";
   public final static String LEVEL1_LAST = "LEVEL1_LAST";
   public final static String LEVEL2_LAST = "LEVEL2_LAST";
   public final static String LEVEL3_LAST = "LEVEL3_LAST";
   public final static String LEVEL4_LAST = "LEVEL4_LAST";
+  public final static String LEVEL5_LAST = "LEVEL5_LAST";
   public final static String LEVEL1_SCORE = "LEVEL1_SCORE";
   public final static String LEVEL2_SCORE = "LEVEL2_SCORE";
   public final static String LEVEL3_SCORE = "LEVEL3_SCORE";
   public final static String LEVEL4_SCORE = "LEVEL4_SCORE";
+  public final static String LEVEL5_SCORE = "LEVEL5_SCORE";
 
 }

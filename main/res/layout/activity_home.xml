@@ -119,7 +119,7 @@
   >
   <Button
     android:id="@+id/level5_btn"
-    android:text="Drag Drop Demo"
+    android:text="@string/v_pansy"
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel5"
     android:padding="8dip"
