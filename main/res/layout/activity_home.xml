@@ -139,6 +139,28 @@
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <Button
+    android:id="@+id/level6_btn"
+    android:text="@string/vi_snowdrop"
+    android:textSize="@dimen/font_medium"
+    android:onClick="startLevel6"
+    android:padding="8dip"
+    android:gravity="left|center_vertical"
+    android:background="@drawable/square_blue_border"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
+  <TextView
+    android:id="@+id/level6_score"
+    android:textColor="@color/square_green_border"
+    android:gravity="left|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
+</TableRow>
+
+<TableRow
+  android:layout_margin="2dip"
+  style="@style/LayoutFillParentCenter"
+  >
   <TextView
    android:text=" "
    style="@style/LayoutFillParent"

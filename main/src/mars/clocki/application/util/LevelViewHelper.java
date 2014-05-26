@@ -6,6 +6,7 @@ import mars.clocki.interfaces.levels.Level2Activity;
 import mars.clocki.interfaces.levels.Level3Activity;
 import mars.clocki.interfaces.levels.Level4Activity;
 import mars.clocki.interfaces.levels.Level5Activity;
+import mars.clocki.interfaces.levels.Level6Activity;
 import mars.clocki.interfaces.levels.LevelActivity;
 
 public class LevelViewHelper {
@@ -26,6 +27,9 @@ public class LevelViewHelper {
     if (level.equalsIgnoreCase(LevelActivity.LEVEL5)) {
       return R.layout.activity_level5;
     }
+    if (level.equalsIgnoreCase(LevelActivity.LEVEL6)) {
+      return R.layout.activity_level6;
+    }
     throw new RuntimeException("View id not found for current level: " + level);
   }
 
@@ -44,6 +48,9 @@ public class LevelViewHelper {
     }
     else if (level.equalsIgnoreCase(LevelActivity.LEVEL5)) {
       Level5Activity.instance.finish();
+    }
+    else if (level.equalsIgnoreCase(LevelActivity.LEVEL6)) {
+      Level6Activity.instance.finish();
     }
     else {
       throw new RuntimeException("Activity not found for level: " + level);
@@ -65,6 +72,9 @@ public class LevelViewHelper {
     }
     if (level.equalsIgnoreCase(LevelActivity.LEVEL5)) {
       return LevelActivity.LEVEL5_LAST;
+    }
+    if (level.equalsIgnoreCase(LevelActivity.LEVEL6)) {
+      return LevelActivity.LEVEL6_LAST;
     }
     throw new RuntimeException("Level key(last score) not found for level: " + level);
   }
