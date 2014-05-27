@@ -1,6 +1,7 @@
 package mars.clocki.interfaces.levels;
 
 import mars.clocki.R;
+import mars.clocki.application.CS;
 import mars.clocki.application.util.LevelViewHelper;
 import android.app.Activity;
 import android.content.Context;
@@ -33,17 +34,17 @@ public class WinningDialogActivity extends Activity {
   }
 
   private int lastRecord() {
-    return getSharedPref().getInt(LevelViewHelper.levelKeyForLastScore(level()), 0);
+    return getSharedPref().getInt(CS.levelLastKey(level()), 0);
   }
 
   private String level() {
     return getIntent().
-           getStringExtra(LevelActivity.LEVEL);
+           getStringExtra(CS.LEVEL);
   }
 
   private SharedPreferences getSharedPref() {
     return getApplicationContext().
-           getSharedPreferences(LevelActivity.SCORE_FILE_KEY,
+           getSharedPreferences(CS.SCORE_FILE_KEY,
                                 Context.MODE_PRIVATE);
   }
 

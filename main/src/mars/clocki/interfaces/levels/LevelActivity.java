@@ -6,6 +6,7 @@ import static android.view.DragEvent.ACTION_DRAG_EXITED;
 import static android.view.DragEvent.ACTION_DRAG_STARTED;
 import static android.view.DragEvent.ACTION_DROP;
 import mars.clocki.R;
+import mars.clocki.application.CS;
 import mars.clocki.application.util.GridHelper;
 import mars.clocki.application.util.LevelViewHelper;
 import mars.clocki.domain.model.CellContainer;
@@ -80,22 +81,29 @@ public abstract class LevelActivity extends ActionBarActivity {
 
   private final String r_c_ = "r%sc%s";
 
-  protected abstract String level();
-
-  protected abstract void writeScore();
-
   public static LevelActivity instance;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(LevelViewHelper.activityViewId(level()));
+    setContentView(LevelViewHelper.activityViewId(grid.level()));
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     moveCount = 0;
     initViewFields();
     initGridLayout(true);
     instance = this;
+  }
+
+  private void writeScore() {
+    SharedPreferences.Editor editor = getSharedEditor();
+    editor.putBoolean(grid.level(), true);
+    editor.putInt(CS.levelLastKey(grid.level()), moveCount);
+    int score = getSharedPref().getInt(CS.levelScoreKey(grid.level()), 0);
+    if (score == 0 || score > moveCount) {
+      editor.putInt(CS.levelScoreKey(grid.level()), moveCount);
+    }
+    editor.commit();
   }
 
   /**
@@ -159,7 +167,7 @@ public abstract class LevelActivity extends ActionBarActivity {
             writeScore();
             startActivity(new Intent(LevelActivity.this,
                                      WinningDialogActivity.class).
-                              putExtra(LEVEL, level()));
+                              putExtra(CS.LEVEL, grid.level()));
           }
           else {
             grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
@@ -363,7 +371,7 @@ public abstract class LevelActivity extends ActionBarActivity {
 
   protected SharedPreferences getSharedPref() {
     return getApplicationContext().
-        getSharedPreferences(SCORE_FILE_KEY, Context.MODE_PRIVATE);
+        getSharedPreferences(CS.SCORE_FILE_KEY, Context.MODE_PRIVATE);
   }
 
   protected SharedPreferences.Editor getSharedEditor() {
@@ -566,29 +574,5 @@ public abstract class LevelActivity extends ActionBarActivity {
     moveView = (TextView) findViewById(R.id.moves);
     moveView.setText(moveCount + "");
   }
-
-  public final static String SCORE_FILE_KEY = "SCORE_FILE";
-  public final static String LEVEL = "LEVEL";
-  public final static String LEVEL1 = "LEVEL1";
-  public final static String LEVEL2 = "LEVEL2";
-  public final static String LEVEL3 = "LEVEL3";
-  public final static String LEVEL4 = "LEVEL4";
-  public final static String LEVEL5 = "LEVEL5";
-  public final static String LEVEL6 = "LEVEL6";
-  public final static String LEVEL7 = "LEVEL7";
-  public final static String LEVEL1_LAST = "LEVEL1_LAST";
-  public final static String LEVEL2_LAST = "LEVEL2_LAST";
-  public final static String LEVEL3_LAST = "LEVEL3_LAST";
-  public final static String LEVEL4_LAST = "LEVEL4_LAST";
-  public final static String LEVEL5_LAST = "LEVEL5_LAST";
-  public final static String LEVEL6_LAST = "LEVEL6_LAST";
-  public final static String LEVEL7_LAST = "LEVEL7_LAST";
-  public final static String LEVEL1_SCORE = "LEVEL1_SCORE";
-  public final static String LEVEL2_SCORE = "LEVEL2_SCORE";
-  public final static String LEVEL3_SCORE = "LEVEL3_SCORE";
-  public final static String LEVEL4_SCORE = "LEVEL4_SCORE";
-  public final static String LEVEL5_SCORE = "LEVEL5_SCORE";
-  public final static String LEVEL6_SCORE = "LEVEL6_SCORE";
-  public final static String LEVEL7_SCORE = "LEVEL7_SCORE";
 
 }

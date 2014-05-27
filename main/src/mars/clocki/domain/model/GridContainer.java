@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import mars.clocki.application.CS;
 import mars.clocki.domain.model.Square.SquareType;
 
 /**
@@ -13,9 +14,15 @@ import mars.clocki.domain.model.Square.SquareType;
 public class GridContainer {
 
   private Map<Position, CellContainer> cells;
+  private final String level;
 
-  public GridContainer(Map<Position, CellContainer> cells) {
+  public GridContainer(Map<Position, CellContainer> cells, String level) {
     this.cells = cells;
+    this.level = level;
+  }
+
+  public String level() {
+    return level;
   }
 
   public void move(Square square, CellContainer targetContainer) {
@@ -521,7 +528,7 @@ public class GridContainer {
     putNewCell(cells, 4, 1, null);
     putNewCell(cells, 4, 2, null);
     putNewCell(cells, 4, 3, SquareType.s1x1);
-    return new GridContainer(cells);
+    return new GridContainer(cells, CS.LEVEL1);
   }
 
   public static GridContainer initLevel2() {
@@ -546,7 +553,7 @@ public class GridContainer {
     putNewCell(cells, 4, 1, null);
     putNewCell(cells, 4, 2, null);
     putNewCell(cells, 4, 3, SquareType.s1x1);
-    return new GridContainer(cells);
+    return new GridContainer(cells, CS.LEVEL2);
   }
 
   public static GridContainer initLevel3() {
@@ -571,7 +578,7 @@ public class GridContainer {
     putNewCell(cells, 4, 1, null);
     putNewCell(cells, 4, 2, null);
     putNewCell(cells, 4, 3, SquareType.s1x1);
-    return new GridContainer(cells);
+    return new GridContainer(cells, CS.LEVEL3);
   }
 
   public static GridContainer initLevel4() {
@@ -596,7 +603,7 @@ public class GridContainer {
     putNewCell(cells, 4, 1, null);
     putNewCell(cells, 4, 2, null);
     putNewCell(cells, 4, 3, SquareType.s1x1);
-    return new GridContainer(cells);
+    return new GridContainer(cells, CS.LEVEL4);
   }
 
   public static GridContainer initLevel5() {
@@ -621,7 +628,7 @@ public class GridContainer {
     putNewCell(cells, 4, 1, null);
     putNewCell(cells, 4, 2, null);
     putNewCell(cells, 4, 3, SquareType.s1x1);
-    return new GridContainer(cells);
+    return new GridContainer(cells, CS.LEVEL5);
   }
 
   public static GridContainer initLevel6() {
@@ -646,7 +653,7 @@ public class GridContainer {
     putNewCell(cells, 4, 1, null);
     putNewCell(cells, 4, 2, null);
     putNewCell(cells, 4, 3, SquareType.s1x1);
-    return new GridContainer(cells);
+    return new GridContainer(cells, CS.LEVEL6);
   }
 
   public static GridContainer initLevel7() {
@@ -671,7 +678,7 @@ public class GridContainer {
     putNewCell(cells, 4, 1, null);
     putNewCell(cells, 4, 2, null);
     putNewCell(cells, 4, 3, SquareType.s1x1);
-    return new GridContainer(cells);
+    return new GridContainer(cells, CS.LEVEL7);
   }
 
 }
