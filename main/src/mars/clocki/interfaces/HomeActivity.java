@@ -139,6 +139,9 @@ public class HomeActivity extends AbstractActivity {
     if (item.getItemId() == R.id.action_settings) {
       startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
     }
+    if (item.getItemId() == R.id.action_help) {
+      startActivity(new Intent(HomeActivity.this, HelpActivity.class));
+    }
     return super.onOptionsItemSelected(item);
   }
 

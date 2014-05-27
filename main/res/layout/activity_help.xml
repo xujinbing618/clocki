@@ -1,0 +1,34 @@
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="MergeRootFrame"
+  style="@style/LayoutFillParentCenter"
+  >
+<TableLayout
+  android:typeface="monospace"
+  style="@style/LayoutFillParentCenter"
+  >
+
+<TableRow
+  android:textAlignment="center"
+  style="@style/LayoutFillParentCenter"
+  >
+  <TextView
+    android:text="@string/the_winning_move"
+    android:textAlignment="center"
+    style="@style/LayoutFillParentCenter"
+    />
+</TableRow>
+
+<TableRow
+  android:textAlignment="center"
+  style="@style/LayoutFillParentCenter"
+  >
+  <ImageView
+    android:src="@drawable/the_winning_move_snapshot"
+    style="@style/LayoutWrapContent"
+  />
+</TableRow>
+
+</TableLayout>
+</ScrollView>

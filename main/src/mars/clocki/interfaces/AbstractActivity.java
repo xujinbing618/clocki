@@ -32,9 +32,17 @@ public abstract class AbstractActivity extends ActionBarActivity {
   }
 
   protected Locale currentLocale() {
+    Locale defaultLocale = Locale.getDefault();
+    if (defaultLocale.equals(Locale.ENGLISH)) {
+    }
+    else if (defaultLocale.equals(new Locale("fa"))) {
+    }
+    else {
+      defaultLocale = Locale.ENGLISH;
+    }
     return new Locale(
         getSharedPref().
-        getString(CS.LOCALE_KEY, Locale.ENGLISH.getLanguage())
+        getString(CS.LOCALE_KEY, defaultLocale.getLanguage())
       );
   }
 

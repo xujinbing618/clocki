@@ -8,4 +8,10 @@
     android:title="@string/settings"
     app:showAsAction="never"/>
 
+  <item
+    android:id="@+id/action_help"
+    android:orderInCategory="101"
+    android:title="@string/help"
+    app:showAsAction="never"/>
+
 </menu>

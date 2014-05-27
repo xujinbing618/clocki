@@ -28,10 +28,10 @@ public class SettingsActivity extends AbstractActivity
         android.R.layout.simple_spinner_dropdown_item);
     languageSpinner.setAdapter(languageAdapter);
     languageSpinner.setOnItemSelectedListener(this);
-    languageSpinner.setSelection(currentPosition());
+    languageSpinner.setSelection(currentSelectedPosition());
   }
 
-  private int currentPosition() {
+  private int currentSelectedPosition() {
     if (currentLocale().equals(Locale.ENGLISH)) {
       return languageAdapter.getPosition(
           getResources().getString(R.string.english));
@@ -46,14 +46,14 @@ public class SettingsActivity extends AbstractActivity
   @Override
   public void onItemSelected(AdapterView<?> parent, View view, int position,
       long id) {
-    String languageString = (String) parent.getItemAtPosition(position);
-    if (languageString.equalsIgnoreCase(
+    String languageLabel = (String) parent.getItemAtPosition(position);
+    if (languageLabel.equalsIgnoreCase(
         getResources().getString(R.string.english))) {
       if (!currentLocale().equals(Locale.ENGLISH)) {
         setLocale(Locale.ENGLISH);
       }
     }
-    else if (languageString.equalsIgnoreCase(
+    else if (languageLabel.equalsIgnoreCase(
         getResources().getString(R.string.farsi))) {
       if (!currentLocale().equals(new Locale("fa"))) {
         setLocale(new Locale("fa"));
