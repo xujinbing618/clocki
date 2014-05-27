@@ -10,6 +10,7 @@ import mars.clocki.interfaces.levels.Level5Activity;
 import mars.clocki.interfaces.levels.Level6Activity;
 import mars.clocki.interfaces.levels.Level7Activity;
 import mars.clocki.interfaces.levels.Level8Activity;
+import mars.clocki.interfaces.levels.Level9Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,6 +67,10 @@ public class HomeActivity extends ActionBarActivity {
     startActivity(new Intent(HomeActivity.this, Level8Activity.class));
   }
 
+  public void startLevel9(View view) {
+    startActivity(new Intent(HomeActivity.this, Level9Activity.class));
+  }
+
   public void exit(View view) {
     HomeActivity.this.finish();
     Process.killProcess(Process.myPid());
@@ -96,6 +101,9 @@ public class HomeActivity extends ActionBarActivity {
     }
     if (sharedPref.getBoolean(CS.LEVEL8, false)) {
       setScore(R.id.level8_btn, CS.level7Score(), R.id.level8_score);
+    }
+    if (sharedPref.getBoolean(CS.LEVEL9, false)) {
+      setScore(R.id.level9_btn, CS.level7Score(), R.id.level9_score);
     }
   }
 

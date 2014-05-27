@@ -1,0 +1,19 @@
+number : 6
+
+status : inprogress
+
+type : Story/feature
+
+subject : Level nine and release version two
+
+description : Level nine of this game is quite similar to level eight, and
+ expected to be done easily. In second part of this story, we need to be
+ prepared for releasing version two of this game. Simple help page and
+ simple setting page are nice to have features before releasing version two.
+
+story point : 0.1 = 0.1
+
+comments : [
+  : "2014-May-27 story was told",
+  : "",
+]
