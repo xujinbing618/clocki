@@ -1,6 +1,6 @@
 number : 6
 
-status : inprogress
+status : inprogress.
 
 type : Story/feature
 
@@ -11,7 +11,7 @@ description : Level nine of this game is quite similar to level eight, and
  prepared for releasing version two of this game. Simple help page and
  simple setting page are nice to have features before releasing version two.
 
-story point : 0.1 = 0.1
+story point : 0.1 + 0.2 = 0.3
 
 comments : [
   : "2014-May-27 story was told",

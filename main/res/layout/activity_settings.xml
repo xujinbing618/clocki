@@ -1,0 +1,29 @@
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="MergeRootFrame"
+  style="@style/LayoutFillParentCenter"
+  >
+<TableLayout
+  android:typeface="monospace"
+  style="@style/LayoutFillParentCenter"
+  >
+
+<TableRow
+  android:textAlignment="center"
+  style="@style/LayoutFillParentCenter"
+  >
+  <TextView
+    android:text="@string/language"
+    android:textAlignment="center"
+    android:lineSpacingExtra="5dip"
+    style="@style/LayoutFillParentCenter"
+    />
+  <Spinner
+    android:id="@+id/language_spinner"
+    style="@style/LayoutWrapContent"
+    />
+</TableRow>
+
+</TableLayout>
+</ScrollView>

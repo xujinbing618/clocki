@@ -3,6 +3,7 @@ package mars.clocki.interfaces.levels;
 import mars.clocki.R;
 import mars.clocki.application.CS;
 import mars.clocki.application.util.LevelViewHelper;
+import mars.clocki.interfaces.AbstractActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -37,15 +38,19 @@ public class WinningDialogActivity extends Activity {
     return getSharedPref().getInt(CS.levelLastKey(level()), 0);
   }
 
+  /**
+   * Duplicate of {@link AbstractActivity#getSharedPref()}
+   * Unfortunately this class could not extends AbstractActivity.
+   * TODO: find a way to share SharedPreferences in one place.
+   */
+  protected SharedPreferences getSharedPref() {
+    return getApplicationContext().
+        getSharedPreferences(CS.SCORE_FILE_KEY, Context.MODE_PRIVATE);
+  }
+
   private String level() {
     return getIntent().
            getStringExtra(CS.LEVEL);
-  }
-
-  private SharedPreferences getSharedPref() {
-    return getApplicationContext().
-           getSharedPreferences(CS.SCORE_FILE_KEY,
-                                Context.MODE_PRIVATE);
   }
 
   private void reSizeLayoutAndOkayButton() {

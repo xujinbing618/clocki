@@ -3,6 +3,7 @@ package mars.clocki.application;
 public class CS {
 
   public final static String SCORE_FILE_KEY = "SCORE_FILE";
+  public final static String LOCALE_KEY = "LOCALE";
 
   // Level constants
   public final static String LEVEL = "LEVEL";

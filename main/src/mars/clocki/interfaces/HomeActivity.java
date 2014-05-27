@@ -11,16 +11,16 @@ import mars.clocki.interfaces.levels.Level6Activity;
 import mars.clocki.interfaces.levels.Level7Activity;
 import mars.clocki.interfaces.levels.Level8Activity;
 import mars.clocki.interfaces.levels.Level9Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Process;
-import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class HomeActivity extends ActionBarActivity {
+public class HomeActivity extends AbstractActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -128,11 +128,18 @@ public class HomeActivity extends ActionBarActivity {
     return getSharedPref().getInt(scoreKey, 0);
   }
 
-  private SharedPreferences getSharedPref() {
-    return getApplicationContext().
-             getSharedPreferences(
-                 CS.SCORE_FILE_KEY,
-                 Context.MODE_PRIVATE);
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.nav, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_settings) {
+      startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+    }
+    return super.onOptionsItemSelected(item);
   }
 
 }

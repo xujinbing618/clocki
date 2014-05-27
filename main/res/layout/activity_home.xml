@@ -16,8 +16,8 @@
   <TextView
     android:id="@+id/welcome_label_id"
     android:text="@string/welcome_to_clocki_game"
-	android:textSize="@dimen/font_medium"
-	android:textStyle="bold"
+    android:textSize="@dimen/font_medium"
+    android:textStyle="bold"
     android:textAlignment="center"
     android:lineSpacingExtra="5dip"
     android:layout_span="2"

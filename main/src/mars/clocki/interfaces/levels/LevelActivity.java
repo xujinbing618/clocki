@@ -13,14 +13,12 @@ import mars.clocki.domain.model.CellContainer;
 import mars.clocki.domain.model.GridContainer;
 import mars.clocki.domain.model.Position;
 import mars.clocki.domain.model.Square.SquareType;
+import mars.clocki.interfaces.AbstractActivity;
 import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +34,7 @@ import android.widget.GridLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public abstract class LevelActivity extends ActionBarActivity {
+public abstract class LevelActivity extends AbstractActivity {
 
   protected GridContainer grid;
   protected int moveCount;
@@ -337,14 +335,7 @@ public abstract class LevelActivity extends ActionBarActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
     case R.id.reset_level:
-      if (Build.VERSION.SDK_INT >= 11) {
-        recreate();
-      }
-      else {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-      }
+      resetActivity();
       break;
     default:
       break;
@@ -368,16 +359,6 @@ public abstract class LevelActivity extends ActionBarActivity {
   protected String formattedId(int row, int column) {
     return String.format(r_c_, row, column);
   }
-
-  protected SharedPreferences getSharedPref() {
-    return getApplicationContext().
-        getSharedPreferences(CS.SCORE_FILE_KEY, Context.MODE_PRIVATE);
-  }
-
-  protected SharedPreferences.Editor getSharedEditor() {
-    return getSharedPref().edit();
-  }
-
 
   protected void initGridLayout(boolean firstTime) {
     visiableAllLinearLayouts();

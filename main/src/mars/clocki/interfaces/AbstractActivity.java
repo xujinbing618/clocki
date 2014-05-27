@@ -1,0 +1,66 @@
+package mars.clocki.interfaces;
+
+import java.util.Locale;
+
+import mars.clocki.application.CS;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+
+public abstract class AbstractActivity extends ActionBarActivity {
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    setLocale(currentLocale());
+    super.onCreate(savedInstanceState);
+  }
+
+  protected void resetActivity() {
+    if (Build.VERSION.SDK_INT >= 11) {
+      recreate();
+    }
+    else {
+      Intent intent = getIntent();
+      finish();
+      startActivity(intent);
+    }
+  }
+
+  protected Locale currentLocale() {
+    return new Locale(
+        getSharedPref().
+        getString(CS.LOCALE_KEY, Locale.ENGLISH.getLanguage())
+      );
+  }
+
+  protected void setLocale(Locale locale) {
+
+    SharedPreferences.Editor editor = getSharedEditor();
+    editor.putString(CS.LOCALE_KEY, locale.getLanguage());
+    editor.commit();
+
+    Configuration conf = getBaseContext().getResources().getConfiguration();
+    if (!conf.locale.equals(currentLocale())) {
+      Locale.setDefault(currentLocale());
+      conf.locale = currentLocale();
+      getBaseContext().getResources().updateConfiguration(conf,
+          getBaseContext().getResources().getDisplayMetrics());
+      resetActivity();
+    }
+  }
+
+  protected SharedPreferences getSharedPref() {
+    return getApplicationContext().
+        getSharedPreferences(CS.SCORE_FILE_KEY, Context.MODE_PRIVATE);
+  }
+
+  protected SharedPreferences.Editor getSharedEditor() {
+    return getSharedPref().edit();
+  }
+
+}
