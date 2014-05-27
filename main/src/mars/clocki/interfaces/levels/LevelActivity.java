@@ -460,7 +460,9 @@ public abstract class LevelActivity extends ActionBarActivity {
           // Hide one covered view. Note: i + 1 will change i value to i + 1 (keyword 'final' has no effect)
           viewById(i + 1, j).setVisibility(View.GONE);
         }
-        else if (child.getId() == R.id.sq2x1_a) {
+        else if (child.getId() == R.id.sq2x1_a ||
+                 child.getId() == R.id.sq2x1_b ||
+                 child.getId() == R.id.sq2x1_c) {
           cellView.getLayoutParams().width = ripBox * 2;
           cellView.getLayoutParams().height = ripBox;
           ((GridLayout.LayoutParams)cellView.getLayoutParams()).

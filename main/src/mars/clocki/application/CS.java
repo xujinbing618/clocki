@@ -13,6 +13,7 @@ public class CS {
   public final static String LEVEL5 = "LEVEL5";
   public final static String LEVEL6 = "LEVEL6";
   public final static String LEVEL7 = "LEVEL7";
+  public final static String LEVEL8 = "LEVEL8";
 
   public static String levelLastKey(String level) {
     return String.format("%s_LAST", level);
@@ -29,6 +30,7 @@ public class CS {
   public static String level5Score() { return levelScoreKey(LEVEL5); }
   public static String level6Score() { return levelScoreKey(LEVEL6); }
   public static String level7Score() { return levelScoreKey(LEVEL7); }
+  public static String level8Score() { return levelScoreKey(LEVEL8); }
 
   public static String level1Last() { return levelLastKey(LEVEL1); }
   public static String level2Last() { return levelLastKey(LEVEL2); }
@@ -37,5 +39,6 @@ public class CS {
   public static String level5Last() { return levelLastKey(LEVEL5); }
   public static String level6Last() { return levelLastKey(LEVEL6); }
   public static String level7Last() { return levelLastKey(LEVEL7); }
+  public static String level8Last() { return levelLastKey(LEVEL8); }
 
 }

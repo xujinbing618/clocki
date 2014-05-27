@@ -1,6 +1,6 @@
 number : 5
 
-status : inprogress.....
+status : done......
 
 type : Story/feature
 
@@ -11,7 +11,7 @@ description : In this story we are suppose to implement level four, five, six,
  (square type 2x1) and in continue there is no new logic.Therefore implementing
  next levels are expected to be stright forward.
 
-story point : 0.3 + 1.7 + 0.2 + 0.1 + 0.1 = 2.4
+story point : 0.3 + 1.7 + 0.2 + 0.1 + 0.1 + 0.1 = 2.5
 
 comments : [
   : "2014-May-21 story was told",

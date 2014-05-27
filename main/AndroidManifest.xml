@@ -97,6 +97,16 @@
     </activity>
 
     <activity
+      android:name="mars.clocki.interfaces.levels.Level8Activity"
+      android:label="@string/viii_trail"
+      >
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value="mars.clocki.interfaces.HomeActivity"
+       />
+    </activity>
+
+    <activity
       android:name="mars.clocki.interfaces.levels.WinningDialogActivity"
       android:theme="@android:style/Theme.Dialog"
       />
