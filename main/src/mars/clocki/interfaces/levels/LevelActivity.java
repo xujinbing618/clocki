@@ -134,7 +134,7 @@ public abstract class LevelActivity extends AbstractActivity {
    */
   protected final class DropListener implements OnDragListener {
     int normalShape = getResources().getColor(R.color.game_background);
-    int enterShape = getResources().getColor(R.color.blue_light);
+    int enterShape = getResources().getColor(R.color.game_background_hover);
 
     public boolean onDrag(View v, DragEvent event) {
       switch(event.getAction()) {

@@ -1,15 +1,15 @@
 <resources>
   <color name="white">#ffffff</color>
   <color name="black">#000000</color>
-  <color name="blue_light">#44b4e4</color>
-  <color name="blue_darker">#1b3f73</color>
   <color name="pink_border">#c200c2</color>
   <color name="shadow_border">#232322</color>
-  <color name="square_blue">#6993bf</color>
-  <color name="square_blue_border">#3465a4</color>
+  <color name="square_blue">#3465a4</color>
+  <color name="square_blue_border">#1b3f73</color>
+  <color name="square_blue_lighter">#6993bf</color>
   <color name="square_green">#9cff3b</color>
   <color name="square_green_border">#007f00</color>
   <color name="game_background">#eeeeec</color>
+  <color name="game_background_hover">#44b4e4</color>
   <color name="grid_wall_background">#729fcf</color>
 
   <!-- Drag-Drop colors -->
