@@ -1,5 +1,6 @@
 package mars.clocki.interfaces.dargdrop;
 
+/*
 import mars.clocki.R;
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.Toast;
-
+*/
 /**
  * This activity presents a screen with a grid on which images can be added and
  * moved around. It also defines areas on the screen where the dragged views
@@ -26,6 +27,7 @@ import android.widget.Toast;
  * any touch event starts a drag-drop.
  *
  */
+/*
 public class DragActivity extends Activity
     implements View.OnLongClickListener, View.OnClickListener,
                View.OnTouchListener, DragDropPresenter {
@@ -146,3 +148,4 @@ public class DragActivity extends Activity
   }
 
 }
+*/

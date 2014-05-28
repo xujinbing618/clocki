@@ -22,6 +22,7 @@
   <string name="help">Help</string>
   <string name="ok">Okay</string>
   <string name="exit">Exit</string>
+  <string name="space">&#160;</string>
 
   <!-- Supported langauges -->
   <string name="english">English</string>

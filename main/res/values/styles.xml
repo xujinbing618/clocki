@@ -45,4 +45,7 @@
    <item name="android:layout_margin">2dip</item>
   </style>
 
+  <style name="gameScrollerWall">
+   <item name="android:background">@color/grid_wall_background</item>
+  </style>
 </resources>

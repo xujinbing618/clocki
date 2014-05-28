@@ -113,11 +113,9 @@ public class HomeActivity extends AbstractActivity {
   }
 
   public void setBackgroundGreen(int buttonId) {
-    findViewById(buttonId).setBackground(
-        getResources().
-        getDrawable(R.drawable.square_green_border)
-    );
+    findViewById(buttonId).setBackgroundResource(R.drawable.square_green_border);
   }
+
 
   public void setScoreNumber(String levelScoreKey,
                              int levelLabelId) {

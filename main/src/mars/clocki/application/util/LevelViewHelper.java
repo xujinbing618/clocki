@@ -78,4 +78,22 @@ public class LevelViewHelper {
     }
   }
 
+  // These added just for resolving Lint warnings
+  public final int sq1x1_a = R.id.sq1x1_a;
+  public final int sq1x1_b = R.id.sq1x1_b;
+  public final int sq1x1_c = R.id.sq1x1_c;
+  public final int sq1x1_d = R.id.sq1x1_d;
+  public final int sq1x1_e = R.id.sq1x1_e;
+  public final int sq1x1_f = R.id.sq1x1_f;
+  public final int sq1x1_g = R.id.sq1x1_g;
+  public final int sq1x1_h = R.id.sq1x1_h;
+  public final int sq1x1_i = R.id.sq1x1_i;
+  public final int sq1x1_j = R.id.sq1x1_j;
+  public final int sq1x1_k = R.id.sq1x1_k;
+  public final int sq1x1_l = R.id.sq1x1_l;
+  public final int sq1x1_m = R.id.sq1x1_m;
+  public final int sq1x1_n = R.id.sq1x1_n;
+  public final int sq1x1_green1 = R.id.sq1x1_green1;
+  public final int sq1x1_green2 = R.id.sq1x1_green2;
+  public final int welcome_label_id = R.id.welcome_label_id;
 }

@@ -53,7 +53,7 @@ public class SquareBox extends Button
 
   @Override
   public void onDragStarted() {
-    ((ViewGroup) getParent()).setBackgroundColor(R.color.cell_nearly_empty);
+//    ((ViewGroup) getParent()).setBackgroundColor(R.color.cell_nearly_empty);
     invalidate();
   }
 

@@ -1,6 +1,5 @@
 package mars.clocki.interfaces.levels;
 
-import mars.clocki.R;
 import mars.clocki.interfaces.dargdrop.DragSource;
 import mars.clocki.interfaces.dargdrop.DropTarget;
 import android.content.Context;
@@ -52,7 +51,7 @@ public class SquareCell extends LinearLayout
   public void onDrop(DragSource source) {
     Log.d("SquareCell", "SquareCell.onDrop: " + row + ", " + column + " source: " + source);
 
-    setBackgroundColor(R.color.cell_filled);
+//    setBackgroundColor(R.color.cell_filled);
 
     SquareBox sourceView = (SquareBox) source.dragDropView();
     ViewGroup sourceParentView = (ViewGroup) sourceView.getParent();
@@ -72,13 +71,13 @@ public class SquareCell extends LinearLayout
 
   @Override
   public void onDragEnter(DragSource source) {
-    setBackgroundColor(isEmpty() ? R.color.cell_empty_hover :
-                               R.color.cell_filled_hover);
+//    setBackgroundColor(isEmpty() ? R.color.cell_empty_hover :
+//                               R.color.cell_filled_hover);
   }
 
   @Override
   public void onDragExit(DragSource source) {
-    setBackgroundColor(isEmpty() ? R.color.cell_empty : R.color.cell_filled);
+//    setBackgroundColor(isEmpty() ? R.color.cell_empty : R.color.cell_filled);
   }
 
   public boolean isEmpty() {

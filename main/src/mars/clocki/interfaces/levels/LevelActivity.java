@@ -158,8 +158,7 @@ public abstract class LevelActivity extends AbstractActivity {
           if (isLastMove(homeId)) {
             owner.removeView(view);
             findViewById(R.id.sq2x2_b).
-              setBackground(getResources().
-                            getDrawable(R.drawable.square_green_big_full));
+              setBackgroundResource(R.drawable.square_green_big_full);
             moveCount++;
             moveView.setText(moveCount + "");
             writeScore();

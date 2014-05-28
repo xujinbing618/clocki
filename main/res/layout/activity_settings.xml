@@ -8,22 +8,16 @@
   android:typeface="monospace"
   style="@style/LayoutFillParentCenter"
   >
-
-<TableRow
-  android:textAlignment="center"
-  style="@style/LayoutFillParentCenter"
-  >
   <TextView
     android:text="@string/language"
     android:textAlignment="center"
     android:lineSpacingExtra="5dip"
-    style="@style/LayoutFillParentCenter"
+    android:gravity="center"
+    style="@style/LayoutFillParent"
     />
   <Spinner
     android:id="@+id/language_spinner"
     style="@style/LayoutWrapContent"
     />
-</TableRow>
-
 </TableLayout>
 </ScrollView>

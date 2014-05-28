@@ -11,7 +11,8 @@
 
 <TableRow
   android:textAlignment="center"
-  style="@style/LayoutFillParentCenter"
+  android:gravity="center"
+  style="@style/LayoutFillParent"
   >
   <TextView
     android:id="@+id/welcome_label_id"
@@ -21,7 +22,8 @@
     android:textAlignment="center"
     android:lineSpacingExtra="5dip"
     android:layout_span="2"
-    style="@style/LayoutFillParentCenter"
+    android:gravity="center"
+    style="@style/LayoutFillParent"
     />
 </TableRow>
 
@@ -35,14 +37,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel1"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContent"
     />
   <TextView
     android:id="@+id/level1_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -57,14 +61,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel2"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContent"
     />
   <TextView
     android:id="@+id/level2_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -79,14 +85,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel3"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
   <TextView
     android:id="@+id/level3_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -101,14 +109,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel4"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
   <TextView
     android:id="@+id/level4_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -123,14 +133,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel5"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
   <TextView
     android:id="@+id/level5_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -145,14 +157,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel6"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
   <TextView
     android:id="@+id/level6_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -167,14 +181,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel7"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
   <TextView
     android:id="@+id/level7_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -189,14 +205,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel8"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
   <TextView
     android:id="@+id/level8_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -211,14 +229,16 @@
     android:textSize="@dimen/font_medium"
     android:onClick="startLevel9"
     android:padding="8dip"
-    android:gravity="left|center_vertical"
+    android:gravity="start|center_vertical"
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
   <TextView
     android:id="@+id/level9_score"
+    android:textSize="@dimen/font_large"
     android:textColor="@color/square_green_border"
-    android:gravity="left|center_vertical"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
 </TableRow>
@@ -228,7 +248,7 @@
   style="@style/LayoutFillParentCenter"
   >
   <TextView
-   android:text=" "
+   android:text="@string/space"
    style="@style/LayoutFillParent"
   />
 </TableRow>
@@ -238,15 +258,16 @@
   style="@style/LayoutFillParentCenter"
   >
   <Button
-    android:id="@+id/exit_btn"
     android:text="@string/exit"
     android:textColor="@color/pink_border"
+    android:textIsSelectable="false"
     android:onClick="exit"
     android:background="@drawable/square_pink_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
   <TextView
-   android:text=" "
+   android:text="@string/space"
+   android:textIsSelectable="false"
    style="@style/LayoutFillParent"
   />
 </TableRow>

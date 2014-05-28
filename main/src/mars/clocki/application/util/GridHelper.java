@@ -1,6 +1,5 @@
 package mars.clocki.application.util;
 
-
 public class GridHelper {
 
   /**
@@ -15,7 +14,7 @@ public class GridHelper {
    */
   public static int row(final String cellId) {
     try {
-      return new Integer(cellId.substring(1, 2));
+      return Integer.valueOf(cellId.substring(1, 2));
     } catch (Exception e) {
       return -10;
     }
@@ -28,7 +27,7 @@ public class GridHelper {
    */
   public static int column(final String cellId) {
     try {
-      return new Integer(cellId.substring(cellId.length() -1));
+      return Integer.valueOf(cellId.substring(cellId.length() -1));
     } catch (Exception e) {
       return -10;
     }
@@ -55,6 +54,5 @@ public class GridHelper {
             "r" + rowPlusOne + "c" + column(id) + "," +
             "r" + rowPlusOne + "c" + columnPlusOne;
   }
-
 
 }

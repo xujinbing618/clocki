@@ -22,5 +22,9 @@
   <string name="help">راهنما</string>
   <string name="ok">بسیار خوب</string>
   <string name="exit">خروج</string>
+  <string name="space">&#160;</string>
 
+  <!-- Supported langauges -->
+  <string name="english">English</string>
+  <string name="farsi">فارسی</string>
 </resources>
