@@ -23,6 +23,7 @@
   <string name="ok">Okay</string>
   <string name="exit">Exit</string>
   <string name="space">&#160;</string>
+  <string name="crash_toast_text">Oops, It seems something didn&#8217;t worked as expected.</string>
 
   <!-- Supported langauges -->
   <string name="english">English</string>

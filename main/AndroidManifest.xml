@@ -8,7 +8,10 @@
     android:minSdkVersion="14"
     android:targetSdkVersion="19" />
 
+  <uses-permission android:name="android.permission.INTERNET" />
+
   <application
+    android:name="mars.clocki.interfaces.ApplicationStartup"
     android:supportsRtl="false"
     android:allowBackup="false"
     android:icon="@drawable/square_green_big_full"

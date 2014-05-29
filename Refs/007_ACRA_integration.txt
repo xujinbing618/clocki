@@ -1,0 +1,25 @@
+number : 7
+
+status : done
+
+type : Story/technical
+
+subject : ACRA(Android Crash Reporter Application) integration
+
+description : Today, I was testing this game in a Tablet and there was
+ an error at the end of a level(just before displaying winning window).
+ And i didn't find any way to look at exception stacktrace, so ACRA
+ integration could be a way to know about these occurred exceptions.
+
+ ACRA has couple of methods for sending these error logs, and Email
+ method sounds quite simple and easy to configure, and good for start.
+ One of disadvantages could be high number of emails in a case of
+ having lots of users. I don't think we face this issue but if so, then
+ other methods could be used in later versions.
+
+story point : 0.2 = 0.2
+
+comments : [
+  : "ACRA 4.5.0 integrated.",
+  : "",
+]

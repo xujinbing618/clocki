@@ -23,6 +23,7 @@
   <string name="ok">بسیار خوب</string>
   <string name="exit">خروج</string>
   <string name="space">&#160;</string>
+  <string name="crash_toast_text">اوه، یک چیزی اونجور که انتظار میرفت بکار نرفت</string>
 
   <!-- Supported langauges -->
   <string name="english">English</string>
