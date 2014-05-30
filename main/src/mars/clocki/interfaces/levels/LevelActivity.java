@@ -14,11 +14,15 @@ import mars.clocki.domain.model.GridContainer;
 import mars.clocki.domain.model.Position;
 import mars.clocki.domain.model.Square.SquareType;
 import mars.clocki.interfaces.AbstractActivity;
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayout;
+import android.support.v7.widget.GridLayout.LayoutParams;
 import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,9 +32,8 @@ import android.view.View.DragShadowBuilder;
 import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -84,8 +87,9 @@ public abstract class LevelActivity extends AbstractActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(LevelViewHelper.activityViewId(grid.level()));
+    supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setContentView(LevelViewHelper.activityViewId(grid.level()));
 
     moveCount = 0;
     initViewFields();
@@ -359,11 +363,20 @@ public abstract class LevelActivity extends AbstractActivity {
     return String.format(r_c_, row, column);
   }
 
-  protected void initGridLayout(boolean firstTime) {
+  @SuppressLint("NewApi")
+  private void initGridLayout(boolean firstTime) {
     visiableAllLinearLayouts();
-    Point screenSize = new Point();
-    getWindowManager().getDefaultDisplay().getSize(screenSize);
-    int ripBox = (int) (screenSize.y * 0.125);
+    int ripBox = 0;
+    if (Build.VERSION.SDK_INT >= 13) {
+      Point screenSize = new Point();
+      getWindowManager().getDefaultDisplay().getSize(screenSize);
+      ripBox = (int) (screenSize.y * 0.097);
+    }
+    else {
+      @SuppressWarnings("deprecation")
+      long height = getWindowManager().getDefaultDisplay().getHeight();
+      ripBox= (int) (height * 0.097);
+    }
     resizeView(0, 0, r0c0Cell, ripBox, firstTime);
     resizeView(0, 1, r0c1Cell, ripBox, firstTime);
     resizeView(0, 2, r0c2Cell, ripBox, firstTime);

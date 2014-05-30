@@ -15,6 +15,11 @@
   style="@style/LayoutFillParent"
   >
   <TextView
+   android:text="@string/space"
+   android:textIsSelectable="false"
+   style="@style/LayoutFillParent"
+  />
+  <TextView
     android:id="@+id/welcome_label_id"
     android:text="@string/welcome_to_clocki_game"
     android:textSize="@dimen/font_medium"
@@ -24,17 +29,20 @@
     android:gravity="center"
     style="@style/LayoutFillParent"
     />
-  <TextView
-   android:text="@string/space"
-   android:textIsSelectable="false"
-   style="@style/LayoutFillParent"
-  />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level1_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level1_btn"
     android:text="@string/i_only_18_steps"
@@ -45,20 +53,20 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContent"
     />
-  <TextView
-    android:id="@+id/level1_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level2_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level2_btn"
     android:text="@string/ii_daisy"
@@ -69,20 +77,20 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContent"
     />
-  <TextView
-    android:id="@+id/level2_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level3_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level3_btn"
     android:text="@string/iii_violet"
@@ -93,20 +101,20 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
-  <TextView
-    android:id="@+id/level3_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level4_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level4_btn"
     android:text="@string/iv_poppy"
@@ -117,20 +125,20 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
-  <TextView
-    android:id="@+id/level4_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level5_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level5_btn"
     android:text="@string/v_pansy"
@@ -141,20 +149,20 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
-  <TextView
-    android:id="@+id/level5_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level6_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level6_btn"
     android:text="@string/vi_snowdrop"
@@ -165,20 +173,20 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
-  <TextView
-    android:id="@+id/level6_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level7_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level7_btn"
     android:text="@string/vii_red_donkey"
@@ -189,20 +197,20 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
-  <TextView
-    android:id="@+id/level7_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level8_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level8_btn"
     android:text="@string/viii_trail"
@@ -213,20 +221,20 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
-  <TextView
-    android:id="@+id/level8_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+    android:id="@+id/level9_score"
+    android:textSize="@dimen/font_large"
+    android:textColor="@color/game_score_color"
+    android:textIsSelectable="false"
+    android:gravity="start|center_vertical"
+    style="@style/LayoutWrapContentAndMargin2dip"
+    />
   <Button
     android:id="@+id/level9_btn"
     android:text="@string/ix_ambush"
@@ -237,20 +245,17 @@
     android:background="@drawable/square_blue_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
-  <TextView
-    android:id="@+id/level9_score"
-    android:textSize="@dimen/font_large"
-    android:textColor="@color/game_score_color"
-    android:textIsSelectable="false"
-    android:gravity="start|center_vertical"
-    style="@style/LayoutWrapContentAndMargin2dip"
-    />
 </TableRow>
 
 <TableRow
   android:layout_margin="2dip"
   style="@style/LayoutFillParentCenter"
   >
+  <TextView
+   android:text="@string/space"
+   android:textIsSelectable="false"
+   style="@style/LayoutFillParent"
+  />
   <Button
     android:text="@string/exit"
     android:textColor="@color/pink_border"
@@ -259,11 +264,6 @@
     android:background="@drawable/square_pink_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />
-  <TextView
-   android:text="@string/space"
-   android:textIsSelectable="false"
-   style="@style/LayoutFillParent"
-  />
 </TableRow>
 
 </TableLayout>

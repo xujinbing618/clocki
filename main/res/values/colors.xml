@@ -7,9 +7,10 @@
   <color name="square_blue_border">#1b3f73</color>
   <color name="square_blue_lighter">#6993bf</color>
   <color name="square_green">#9cff3b</color>
-  <color name="square_green_border">#007f00</color>
+  <color name="square_green_border">#67cc08</color>
   <color name="game_background">#eeeeec</color>
   <color name="game_background_hover">#44b4e4</color>
+  <color name="game_score_color">#007f00</color>
   <color name="grid_wall_background">#729fcf</color>
 
   <!-- Drag-Drop colors -->

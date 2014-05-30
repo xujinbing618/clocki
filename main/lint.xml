@@ -39,7 +39,7 @@
     <issue id="HardcodedDebugMode" severity="warning" />
     <issue id="HardcodedText" severity="warning" />
     <issue id="IconColors" severity="warning" />
-    <issue id="IconDensities" severity="warning" />
+    <issue id="IconDensities" severity="ignore" />
     <issue id="IconDipSize" severity="warning" />
     <issue id="IconDuplicates" severity="warning" />
     <issue id="IconDuplicatesConfig" severity="warning" />
@@ -103,7 +103,7 @@
     <issue id="RequiredSize" severity="warning" />
     <issue id="ResAuto" severity="warning" />
     <issue id="ResourceAsColor" severity="warning" />
-    <issue id="RtlCompat" severity="error" />
+    <issue id="RtlCompat" severity="warning" />
     <issue id="RtlEnabled" severity="warning" />
     <issue id="RtlHardcoded" severity="warning" />
     <issue id="ScrollViewCount" severity="warning" />

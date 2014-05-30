@@ -14,7 +14,17 @@
 
 	<!-- Application theme. -->
   <style name="AppTheme" parent="AppBaseTheme">
-		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <item name="android:actionBarStyle">@style/MyActionBar</item>
+  </style>
+
+  <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
+    <item name="android:background">@drawable/actionbar_background</item>
+    <item name="android:windowActionBarOverlay">true</item>
+
+    <!-- Support library compatibility -->
+    <item name="background">@drawable/actionbar_background</item>
+    <item name="windowActionBarOverlay">true</item>
   </style>
 
   <style name="Square">
@@ -45,7 +55,8 @@
    <item name="android:layout_margin">2dip</item>
   </style>
 
-  <style name="gameScrollerWall">
+  <style name="gameWalls">
    <item name="android:background">@color/grid_wall_background</item>
+   <item name="android:paddingTop">?attr/actionBarSize</item>
   </style>
 </resources>

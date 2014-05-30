@@ -5,24 +5,25 @@
 	android:versionName="1.0" >
 
   <uses-sdk
-    android:minSdkVersion="14"
+    android:minSdkVersion="11"
     android:targetSdkVersion="19" />
 
   <uses-permission android:name="android.permission.INTERNET" />
 
   <application
     android:name="mars.clocki.interfaces.ApplicationStartup"
-    android:supportsRtl="false"
-    android:allowBackup="false"
-    android:icon="@drawable/square_green_big_full"
+    android:icon="@drawable/game_icon"
     android:label="@string/app_name"
     android:theme="@style/AppTheme"
+    android:allowBackup="true"
+    android:supportsRtl="true"
     >
 
     <activity
       android:name="mars.clocki.interfaces.HomeActivity"
       android:label="@string/app_name"
       android:launchMode="singleInstance"
+      android:screenOrientation="portrait"
       >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -33,6 +34,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level1Activity"
       android:label="@string/i_only_18_steps"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -43,6 +45,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level2Activity"
       android:label="@string/ii_daisy"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -53,6 +56,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level3Activity"
       android:label="@string/iii_violet"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -63,6 +67,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level4Activity"
       android:label="@string/iv_poppy"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -73,6 +78,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level5Activity"
       android:label="@string/v_pansy"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -83,6 +89,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level6Activity"
       android:label="@string/vi_snowdrop"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -93,6 +100,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level7Activity"
       android:label="@string/vii_red_donkey"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -103,6 +111,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level8Activity"
       android:label="@string/viii_trail"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -113,6 +122,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.Level9Activity"
       android:label="@string/ix_ambush"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -123,6 +133,7 @@
     <activity
       android:name="mars.clocki.interfaces.SettingsActivity"
       android:label="@string/settings"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -133,6 +144,7 @@
     <activity
       android:name="mars.clocki.interfaces.HelpActivity"
       android:label="@string/help"
+      android:screenOrientation="portrait"
       >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -143,6 +155,7 @@
     <activity
       android:name="mars.clocki.interfaces.levels.WinningDialogActivity"
       android:theme="@android:style/Theme.Dialog"
+      android:screenOrientation="portrait"
       />
 
   </application>

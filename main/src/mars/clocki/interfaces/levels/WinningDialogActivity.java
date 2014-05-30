@@ -4,10 +4,12 @@ import mars.clocki.R;
 import mars.clocki.application.CS;
 import mars.clocki.application.util.LevelViewHelper;
 import mars.clocki.interfaces.AbstractActivity;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -27,6 +29,7 @@ public class WinningDialogActivity extends Activity {
                   lastRecord()
                 );
     reSizeLayoutAndOkayButton();
+    this.setFinishOnTouchOutside(false);
   }
 
   public void closeDialog(View v) {
@@ -53,11 +56,24 @@ public class WinningDialogActivity extends Activity {
            getStringExtra(CS.LEVEL);
   }
 
+  @SuppressLint("NewApi")
   private void reSizeLayoutAndOkayButton() {
-    Point point = new Point();
-    getWindowManager().getDefaultDisplay().getSize(point);
-    int dialogWidth = (int) (point.x * 0.50);
-    int dialogHeight = (int) (point.y * 0.50);
+    int dialogWidth = 0;
+    int dialogHeight = 0;
+    if (Build.VERSION.SDK_INT >= 13) {
+      Point point = new Point();
+      getWindowManager().getDefaultDisplay().getSize(point);
+      dialogWidth = (int) (point.x * 0.50);
+      dialogHeight = (int) (point.y * 0.50);
+    }
+    else {
+      @SuppressWarnings("deprecation")
+      int width = getWindowManager().getDefaultDisplay().getHeight();
+      dialogWidth = (int) (width * 0.50);
+      @SuppressWarnings("deprecation")
+      int height = getWindowManager().getDefaultDisplay().getWidth();
+      dialogHeight = (int) (height * 0.50);
+    }
     View winningLayout = findViewById(R.id.winning_dialog_layout_id);
     winningLayout.getLayoutParams().width = dialogWidth;
     winningLayout.getLayoutParams().height = dialogHeight;

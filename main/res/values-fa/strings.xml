@@ -4,15 +4,15 @@
   <string name="app_name">ک‌لاکی</string>
 
   <string name="welcome_to_clocki_game">به ک‌لاکی خوش‌ آمدید</string>
-  <string name="i_only_18_steps">&#160;I. فقط ۱۸ حرکت</string>
-  <string name="ii_daisy">&#160;II. آفتاب گردان</string>
-  <string name="iii_violet">&#160;III. بنفشه</string>
-  <string name="iv_poppy">&#160;IV. شکلات</string>
-  <string name="v_pansy">&#160;V. بنفشه سه رنگ</string>
-  <string name="vi_snowdrop">&#160;VI. دونه برف</string>
-  <string name="vii_red_donkey">&#160;VII. خر قرمز</string>
-  <string name="viii_trail">&#160;VIII. دنباله‌دار</string>
-  <string name="ix_ambush">&#160;IX. کمین‌گاه</string>
+  <string name="i_only_18_steps"> ۱. فقط ۱۸ حرکت</string>
+  <string name="ii_daisy"> ۲. آفتاب گردان</string>
+  <string name="iii_violet"> ۳. بنفشه</string>
+  <string name="iv_poppy"> ۴. شکلات</string>
+  <string name="v_pansy"> ۵. بنفشه سه رنگ</string>
+  <string name="vi_snowdrop"> ۶. دونه برف</string>
+  <string name="vii_red_donkey"> ۷. خر قرمز</string>
+  <string name="viii_trail"> ۸. دنباله‌دار</string>
+  <string name="ix_ambush"> ۹. کمین‌گاه</string>
   <string name="moves">:ح</string>
   <string name="reset">از نو</string>
   <string name="the_puzzle_has_been_solved">معما حل شد</string>
@@ -20,7 +20,7 @@
   <string name="language">زبان</string>
   <string name="the_winning_move">حرکت پیروزی</string>
   <string name="help">راهنما</string>
-  <string name="ok">بسیار خوب</string>
+  <string name="ok">باشه</string>
   <string name="exit">خروج</string>
   <string name="space">&#160;</string>
   <string name="crash_toast_text">اوه، یک چیزی اونجور که انتظار میرفت بکار نرفت</string>
