@@ -59,4 +59,12 @@
    <item name="android:background">@color/grid_wall_background</item>
    <item name="android:paddingTop">?attr/actionBarSize</item>
   </style>
+
+  <style name="ButtonBorderBlue" parent="@style/LayoutWrapContent">
+   <item name="android:textSize">@dimen/font_medium</item>
+   <item name="android:padding">8dip</item>
+   <item name="android:gravity">start|center_vertical</item>
+   <item name="android:background">@drawable/square_blue_border</item>
+  </style>
+
 </resources>

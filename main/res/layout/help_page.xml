@@ -1,0 +1,67 @@
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="MergeRootFrame"
+  style="@style/LayoutFillParentCenter"
+  >
+<TableLayout
+  android:typeface="monospace"
+  style="@style/LayoutFillParentCenter"
+  >
+
+<TableRow
+  android:textAlignment="center"
+  android:gravity="center"
+  style="@style/LayoutFillParent"
+  >
+  <TextView
+    android:text="@string/help"
+    android:textSize="@dimen/font_large"
+    android:textAlignment="center"
+    android:lineSpacingExtra="5dip"
+    android:gravity="center"
+    style="@style/LayoutFillParent"
+    />
+</TableRow>
+
+<TableRow
+  android:textAlignment="center"
+  android:gravity="center"
+  android:layout_margin="2dip"
+  style="@style/LayoutFillParent"
+  >
+  <Button
+    android:text="@string/introduction"
+    android:onClick="goToIntroduction"
+    style="@style/ButtonBorderBlue"
+    />
+</TableRow>
+
+<TableRow
+  android:textAlignment="center"
+  android:gravity="center"
+  android:layout_margin="2dip"
+  style="@style/LayoutFillParent"
+  >
+  <Button
+    android:text="@string/objective"
+    android:onClick="goToObjective"
+    style="@style/ButtonBorderBlue"
+    />
+</TableRow>
+
+<TableRow
+  android:textAlignment="center"
+  android:gravity="center"
+  android:layout_margin="2dip"
+  style="@style/LayoutFillParent"
+  >
+  <Button
+    android:text="@string/moving_blocks"
+    android:onClick="goToMovingBlocks"
+    style="@style/ButtonBorderBlue"
+    />
+</TableRow>
+
+</TableLayout>
+</ScrollView>

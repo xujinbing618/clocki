@@ -19,11 +19,21 @@
   <string name="settings">تنضیمات</string>
   <string name="language">زبان</string>
   <string name="the_winning_move">حرکت پیروزی</string>
-  <string name="help">راهنما</string>
   <string name="ok">باشه</string>
   <string name="exit">خروج</string>
   <string name="space">&#160;</string>
   <string name="crash_toast_text">اوه، یک چیزی اونجور که انتظار میرفت بکار نرفت</string>
+
+  <!-- Help section -->
+  <string name="help">راهنما</string>
+  <string name="back">برگشت</string>
+  <string name="introduction">معرفی</string>
+  <string name="introduction_text">""بازی ک‌لاکی مشابه‌ای از بازی کلاتسکی می‌باشد.\n هدف در این بازی رساندن مربع بزرگ به محل مشخص شده با رنگ سبز می‌باشد.</string>
+  <string name="introduction_refs">"منبع : \nhttps://en.wikipedia.org/wiki/Klotski"</string>
+  <string name="objective">هدف</string>
+  <string name="objective_text">"هدف در این بازی رساندن مربع بزرگ به محل مشخص شده بار رنگ سبز با حداقل تعداد حرکت ممکن، می‌باشد.\nشما این کار رو با لمس و جابه جا کردن مربع‌ها یکی پس از دیگری انجام می‌دهید،\nتا زمانی که شما قادر به رساندن مربع بزرگ به محل مشخص شده باشید."</string>
+  <string name="moving_blocks">حرکت مربع‌ها</string>
+  <string name="moving_blocks_text">"* برای حرکت یک مربع، آن را لمس کنید و با حرکت بروی صفحه آن را به محل جدیدش ببرید.\n* حرکت مربع به محلی که دارای مربع‌ای ‌باشد ممکن نیست.\n* مربع‌های سبز قابل حرکت دادن نیستند و از روی آنها نمی‌توان گذر کرد، به غیر از یک حالت استثنا‌‌‌‌ء که آن حرکت آخر مربع بزرگ برای پیروزی می‌باشد."</string>
 
   <!-- Supported langauges -->
   <string name="english">English</string>

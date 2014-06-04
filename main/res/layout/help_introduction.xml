@@ -1,0 +1,57 @@
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="MergeRootFrame"
+  style="@style/LayoutFillParent"
+  >
+<TableLayout
+  android:gravity="start"
+  android:shrinkColumns="*"
+  style="@style/LayoutFillParent"
+  >
+
+<TableRow
+  android:gravity="start"
+  style="@style/LayoutFillParent"
+  >
+  <Button
+    android:text="@string/back"
+    android:onClick="backTo"
+    style="@style/ButtonBorderBlue"
+   />
+</TableRow>
+
+<TableRow
+  style="@style/LayoutFillParentCenter"
+  >
+  <TextView
+    android:text="@string/introduction"
+    android:textSize="@dimen/font_large"
+    android:lineSpacingExtra="8dip"
+    style="@style/LayoutFillParentCenter"
+    />
+</TableRow>
+
+<TableRow
+  android:gravity="start"
+  style="@style/LayoutFillParent"
+  >
+  <TextView
+    android:text="@string/introduction_text"
+    android:gravity="start"
+    android:textAlignment="textStart"
+    style="@style/LayoutFillParent"
+    />
+</TableRow>
+
+<TableRow
+  style="@style/LayoutFillParent"
+  >
+  <TextView
+    android:text="@string/introduction_refs"
+    style="@style/LayoutFillParent"
+    />
+</TableRow>
+
+</TableLayout>
+</ScrollView>

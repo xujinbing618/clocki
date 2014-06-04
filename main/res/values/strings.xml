@@ -19,11 +19,21 @@
   <string name="settings">Settings</string>
   <string name="language">Language</string>
   <string name="the_winning_move">The winning move</string>
-  <string name="help">Help</string>
   <string name="ok">Okay</string>
   <string name="exit">Exit</string>
   <string name="space">&#160;</string>
   <string name="crash_toast_text">Oops, It seems something didn&#8217;t worked as expected.</string>
+
+  <!-- Help section -->
+  <string name="help">Help</string>
+  <string name="back">Back</string>
+  <string name="introduction">Introduction</string>
+  <string name="introduction_text">"The Clocki game is a clone of the Klotski game.\nThe objective is to move the patterned block to the area bordered by green markers."</string>
+  <string name="introduction_refs">"Reference:\nhttps://en.wikipedia.org/wiki/Klotski"</string>
+  <string name="objective">Objective</string>
+  <string name="objective_text">"The objective of Clocki is to move the patterned block to the green markers in as few moves as possible.\nYou do this by moving the blocks one at a time with touching them until, you can get the patterned block to the markers."</string>
+  <string name="moving_blocks">Moving blocks</string>
+  <string name="moving_blocks_text">"* To move a block, touch it, hold down and drag it to its new location.\n* You cannot move a block to a space already occupied by another block.\n* You cannot move the green blocks or cross over them, with the exception that you may move the patterned block through the green blocks to win."</string>
 
   <!-- Supported langauges -->
   <string name="english">English</string>

@@ -1,38 +1,6 @@
-<ScrollView
+<FrameLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  tools:ignore="MergeRootFrame"
-  style="@style/LayoutFillParentCenter"
-  >
-<TableLayout
-  android:typeface="monospace"
-  style="@style/LayoutFillParentCenter"
-  >
-
-<TableRow
-  android:textAlignment="center"
-  android:gravity="center"
-  style="@style/LayoutFillParent"
-  >
-  <TextView
-    android:text="@string/the_winning_move"
-    android:textAlignment="center"
-    android:gravity="center"
-    style="@style/LayoutFillParent"
-    />
-</TableRow>
-
-<TableRow
-  android:textAlignment="center"
-  android:gravity="center"
-  style="@style/LayoutFillParent"
-  >
-  <ImageView
-    android:src="@drawable/the_winning_move_snapshot"
-    style="@style/LayoutWrapContent"
-    android:contentDescription="@string/the_winning_move"
+  android:id="@+id/help_container"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
   />
-</TableRow>
-
-</TableLayout>
-</ScrollView>

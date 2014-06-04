@@ -1,0 +1,17 @@
+number : 8
+
+status : inprogress
+
+type : Story/improvement
+
+subject : Help page improvements
+
+description : Improvements, such as simple introudction, objective page and
+ valid moves are good for start.
+
+story point : 0.4 = 0.4
+
+comments : [
+  : "2014-June-4 Story was told.",
+  : "",
+]

@@ -1,0 +1,83 @@
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="MergeRootFrame"
+  style="@style/LayoutFillParentCenter"
+  >
+<TableLayout
+  android:gravity="start"
+  android:shrinkColumns="*"
+  style="@style/LayoutFillParent"
+  >
+
+<TableRow
+  android:gravity="start"
+  style="@style/LayoutFillParent"
+  >
+  <Button
+    android:text="@string/back"
+    android:onClick="backTo"
+    style="@style/ButtonBorderBlue"
+   />
+</TableRow>
+
+<TableRow
+  android:textAlignment="center"
+  android:gravity="center"
+  style="@style/LayoutFillParent"
+  >
+  <TextView
+    android:text="@string/objective"
+    android:textSize="@dimen/font_large"
+    android:lineSpacingExtra="8dip"
+    style="@style/LayoutFillParentCenter"
+    />
+</TableRow>
+
+<TableRow
+  android:gravity="start"
+  style="@style/LayoutFillParent"
+  >
+  <TextView
+    android:text="@string/objective_text"
+    android:gravity="start"
+    android:textAlignment="textStart"
+    style="@style/LayoutFillParent"
+    />
+</TableRow>
+
+<TableRow
+  style="@style/LayoutFillParent"
+  >
+  <TextView
+    android:text="@string/space"
+    style="@style/LayoutFillParent"
+    />
+</TableRow>
+
+<TableRow
+  android:textAlignment="center"
+  android:gravity="center"
+  style="@style/LayoutFillParent"
+  >
+  <TextView
+    android:text="@string/the_winning_move"
+    android:textStyle="bold"
+    style="@style/LayoutFillParentCenter"
+    />
+</TableRow>
+
+<TableRow
+  android:textAlignment="center"
+  android:gravity="center"
+  style="@style/LayoutFillParent"
+  >
+  <ImageView
+    android:src="@drawable/the_winning_move_snapshot"
+    style="@style/LayoutWrapContent"
+    android:contentDescription="@string/the_winning_move"
+  />
+</TableRow>
+
+</TableLayout>
+</ScrollView>
