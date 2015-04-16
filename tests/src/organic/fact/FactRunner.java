@@ -68,7 +68,7 @@ public class FactRunner {
   protected static String precisionOne(String elapsedTime) {
     int dotIndex = elapsedTime.indexOf(".");
     if (elapsedTime.length() - dotIndex > 2) {
-      return elapsedTime.substring(0, elapsedTime.length() - 1);
+      return elapsedTime.substring(0, dotIndex + 2);
     }
     return elapsedTime;
   }

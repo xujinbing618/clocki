@@ -1,0 +1,18 @@
+number : 9
+
+status : done
+
+type : Technical/feature
+
+subject : Gradle build system
+
+description : With Gradle this project could be build from command line. In
+another words, building this project will have one more option beside building
+inside of Eclipse.
+
+story point : 1 = 1
+
+comments : [
+  : "2015-March-16(My clock's time was 15 March) Story was told.",
+  : "",
+]

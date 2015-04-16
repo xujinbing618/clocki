@@ -4,3 +4,5 @@ classes
 target
 bin
 gen
+build
+.gradle
