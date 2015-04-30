@@ -1,6 +1,6 @@
 number : 7
 
-status : done
+status : done.
 
 type : Story/technical
 
