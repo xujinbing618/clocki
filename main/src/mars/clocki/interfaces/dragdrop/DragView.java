@@ -53,6 +53,10 @@ public class DragView extends View {
   private WindowManager.LayoutParams layoutParams;
   private WindowManager windowManager;
 
+  public DragView(Context context) {
+    super(context);     // Just for suppressing Lint warning
+  }
+
   public DragView(Context context, Bitmap bitmap, int registerationX, int registerationY,
                   int left, int top, int width, int height) {
     super(context);

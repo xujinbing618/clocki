@@ -16,6 +16,7 @@ import mars.clocki.interfaces.dragdrop.DragLayer;
 import mars.clocki.interfaces.dragdrop.DragSource;
 import mars.clocki.interfaces.dragdrop.DropTarget;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
@@ -90,6 +91,7 @@ public abstract class LevelActivity extends AbstractActivity
 
   public static LevelActivity instance;
 
+  @TargetApi(13)
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

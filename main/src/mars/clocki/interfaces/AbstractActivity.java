@@ -5,6 +5,7 @@ import java.util.Locale;
 import mars.clocki.application.CS;
 import mars.clocki.application.util.BuildHelper;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ public abstract class AbstractActivity extends ActionBarActivity {
     super.onCreate(savedInstanceState);
   }
 
+  @TargetApi(11)
   protected void resetActivity() {
     if (BuildHelper.api11orHigher()) {
       recreate();

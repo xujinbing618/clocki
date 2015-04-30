@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="app_name">Clocki</string>
+  <string name="app_name">Cookie</string>
 
-  <string name="welcome_to_clocki_game">Welcomen to Clocki!</string>
+  <string name="welcome_to_clocki_game">Welcome to Cookie!</string>
   <string name="i_only_18_steps">&#160;I. Only 18 Steps</string>
   <string name="ii_daisy">&#160;II. Daisy</string>
   <string name="iii_violet">&#160;III. Violet</string>

@@ -11,10 +11,10 @@ public class BuildHelper {
           Build.VERSION.RELEASE.startsWith("2.1")) {
         return false;
       }
+      return Build.VERSION.SDK_INT >= 8;
     } catch (Exception e) {
       return false;
     }
-    return true;
   }
 
   public static boolean api11orHigher() {
@@ -39,10 +39,10 @@ public class BuildHelper {
           Build.VERSION.RELEASE.startsWith("3.1")) {
         return false;
       }
+      return Build.VERSION.SDK_INT >= 13;
     } catch (Exception e) {
       return false;
     }
-    return true;
   }
 
 }

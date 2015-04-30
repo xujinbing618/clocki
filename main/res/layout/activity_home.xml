@@ -253,9 +253,11 @@
   >
   <Button
     android:text="@string/exit"
+    android:textSize="@dimen/font_medium"
     android:textColor="@color/pink_border"
     android:textIsSelectable="false"
     android:onClick="exit"
+    android:padding="8dip"
     android:background="@drawable/square_pink_border"
     style="@style/LayoutWrapContentAndMargin2dip"
     />

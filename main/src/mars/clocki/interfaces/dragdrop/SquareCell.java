@@ -1,6 +1,7 @@
 package mars.clocki.interfaces.dragdrop;
 
 import mars.clocki.R;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -18,6 +19,7 @@ public class SquareCell extends LinearLayout
     super(context, attrs);
   }
 
+  @TargetApi(11)
   public SquareCell(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
   }
@@ -124,4 +126,5 @@ public class SquareCell extends LinearLayout
     }
     return false;
   }
+
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="app_name">ک‌لاکی</string>
+  <string name="app_name">کوکی</string>
 
-  <string name="welcome_to_clocki_game">به ک‌لاکی خوش‌ آمدید</string>
+  <string name="welcome_to_clocki_game">به کوکی خوش‌ آمدید</string>
   <string name="i_only_18_steps"> ۱. فقط ۱۸ حرکت</string>
   <string name="ii_daisy"> ۲. آفتاب گردان</string>
   <string name="iii_violet"> ۳. بنفشه</string>
