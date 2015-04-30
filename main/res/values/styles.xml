@@ -37,6 +37,10 @@
     <item name="android:shadowRadius">4</item>
   </style>
 
+  <style name="Cell">
+    <item name="android:padding">2dip</item>
+  </style>
+
   <style name="LayoutFillParent">
    <item name="android:layout_width">fill_parent</item>
    <item name="android:layout_height">fill_parent</item>

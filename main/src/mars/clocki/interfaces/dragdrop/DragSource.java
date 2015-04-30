@@ -1,7 +1,8 @@
-package mars.clocki.interfaces.dargdrop;
-
 /*
- * Copyright (C) 2013 Wglxy.com
+ * This is a modified version of a class from the Android Open Source Project.
+ * The original copyright and license information follows.
+ *
+ * Copyright (C) 2008 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +15,14 @@ package mars.clocki.interfaces.dargdrop;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * (Note to other developers: The above note says you are free to do what you want with this code.
- *  Any problems are yours to fix. Wglxy.com is simply helping you get started. )
  */
 
-import android.content.ClipData;
+package mars.clocki.interfaces.dragdrop;
+
 import android.view.View;
 
 /**
- * This interface defines an object where drag-drop operations originate.
+ * Interface defining an object where drag operations originate.
  */
 public interface DragSource {
 
@@ -35,25 +34,19 @@ public interface DragSource {
   boolean allowDrag();
 
   /**
-   * Return the ClipData associated with the drag operation.
+   * This method is used to tell the DragSource which drag controller it is working with.
+   *
+   * @param dragger DragCotnroller
    */
-  public ClipData clipDataForDragDrop();
-
-  /**
-   * Return the view that is the actual source of the information being dragged.
-   */
-  public View dragDropView();
-
-  /**
-   * This method is called at the start of a drag-drop operation so
-   * the object being dragged knows that it is being dragged.
-   */
-  public void onDragStarted();
+  void setDragController(DragController dragger);
 
   /**
    * This method is called on the completion of the drag operation so
    * the DragSource knows whether it succeeded or failed.
+   *
+   * @param target View - the view that accepted the dragged object
+   * @param success boolean - true means that the object was dropped successfully
    */
-  void onDropCompleted(DropTarget target, boolean success);
+  void onDropCompleted(View target, boolean success);
 
 }

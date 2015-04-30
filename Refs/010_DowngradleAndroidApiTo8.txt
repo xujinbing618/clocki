@@ -1,0 +1,20 @@
+number : 10
+
+status : inprogress
+
+type : Story/improvement
+
+subject : Downgrade Android api to 8
+
+description : Currently minimum Android SDK version is 11. Which easy
+drag-and-drop functionality is available. Under this issue title we want to
+downgradle api 11 to api 8. For drag-and-drop functionality following web
+address, seems right on the target:
+http://blahti.wordpress.com/2011/01/17/moving-views-part-2/
+
+story point : 4 = 4
+
+comments : [
+  : "2015-04-30 Story was told.",
+  : "DragViewV3 project example used as drag-and-drop guide.",
+]

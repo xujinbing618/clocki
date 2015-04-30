@@ -1,6 +1,7 @@
-<LinearLayout
+<mars.clocki.interfaces.dragdrop.DragLayer
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/drag_layer"
   android:gravity="center"
   android:layout_gravity="center"
   android:layout_width="fill_parent"
@@ -18,247 +19,247 @@
   android:background="@color/white"
   >
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r0c0"
     app:layout_row="0"
     app:layout_column="0"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x2_a"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r0c1"
     app:layout_row="0"
     app:layout_column="1"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq2x2_a"
       android:background="@drawable/square_blue_big"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r0c2"
     app:layout_row="0"
     app:layout_column="2"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r0c3"
     app:layout_row="0"
     app:layout_column="3"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x2_b"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r1c0"
     app:layout_row="1"
     app:layout_column="0"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r1c1"
     app:layout_row="1"
     app:layout_column="1"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r1c2"
     app:layout_row="1"
     app:layout_column="2"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r1c3"
     app:layout_row="1"
     app:layout_column="3"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r2c0"
     app:layout_row="2"
     app:layout_column="0"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_a"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r2c1"
     app:layout_row="2"
     app:layout_column="1"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq2x1_a"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r2c2"
     app:layout_row="2"
     app:layout_column="2"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r2c3"
     app:layout_row="2"
     app:layout_column="3"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_b"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r3c0"
     app:layout_row="3"
     app:layout_column="0"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_c"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r3c1"
     app:layout_row="3"
     app:layout_column="1"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_d"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r3c2"
     app:layout_row="3"
     app:layout_column="2"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_e"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r3c3"
     app:layout_row="3"
     app:layout_column="3"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_f"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r4c0"
     app:layout_row="4"
     app:layout_column="0"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_g"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r4c1"
     app:layout_row="4"
     app:layout_column="1"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r4c2"
     app:layout_row="4"
     app:layout_column="2"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r4c3"
     app:layout_row="4"
     app:layout_column="3"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_h"
       android:background="@drawable/square_blue"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r5c0"
     app:layout_row="5"
     app:layout_column="0"
@@ -267,35 +268,35 @@
     style="@style/LayoutFillParent"
     />
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r5c1"
     app:layout_row="5"
     app:layout_column="1"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_green1"
       android:background="@drawable/square_green"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r5c2"
     app:layout_row="5"
     app:layout_column="2"
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/game_background">
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq1x1_green2"
       android:background="@drawable/square_green"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r5c3"
     app:layout_row="5"
     app:layout_column="3"
@@ -304,7 +305,7 @@
     style="@style/LayoutFillParent"
     />
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r6c0"
     app:layout_row="6"
     app:layout_column="0"
@@ -324,9 +325,9 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r6c1"
     app:layout_row="6"
     app:layout_column="1"
@@ -334,14 +335,14 @@
     android:background="@color/game_background"
     style="@style/LayoutFillParent"
     >
-    <Button
+    <mars.clocki.interfaces.dragdrop.SquareBox
       android:id="@+id/sq2x2_b"
       android:background="@drawable/square_green_big"
       style="@style/Square"
       />
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r6c2"
     app:layout_row="6"
     app:layout_column="2"
@@ -350,7 +351,7 @@
     style="@style/LayoutFillParent"
     />
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r6c3"
     app:layout_row="6"
     app:layout_column="3"
@@ -359,7 +360,7 @@
     style="@style/LayoutFillParent"
     />
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r7c0"
     app:layout_row="7"
     app:layout_column="0"
@@ -368,7 +369,7 @@
     style="@style/LayoutFillParent"
     />
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r7c1"
     app:layout_row="7"
     app:layout_column="1"
@@ -377,7 +378,7 @@
     style="@style/LayoutFillParent"
     />
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r7c2"
     app:layout_row="7"
     app:layout_column="2"
@@ -385,9 +386,9 @@
     android:background="@color/game_background"
     style="@style/LayoutFillParent"
     >
-  </LinearLayout>
+  </mars.clocki.interfaces.dragdrop.SquareCell>
 
-  <LinearLayout
+  <mars.clocki.interfaces.dragdrop.SquareCell
     android:id="@+id/r7c3"
     app:layout_row="7"
     app:layout_column="3"
@@ -397,4 +398,4 @@
     />
 
 </android.support.v7.widget.GridLayout>
-</LinearLayout>
+</mars.clocki.interfaces.dragdrop.DragLayer>

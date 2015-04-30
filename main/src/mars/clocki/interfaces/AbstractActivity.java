@@ -3,12 +3,12 @@ package mars.clocki.interfaces;
 import java.util.Locale;
 
 import mars.clocki.application.CS;
+import mars.clocki.application.util.BuildHelper;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
@@ -21,7 +21,7 @@ public abstract class AbstractActivity extends ActionBarActivity {
   }
 
   protected void resetActivity() {
-    if (Build.VERSION.SDK_INT >= 11) {
+    if (BuildHelper.api11orHigher()) {
       recreate();
     }
     else {

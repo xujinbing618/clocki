@@ -15,6 +15,8 @@
   <string name="ix_ambush"> ۹. کمین‌گاه</string>
   <string name="moves">:ح</string>
   <string name="reset">از نو</string>
+  <string name="change_touch_mode">تغییر نوع لمس</string>
+  <string name="vibration_on_off">لرزش روشن/خاموش</string>
   <string name="the_puzzle_has_been_solved">معما حل شد</string>
   <string name="settings">تنضیمات</string>
   <string name="language">زبان</string>

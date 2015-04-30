@@ -14,9 +14,9 @@
   <color name="grid_wall_background">#729fcf</color>
 
   <!-- Drag-Drop colors -->
-  <color name="cell_empty">#FF993311</color>
-  <color name="cell_nearly_empty">#88993311</color>
-  <color name="cell_filled">#FFA99033</color>
+  <color name="cell_empty">#eeeeec</color>
+  <color name="cell_nearly_empty">#eeeeec</color>
+  <color name="cell_filled">#eeeeec</color>
   <color name="cell_empty_hover">#ff00ff00</color>
   <color name="cell_filled_hover">#ffaadddd</color>
 </resources>

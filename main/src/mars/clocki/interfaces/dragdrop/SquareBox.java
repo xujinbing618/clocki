@@ -1,9 +1,5 @@
-package mars.clocki.interfaces.levels;
+package mars.clocki.interfaces.dragdrop;
 
-import mars.clocki.R;
-import mars.clocki.interfaces.dargdrop.DragSource;
-import mars.clocki.interfaces.dargdrop.DropTarget;
-import android.content.ClipData;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -41,30 +37,19 @@ public class SquareBox extends Button
     return true;
   }
 
-  @Override
-  public ClipData clipDataForDragDrop() {
-    return null;
+  public void setDragController(DragController dragger) {
+    // Do nothing. We do not need to know the controller object.
   }
 
   @Override
-  public View dragDropView() {
-    return this;
-  }
+  public void onDropCompleted(View target, boolean success) {
 
-  @Override
-  public void onDragStarted() {
-//    ((ViewGroup) getParent()).setBackgroundColor(R.color.cell_nearly_empty);
-    invalidate();
-  }
-
-  @Override
-  public void onDropCompleted(DropTarget target, boolean success) {
-    invalidate();
-
+    // If the drop succeeds, the SquareBox has moved elsewhere
+    // So clear the SquareCell.
     if (success) {
-      Log.d ("SquareBox", "SquareBox.onDropCompleted - target: " + target);
+      Log.d ("DD", "SquareBox.onDropCompleted - target: " + target);
     }
-    setBackgroundForParent(R.color.cell_filled);
+//    setBackgroundForParent(R.color.cell_filled);
   }
 
   public void setBackgroundForParent(int colorId) {

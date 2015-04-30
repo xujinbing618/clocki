@@ -2,14 +2,15 @@ package mars.clocki.interfaces.levels;
 
 import mars.clocki.R;
 import mars.clocki.application.CS;
+import mars.clocki.application.util.BuildHelper;
 import mars.clocki.application.util.LevelViewHelper;
 import mars.clocki.interfaces.AbstractActivity;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 public class WinningDialogActivity extends Activity {
 
+  @TargetApi(11)
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -29,7 +31,9 @@ public class WinningDialogActivity extends Activity {
                   lastRecord()
                 );
     reSizeLayoutAndOkayButton();
-    this.setFinishOnTouchOutside(false);
+    if (BuildHelper.api11orHigher()) {
+      this.setFinishOnTouchOutside(false);
+    }
   }
 
   public void closeDialog(View v) {
@@ -60,7 +64,7 @@ public class WinningDialogActivity extends Activity {
   private void reSizeLayoutAndOkayButton() {
     int dialogWidth = 0;
     int dialogHeight = 0;
-    if (Build.VERSION.SDK_INT >= 13) {
+    if (BuildHelper.api13orHigher()) {
       Point point = new Point();
       getWindowManager().getDefaultDisplay().getSize(point);
       dialogWidth = (int) (point.x * 0.50);

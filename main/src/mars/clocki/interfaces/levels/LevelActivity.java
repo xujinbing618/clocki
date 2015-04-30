@@ -1,12 +1,8 @@
 package mars.clocki.interfaces.levels;
 
-import static android.view.DragEvent.ACTION_DRAG_ENDED;
-import static android.view.DragEvent.ACTION_DRAG_ENTERED;
-import static android.view.DragEvent.ACTION_DRAG_EXITED;
-import static android.view.DragEvent.ACTION_DRAG_STARTED;
-import static android.view.DragEvent.ACTION_DROP;
 import mars.clocki.R;
 import mars.clocki.application.CS;
+import mars.clocki.application.util.BuildHelper;
 import mars.clocki.application.util.GridHelper;
 import mars.clocki.application.util.LevelViewHelper;
 import mars.clocki.domain.model.CellContainer;
@@ -14,30 +10,41 @@ import mars.clocki.domain.model.GridContainer;
 import mars.clocki.domain.model.Position;
 import mars.clocki.domain.model.Square.SquareType;
 import mars.clocki.interfaces.AbstractActivity;
+import mars.clocki.interfaces.dragdrop.DragController;
+import mars.clocki.interfaces.dragdrop.DragDropPresenter;
+import mars.clocki.interfaces.dragdrop.DragLayer;
+import mars.clocki.interfaces.dragdrop.DragSource;
+import mars.clocki.interfaces.dragdrop.DropTarget;
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayout;
 import android.support.v7.widget.GridLayout.LayoutParams;
-import android.view.DragEvent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.DragShadowBuilder;
-import android.view.View.OnDragListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public abstract class LevelActivity extends AbstractActivity {
+public abstract class LevelActivity extends AbstractActivity
+                                    implements View.OnLongClickListener,
+                                               View.OnClickListener,
+                                               View.OnTouchListener,
+                                               DragDropPresenter {
+
+  private DragController dragController;    // Object that handles a drag-drop sequence. It interacts with DragSource and DropTarget objects.
+  private DragLayer dragLayer;              // The ViewGroup within which an object can be dragged.
+  private boolean longClickStartsDrag = false;  // If true, it takes a long click to start the drag operation.
+                                                // Otherwise, any touch event starts a drag.
+  private boolean vibrationOn = false;          // Vibration is off by default, could be enabled by user from Menu.
 
   protected GridContainer grid;
   protected int moveCount;
@@ -45,6 +52,7 @@ public abstract class LevelActivity extends AbstractActivity {
   private int mostRecentSquareId;
   private String mostRecentDraggedId = "";
   private boolean moveDecreasedOnce;
+  private static int ripBoxSize = 0;
 
   protected LinearLayout r0c0Cell;
   protected LinearLayout r0c1Cell;
@@ -80,22 +88,153 @@ public abstract class LevelActivity extends AbstractActivity {
   protected LinearLayout r7c2Cell;
   protected LinearLayout r7c3Cell;
 
-  private final String r_c_ = "r%sc%s";
-
   public static LevelActivity instance;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+
+    if (BuildHelper.api11orHigher()) {
+      supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+    }
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     setContentView(LevelViewHelper.activityViewId(grid.level()));
+
+    dragController = new DragController(this, this);
+    dragLayer = (DragLayer) findViewById(R.id.drag_layer);
+    dragLayer.setDragController(dragController);
+
+    dragController.setDragListener(dragLayer);
 
     moveCount = 0;
     initViewFields();
     initGridLayout(true);
     instance = this;
+
+    if (BuildHelper.api13orHigher()) {
+      Point screenSize = new Point();
+      getWindowManager().getDefaultDisplay().getSize(screenSize);
+      ripBoxSize = (int) (screenSize.y * 0.110);
+    }
+    else {
+      @SuppressWarnings("deprecation")
+      long height = getWindowManager().getDefaultDisplay().getHeight();
+      ripBoxSize= (int) (height * 0.110);
+    }
   }
+
+  @Override
+  public void onClick(View v) {
+    if (longClickStartsDrag) {
+      toast("Press and hold to drag a box.");
+    }
+  }
+
+  /**
+   * Handle a long click.
+   * If longClickStartsDrag only is true, this will be the only way to start a drag operation.
+   *
+   * @param v View
+   * @return boolean - true indicates that the event was handled
+   */
+  @Override
+  public boolean onLongClick(View v) {
+    if (longClickStartsDrag) {
+      Log.d("DD", "onLongClick in view: " + v + " touchMode: " + v.isInTouchMode());
+
+      // Make sure the drag was started by a long press as opposed to a long click.
+      // (Note: I got this from the Workspace object in the Android Launcher code.
+      // I think it is here to ensure that the device is still in touch mode as we start the drag operation.)
+      if (!v.isInTouchMode()) {
+        Log.d("DD", "isInTouchMode returned false. Try touching the view again.");
+        return false;
+      }
+      return startDrag(v);
+    }
+    // If we get here, return false to indicate that we have not taken care of the event.
+    return false;
+  }
+
+  @Override
+  public boolean onTouch(View view, MotionEvent event) {
+    // If we are configured to start only on a long click, we are not going to handle any events here.
+    if (longClickStartsDrag) {
+      return false;
+    }
+    boolean handledHere = false;
+
+    final int action = event.getAction();
+    final String id = idString((ViewGroup)view.getParent());
+    if (action == MotionEvent.ACTION_DOWN) {
+      if (grid.isAllowedToMoveFrom(GridHelper.row(id),
+                                   GridHelper.column(id))) {
+
+        handledHere = startDrag(view);
+      }
+    }
+    return handledHere;
+  }
+
+  private boolean startDrag(View view) {
+    DragSource dragSource = (DragSource) view;
+
+    // We are starting a drag. Let the DragController handle it.
+    dragController.startDrag(view, dragSource, dragSource, DragController.DRAG_ACTION_MOVE, vibrationOn);
+    return true;
+  }
+
+  @Override
+  public boolean isDragDropEnabled() {
+    return true;
+  }
+
+  @Override
+  public void onDragStarted(View source) {
+    Log.d("DD", "onDragStarted in activity with source " + source);
+  }
+
+  @Override
+  public void onDropCompleted(View source, View target, boolean success) {
+    if (success) {
+      View view = source;
+      ViewGroup owner = (ViewGroup) view.getParent();
+      LinearLayout container = (LinearLayout) target;
+      String homeId = idString(owner);
+      String dropId = idString(container);
+
+      if (isAllowedToMoveTo(homeId, dropId)) {
+        if (isLastMove(homeId)) {
+          owner.removeView(view);
+          findViewById(R.id.sq2x2_b).
+            setBackgroundResource(R.drawable.square_green_big_full);
+          moveCount++;
+          moveView.setText(moveCount + "");
+          writeScore();
+          startActivity(new Intent(LevelActivity.this,
+                                   WinningDialogActivity.class).
+                                   putExtra(CS.LEVEL, grid.level()));
+        }
+        else {
+          grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
+                    GridHelper.row(dropId), GridHelper.column(dropId));
+          updateViewWithNewMove(view, container);
+          if (mostRecentSquareId == view.getId() &&
+              mostRecentDraggedId.equalsIgnoreCase(dropId) &&
+              !moveDecreasedOnce) {
+            moveCount--;
+            moveDecreasedOnce = true;
+          } else {
+            moveCount++;
+            moveDecreasedOnce = false;
+          }
+          moveView.setText(moveCount + "");
+          mostRecentSquareId = view.getId();
+          mostRecentDraggedId = homeId;
+        }
+      }
+    }
+  }
+
 
   private void writeScore() {
     SharedPreferences.Editor editor = getSharedEditor();
@@ -106,98 +245,6 @@ public abstract class LevelActivity extends AbstractActivity {
       editor.putInt(CS.levelScoreKey(grid.level()), moveCount);
     }
     editor.commit();
-  }
-
-  /**
-   * Dragging starts here.
-   */
-  private final class DragListener implements OnTouchListener {
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-      if (event.getAction() == MotionEvent.ACTION_DOWN) {
-        String id = idString((ViewGroup)view.getParent());
-        if (grid.isAllowedToMoveFrom(GridHelper.row(id),
-                                     GridHelper.column(id))) {
-          ClipData data = ClipData.newPlainText("", "");
-          DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-          view.startDrag(data, shadowBuilder, view, 0);
-          view.setVisibility(View.INVISIBLE);
-          return true;
-        }
-        return false;
-      }
-      else {
-        view.setVisibility(View.VISIBLE);
-        return false;
-      }
-    }
-  }
-
-  /**
-   * Dragging ends here.
-   */
-  protected final class DropListener implements OnDragListener {
-    int normalShape = getResources().getColor(R.color.game_background);
-    int enterShape = getResources().getColor(R.color.game_background_hover);
-
-    public boolean onDrag(View v, DragEvent event) {
-      switch(event.getAction()) {
-      case ACTION_DRAG_STARTED:
-        break;
-      case ACTION_DRAG_ENTERED:
-        v.setBackgroundColor(enterShape);
-        break;
-      case ACTION_DRAG_EXITED:
-        v.setBackgroundColor(normalShape);
-        break;
-      case ACTION_DROP:
-        // Dropped, reassign View to ViewGroup
-        View view = (View) event.getLocalState();
-        ViewGroup owner = (ViewGroup) view.getParent();
-        LinearLayout container = (LinearLayout) v;
-        String homeId = idString(owner);
-        String dropId = idString(container);
-
-        if (isAllowedToMoveTo(homeId, dropId)) {
-          if (isLastMove(homeId)) {
-            owner.removeView(view);
-            findViewById(R.id.sq2x2_b).
-              setBackgroundResource(R.drawable.square_green_big_full);
-            moveCount++;
-            moveView.setText(moveCount + "");
-            writeScore();
-            startActivity(new Intent(LevelActivity.this,
-                                     WinningDialogActivity.class).
-                              putExtra(CS.LEVEL, grid.level()));
-          }
-          else {
-            grid.move(GridHelper.row(homeId), GridHelper.column(homeId),
-                      GridHelper.row(dropId), GridHelper.column(dropId));
-            updateViewViewNewMove(view, container);
-            if (mostRecentSquareId == view.getId() &&
-                mostRecentDraggedId.equalsIgnoreCase(dropId) &&
-                !moveDecreasedOnce) {
-              moveCount--;
-              moveDecreasedOnce = true;
-            } else {
-              moveCount++;
-              moveDecreasedOnce = false;
-            }
-            moveView.setText(moveCount + "");
-            mostRecentSquareId = view.getId();
-            mostRecentDraggedId = homeId;
-          }
-        }
-        v.setBackgroundColor(normalShape);
-        break;
-      case ACTION_DRAG_ENDED:
-        break;
-      default:
-        break;
-      }
-      return true;
-    }
-
   }
 
   private boolean isLastMove(String homeId) {
@@ -239,7 +286,7 @@ public abstract class LevelActivity extends AbstractActivity {
         GridHelper.row(dropId), GridHelper.column(dropId));
   }
 
-  private void updateViewViewNewMove(View view, LinearLayout droppedIn) {
+  private void updateViewWithNewMove(View view, LinearLayout droppedIn) {
     String homeId = idString((ViewGroup)view.getParent());
     String dropId = idString(droppedIn);
     final Position home = Position.point(GridHelper.row(homeId),
@@ -340,6 +387,12 @@ public abstract class LevelActivity extends AbstractActivity {
     case R.id.reset_level:
       resetActivity();
       break;
+    case R.id.change_touch_mode:
+      longClickStartsDrag = !longClickStartsDrag;
+      break;
+    case R.id.vibration_on_off:
+      vibrationOn = !vibrationOn;
+      break;
     default:
       break;
     }
@@ -360,57 +413,46 @@ public abstract class LevelActivity extends AbstractActivity {
   }
 
   protected String formattedId(int row, int column) {
-    return String.format(r_c_, row, column);
+    return String.format("r%sc%s", row, column);
   }
 
   @SuppressLint("NewApi")
   private void initGridLayout(boolean firstTime) {
     visiableAllLinearLayouts();
-    int ripBox = 0;
-    if (Build.VERSION.SDK_INT >= 13) {
-      Point screenSize = new Point();
-      getWindowManager().getDefaultDisplay().getSize(screenSize);
-      ripBox = (int) (screenSize.y * 0.097);
-    }
-    else {
-      @SuppressWarnings("deprecation")
-      long height = getWindowManager().getDefaultDisplay().getHeight();
-      ripBox= (int) (height * 0.097);
-    }
-    resizeView(0, 0, r0c0Cell, ripBox, firstTime);
-    resizeView(0, 1, r0c1Cell, ripBox, firstTime);
-    resizeView(0, 2, r0c2Cell, ripBox, firstTime);
-    resizeView(0, 3, r0c3Cell, ripBox, firstTime);
-    resizeView(1, 0, r1c0Cell, ripBox, firstTime);
-    resizeView(1, 1, r1c1Cell, ripBox, firstTime);
-    resizeView(1, 2, r1c2Cell, ripBox, firstTime);
-    resizeView(1, 3, r1c3Cell, ripBox, firstTime);
-    resizeView(2, 0, r2c0Cell, ripBox, firstTime);
-    resizeView(2, 1, r2c1Cell, ripBox, firstTime);
-    resizeView(2, 2, r2c2Cell, ripBox, firstTime);
-    resizeView(2, 3, r2c3Cell, ripBox, firstTime);
-    resizeView(3, 0, r3c0Cell, ripBox, firstTime);
-    resizeView(3, 1, r3c1Cell, ripBox, firstTime);
-    resizeView(3, 2, r3c2Cell, ripBox, firstTime);
-    resizeView(3, 3, r3c3Cell, ripBox, firstTime);
-    resizeView(4, 0, r4c0Cell, ripBox, firstTime);
-    resizeView(4, 1, r4c1Cell, ripBox, firstTime);
-    resizeView(4, 2, r4c2Cell, ripBox, firstTime);
-    resizeView(4, 3, r4c3Cell, ripBox, firstTime);
+    resizeView(0, 0, r0c0Cell, ripBoxSize, firstTime);
+    resizeView(0, 1, r0c1Cell, ripBoxSize, firstTime);
+    resizeView(0, 2, r0c2Cell, ripBoxSize, firstTime);
+    resizeView(0, 3, r0c3Cell, ripBoxSize, firstTime);
+    resizeView(1, 0, r1c0Cell, ripBoxSize, firstTime);
+    resizeView(1, 1, r1c1Cell, ripBoxSize, firstTime);
+    resizeView(1, 2, r1c2Cell, ripBoxSize, firstTime);
+    resizeView(1, 3, r1c3Cell, ripBoxSize, firstTime);
+    resizeView(2, 0, r2c0Cell, ripBoxSize, firstTime);
+    resizeView(2, 1, r2c1Cell, ripBoxSize, firstTime);
+    resizeView(2, 2, r2c2Cell, ripBoxSize, firstTime);
+    resizeView(2, 3, r2c3Cell, ripBoxSize, firstTime);
+    resizeView(3, 0, r3c0Cell, ripBoxSize, firstTime);
+    resizeView(3, 1, r3c1Cell, ripBoxSize, firstTime);
+    resizeView(3, 2, r3c2Cell, ripBoxSize, firstTime);
+    resizeView(3, 3, r3c3Cell, ripBoxSize, firstTime);
+    resizeView(4, 0, r4c0Cell, ripBoxSize, firstTime);
+    resizeView(4, 1, r4c1Cell, ripBoxSize, firstTime);
+    resizeView(4, 2, r4c2Cell, ripBoxSize, firstTime);
+    resizeView(4, 3, r4c3Cell, ripBoxSize, firstTime);
     // Bottom of puzzle
     if (firstTime) {
-      resizeView(5, 0, r5c0Cell, ripBox, firstTime);
-      resizeView(5, 1, r5c1Cell, ripBox, firstTime);
-      resizeView(5, 2, r5c2Cell, ripBox, firstTime);
-      resizeView(5, 3, r5c3Cell, ripBox, firstTime);
-      resizeView(6, 0, r6c0Cell, ripBox, firstTime);
-      resizeView(6, 1, r6c1Cell, ripBox, firstTime);
-      resizeView(6, 2, r6c2Cell, ripBox, firstTime);
-      resizeView(6, 3, r6c3Cell, ripBox, firstTime);
-      resizeView(7, 0, r7c0Cell, ripBox, firstTime);
-      resizeView(7, 1, r7c1Cell, ripBox, firstTime);
-      resizeView(7, 2, r7c2Cell, ripBox, firstTime);
-      resizeView(7, 3, r7c3Cell, ripBox, firstTime);
+      resizeView(5, 0, r5c0Cell, ripBoxSize, firstTime);
+      resizeView(5, 1, r5c1Cell, ripBoxSize, firstTime);
+      resizeView(5, 2, r5c2Cell, ripBoxSize, firstTime);
+      resizeView(5, 3, r5c3Cell, ripBoxSize, firstTime);
+      resizeView(6, 0, r6c0Cell, ripBoxSize, firstTime);
+      resizeView(6, 1, r6c1Cell, ripBoxSize, firstTime);
+      resizeView(6, 2, r6c2Cell, ripBoxSize, firstTime);
+      resizeView(6, 3, r6c3Cell, ripBoxSize, firstTime);
+      resizeView(7, 0, r7c0Cell, ripBoxSize, firstTime);
+      resizeView(7, 1, r7c1Cell, ripBoxSize, firstTime);
+      resizeView(7, 2, r7c2Cell, ripBoxSize, firstTime);
+      resizeView(7, 3, r7c3Cell, ripBoxSize, firstTime);
     }
   }
 
@@ -421,7 +463,9 @@ public abstract class LevelActivity extends AbstractActivity {
       if (((ViewGroup) cellView).getChildCount() > 0) {
         View child = ((ViewGroup) cellView).getChildAt(0);
         if (child instanceof Button && firstTime) {
-          child.setOnTouchListener(new DragListener());
+          child.setOnTouchListener(this);
+          child.setOnClickListener(this);
+          child.setOnLongClickListener(this);
         }
         if (child.getId() == R.id.sq2x2_a ||
             child.getId() == R.id.sq2x2_b) {
@@ -543,31 +587,40 @@ public abstract class LevelActivity extends AbstractActivity {
     r7c2Cell = (LinearLayout) findViewById(R.id.r7c2);
     r7c3Cell = (LinearLayout) findViewById(R.id.r7c3);
 
-    r0c0Cell.setOnDragListener(new DropListener());
-    r0c1Cell.setOnDragListener(new DropListener());
-    r0c2Cell.setOnDragListener(new DropListener());
-    r0c3Cell.setOnDragListener(new DropListener());
-    r1c0Cell.setOnDragListener(new DropListener());
-    r1c1Cell.setOnDragListener(new DropListener());
-    r1c2Cell.setOnDragListener(new DropListener());
-    r1c3Cell.setOnDragListener(new DropListener());
-    r2c0Cell.setOnDragListener(new DropListener());
-    r2c1Cell.setOnDragListener(new DropListener());
-    r2c2Cell.setOnDragListener(new DropListener());
-    r2c3Cell.setOnDragListener(new DropListener());
-    r3c0Cell.setOnDragListener(new DropListener());
-    r3c1Cell.setOnDragListener(new DropListener());
-    r3c2Cell.setOnDragListener(new DropListener());
-    r3c3Cell.setOnDragListener(new DropListener());
-    r4c0Cell.setOnDragListener(new DropListener());
-    r4c1Cell.setOnDragListener(new DropListener());
-    r4c2Cell.setOnDragListener(new DropListener());
-    r4c3Cell.setOnDragListener(new DropListener());
+    dragController.addDropTarget((DropTarget) r0c0Cell);
+    dragController.addDropTarget((DropTarget) r0c1Cell);
+    dragController.addDropTarget((DropTarget) r0c2Cell);
+    dragController.addDropTarget((DropTarget) r0c3Cell);
+    dragController.addDropTarget((DropTarget) r1c0Cell);
+    dragController.addDropTarget((DropTarget) r1c1Cell);
+    dragController.addDropTarget((DropTarget) r1c2Cell);
+    dragController.addDropTarget((DropTarget) r1c3Cell);
+    dragController.addDropTarget((DropTarget) r2c0Cell);
+    dragController.addDropTarget((DropTarget) r2c1Cell);
+    dragController.addDropTarget((DropTarget) r2c2Cell);
+    dragController.addDropTarget((DropTarget) r2c3Cell);
+    dragController.addDropTarget((DropTarget) r3c0Cell);
+    dragController.addDropTarget((DropTarget) r3c1Cell);
+    dragController.addDropTarget((DropTarget) r3c2Cell);
+    dragController.addDropTarget((DropTarget) r3c3Cell);
+    dragController.addDropTarget((DropTarget) r4c0Cell);
+    dragController.addDropTarget((DropTarget) r4c1Cell);
+    dragController.addDropTarget((DropTarget) r4c2Cell);
+    dragController.addDropTarget((DropTarget) r4c3Cell);
 
-    r6c1Cell.setOnDragListener(new DropListener());
+    dragController.addDropTarget((DropTarget) r6c1Cell);
 
     moveView = (TextView) findViewById(R.id.moves);
     moveView.setText(moveCount + "");
+  }
+
+  /**
+   * Show a string on the screen via Toast.
+   *
+   * @param msg String
+   */
+  public void toast(String msg) {
+    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
   }
 
 }
